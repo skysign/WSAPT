@@ -1,5 +1,6 @@
 # WSTT 스터디 
 We Solve Topcoder problems Together
+
 Topcoder의 문제를 함께 풀어보는 스터디입니다.
 
 # 스터디 진행방식
