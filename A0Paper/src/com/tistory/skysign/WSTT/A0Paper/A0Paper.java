@@ -1,3 +1,5 @@
+package com.tistory.skysign.WSTT.A0Paper;
+
 public class A0Paper {
 	public String canBuild(int[] A){
     	for(int i = A.length-1; i > 0; --i)
