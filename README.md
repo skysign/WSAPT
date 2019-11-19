@@ -3,6 +3,8 @@ We Solve Topcoder problems Together
 
 Topcoder의 문제를 함께 풀어보는 스터디입니다.
 
+꼭 topcoder가 아니여도 괜찮구요, 함께 문제를 풀어보는 스터디입니다.
+
 # 스터디 진행방식
 
 ## 스터디 시작전에 준비 
