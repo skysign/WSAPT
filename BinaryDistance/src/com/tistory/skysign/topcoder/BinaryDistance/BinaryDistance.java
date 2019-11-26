@@ -36,13 +36,7 @@ public class BinaryDistance {
         for(int i=0; true; ++i) {
             levelSum += Math.pow(2,i);
 
-            if(levelSum==N) {
-                isRightShort = false;
-                l = i+1;
-                break;
-            }
-
-            if( (levelSum<N) && (N<levelSum+Math.pow(2,i+1)) ) {
+            if( (levelSum < N) && (N <= levelSum+Math.pow(2,i+1)) ) {
                 if(N <= levelSum + (Math.pow(2,i+1)/2)) {
                     isRightShort = true;
                 }
@@ -50,7 +44,7 @@ public class BinaryDistance {
                     isRightShort = false;
                 }
 
-                l = i+2;
+                l = i+1;
                 break;
             }
         }
@@ -58,20 +52,39 @@ public class BinaryDistance {
         int ll = findMyLevel(V, 0);
         if(isRightShort) {
             LR = findLR(V);
-            r = ll + ((l-1) - LR);
+            r = ll + ((l) - LR);
         }
         else {
-            r = ll + (l-1);
+            r = ll + (l);
         }
 
-        System.out.printf("levels : %d\n", l);
+//        System.out.printf("levels : %d\n", l);
 
         return r;
     }
 
     public static void main(String[] args) {
         BinaryDistance c = new BinaryDistance();
-        int r = c.maxDist(12, 4);
-        System.out.printf("%s\n", r);
+        int r = 0;
+        r = c.maxDist(6, 2);
+        System.out.printf("Returns: %s\n", r);
+
+        r = c.maxDist(6, 6);
+        System.out.printf("Returns: %s\n", r);
+
+        r = c.maxDist(5, 4);
+        System.out.printf("Returns: %s\n", r);
+
+        r = c.maxDist(2, 2);
+        System.out.printf("Returns: %s\n", r);
+
+        r = c.maxDist(1000000000, 1);
+        System.out.printf("Returns: %s\n", r);
+
+        r = c.maxDist(20, 7);
+        System.out.printf("Returns: %s\n", r);
+
+        r = c.maxDist(12, 4);
+        System.out.printf("Returns: %s\n", r);
     }
 }
