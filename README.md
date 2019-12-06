@@ -1,5 +1,5 @@
 # WSTT 스터디 
-We Solve Topcoder problems Together
+We Solve Topcoder problems Together 
 
 Topcoder의 문제를 함께 풀어보는 스터디입니다.
 
@@ -23,3 +23,6 @@ Topcoder의 문제를 함께 풀어보는 스터디입니다.
 메일 주세요~
 
 skysign at gmail.com
+
+# WSTT에서 그동안푼 문제들은 여기서 찾아 보실 수 있습니다.
+[WSTT git repo](https://github.com/skysign/WSTT)
