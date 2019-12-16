@@ -1,45 +1,40 @@
 package com.tistory.skysign.topcoder.PBG;
 
 public class PBG {
-    int mrV;
-    int mrC;
-    int mP;
-    int mB;
-    int mG;
+    int mZ1;
+    int mZ2;
+    int mPos;
 
-    public void LimakfightP(int pos, int P) {
-        // lose
-        mrV += pos;
-        mrC++;
-
+    public void LimakfightP(int P) {
         if (P > 1) {
             // winning
-            LimakfightP(--pos, --P);
-        }
-//        else {
+            mZ1 += mPos;
+            mZ2++;
 
-//        }
+            --mPos;
+            LimakfightP(--P);
+        }
     }
 
     public int findEV(int P, int B, int G) {
-        mrV = 0;
-        mrC = 0;
+        mZ1 = 0;
+        mZ2 = 0;
+        mPos = 0;
 
-        mP = P;
-        mB = B;
-        mG = G;
-
-        int N = mP-1 + mB + mG;
+        int NN = P + B + G;
+        int N = B + G;
+        if (P > 0)
+            ++N;
 
         for(int i=0; i<N; ++i) {
-            int pos = N-B;
+            mPos = NN - B;
 
             if(B > 0) {
                 --B;
             }
 
-            if(P > 1) {
-                LimakfightP(pos, P);
+            if(P > 0) {
+                LimakfightP(P);
                 --P;
             }
 
@@ -47,15 +42,21 @@ public class PBG {
                 --G;
             }
 
-            mrV += pos;
-            mrC++;
+            mZ1 += mPos;
+            mZ2++;
         }
 
-        return mrV * (int)Math.pow(mrC, -1) % ((int)Math.pow(10, 9) + 7);
+        System.out.printf("%d/%d\n", mZ1, mZ2);
+
+        return mZ1 * (int)Math.pow(mZ2, -1) % ((int)Math.pow(10, 9) + 7);
     }
 
     public static void main(String[] args) {
 	// write your code here
-        
+        PBG pbg = new PBG();
+        int r;
+
+        r = pbg.findEV(5, 0, 0);
+        System.out.println(r);
     }
 }
