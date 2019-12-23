@@ -1,17 +1,13 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
-// https://www.geeksforgeeks.org/box-stacking-problem-dp-22/
+// https://practice.geeksforgeeks.org/problems/box-stacking/1
 // 문제 설명이 부족한 부분이 있습니다.
 // 박스를 돌릴 수 있다고만 설명 되어 있지,
 // 돌린 박스는 중복해서 사용할 수 있는 것으로 풀어야 합니다.
 // 즉, 1, 2, 3 (h, w, l) 인 박스가 있으면,
 // 실제로 박스 쌓을 때는 3개의 박스가 있는 것으로 풀어야 합니다.
-// 1, 2, 3 / 3, 1, 2 / 2, 3, 1 이렇게 3개의 박스를 서로 다른 박스로 보고
-
+// 1, 2, 3 / 3, 1, 2 / 2, 3, 1 이렇게 3개의 박스를 서로 다른 박스로 보고, 쌓을 수 있는 것으로 풀어야 합니다.
 public class Geeks {
     static class Box implements Comparable<Box>{
         public int mh, mw, ml;
