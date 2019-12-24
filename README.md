@@ -21,6 +21,7 @@ We Solve Algorithm Problem Together
 
 skysign at gmail.com
 
-# WSAPT 스터디 에서 그동안푼 문제들은 아래 리포에서 찾아 보실 수 있습니다.
-https://github.com/skysign/WSAPT
-https://github.com/kmdigit/TopCoder
+## WSAPT 스터디 에서 그동안 푼 문제들
+아래 리포에서 찾아 보실 수 있습니다.
+* https://github.com/skysign/WSAPT
+* https://github.com/kmdigit/TopCoder
