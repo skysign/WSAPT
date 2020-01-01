@@ -16,6 +16,7 @@ public class Main {
     static public char[] T;
 
     public static void main(String[] args) {
+        // FasterReader는 Scanner보다 좀더 빠르게 입력을 받을 수 있습니다.
         FastReader sc = new FastReader();
 //        Scanner sc = new Scanner(System.in);
         PrintWriter pw = new PrintWriter(System.out);
