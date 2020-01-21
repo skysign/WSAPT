@@ -14,14 +14,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
 //	    Scanner sc = new Scanner(System.in);
         Reader sc = new Reader();
-	    int N = sc.nextInt();
-	    long[] as = new long[N+1];
+        int N = sc.nextInt();
+        long[] as = new long[N+1];
         long[][] dp = new long[N+1][N+1];
-	    long[] prefixSum = new long[N+1];
+        long[] prefixSum = new long[N+1];
 
-	    for(int i=1; i<=N; ++i) {
-	        as[i] = sc.nextLong();
-	        prefixSum[i] = prefixSum[i-1] + as[i];
+        for(int i=1; i<=N; ++i) {
+            as[i] = sc.nextLong();
+            prefixSum[i] = prefixSum[i-1] + as[i];
         }
 
         for(int ij_d=1; ij_d<=N; ++ij_d) {
@@ -35,7 +35,7 @@ public class Main {
             }
         }
 
-	    System.out.println(dp[1][N]);
+        System.out.println(dp[1][N]);
     }
 
     // https://www.geeksforgeeks.org/fast-io-in-java-in-competitive-programming/
