@@ -81,19 +81,11 @@ bool AreTheyBlocked(int Oi, int Oj, int Mi, int Mj) {
                 return true;
             }
         }
-    }
-    //        if(oPos.mI == mPos.mI) {
-    //            int fixedI = oPos.mI;
-    //            int begJ = Math.min(oPos.mJ, mPos.mJ) +1;
-    //            int endJ = Math.max(oPos.mJ, mPos.mJ);
-    //            for(int j = begJ; j < endJ; ++j) {
-    //                if(mMap[fixedI][j] != 0) {
-    //                    return true;
-    //                }
-    //            }
-    //        }
 
-            // j 가 같음
+        return false;
+    }
+
+    // j 가 같음
     if (Oj == Mj) {
         int fixedJ = Oj;
         int begI = min(Oi, Mi) + 1;
@@ -103,31 +95,20 @@ bool AreTheyBlocked(int Oi, int Oj, int Mi, int Mj) {
                 return true;
             }
         }
+
+        return false;
     }
-    //        if(oPos.mJ == mPos.mJ) {
-    //            int fixedJ = oPos.mJ;
-    //            int begI = Math.min(oPos.mI, mPos.mI) +1;
-    //            int endI = Math.max(oPos.mI, mPos.mI);
-    //            for(int i = begI; i < endI; ++i) {
-    //                if(mMap[i][fixedJ] != 0) {
-    //                    return true;
-    //                }
-    //            }
-    //        }
 
     int di = abs(Oi - Mi);
     int dj = abs(Oj - Mj);
-    //        int di = Math.abs(oPos.mI - mPos.mI);
-    //        int dj = Math.abs(oPos.mJ - mPos.mJ);
 
-            // i와 j 가 둘다 소수이면
+    // i와 j 가 둘다 소수이면, 중간에 막을 수 있는 위치가 없습니다.
     if (AreTheyPrimeNumber(di, dj))
         return false;
 
     // Orange와 Melon이 대각선 방향에 있음
     // Orange에서 Melon방향으로 다가갈 때,
     // 중간이 막혀 있으면 blocked(true)
-
     int gcd = mygcd(di, dj);
 
     di = (Mi - Oi) / gcd;
@@ -139,16 +120,6 @@ bool AreTheyBlocked(int Oi, int Oj, int Mi, int Mj) {
         if (mMap[i][j] != 0)
             return true;
     }
-
-    //        di = (mPos.mI - oPos.mI) / gcd;
-    //        dj = (mPos.mJ - oPos.mJ) / gcd;
-    //
-    //        for(int step=1, i = oPos.mI, j = oPos.mJ; step<gcd; ++step) {
-    //            i += di;
-    //            j += dj;
-    //            if(mMap[i][j] != 0)
-    //                return true;
-    //        }
 
     return false;
 }

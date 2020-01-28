@@ -81,6 +81,8 @@ public class Main {
                     return true;
                 }
             }
+
+            return false;
         }
 
         // j 가 같음
@@ -93,6 +95,8 @@ public class Main {
                     return true;
                 }
             }
+
+            return false;
         }
 
         int di = Math.abs(Oi - Mi);
