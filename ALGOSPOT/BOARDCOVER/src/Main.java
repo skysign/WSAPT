@@ -8,8 +8,8 @@ import java.io.FileInputStream;
  * BOARDCOVER 게임판 덮기 / ALGOSPOT
  * 문제링크 : https://algospot.com/judge/problem/read/BOARDCOVER
  * 제출링크 : https://algospot.com/judge/submission/detail/654332
- * RTE가 왜 나는지 모르겠네요...
- * ALGOSPOT은 테스트 케이스를 공개하지 않아서, 디버깅은 더 안하려고 합니다.
+ * 문제의 테스트케이스는 통과하고, 제출하면 RTE
+ * ALGOSPOT은 테스트 케이스를 공개하지 않아서, 디버깅은 하지 않겠습니다.
  */
 
 public class Main {
@@ -27,9 +27,6 @@ public class Main {
     public void solve() throws IOException {
         Reader sc = new Reader();
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-//        Lblocks = new int[1][1][1]{{{1}}};
-//        int[] ttt = new int[]
 
         Lblocks = new int[][][]{
                 {{0,0}, {0,1}, {1,1}},
