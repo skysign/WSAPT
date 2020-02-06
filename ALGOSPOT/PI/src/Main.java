@@ -4,6 +4,22 @@ import java.util.Scanner;
  * PI 원주율 외우기 / ALGOSPOT
  * 문제링크 : https://algospot.com/judge/problem/read/PI
  * 제출링크 : https://algospot.com/judge/submission/detail/655695
+ *
+ * 만들어본 테스트 케이스 입니다.
+ * 4
+ * 3135722443
+ * 57722313
+ * 31355722
+ * 57224433
+ *
+ * 20
+ * 14
+ * 14
+ * 20
+ *
+ * 더 긴 테스트 케이스가 필요하신 분은, 아래 참고하세요.
+ * https://algospot.com/judge/problem/read/PI 의 댓글에서 테스트케이스 링크 찾았습니다.
+ * https://pastebin.com/rhMYwAN3
  */
 public class Main {
     Scanner sc = new Scanner(System.in);
