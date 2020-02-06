@@ -16,8 +16,7 @@ We Solve Algorithm Problem Together
 3. 서로의 문제풀이를 리뷰/토론
 
 # 멤버 모집중입니다.
-현재 3명이서 진행중이구요, 한~두분 정도 더 오셨으면 좋겠습니다.
-
+한~두분 정도 더 오셨으면 좋겠습니다.
 메일 주세요~
 
 skysign at gmail.com
@@ -27,3 +26,4 @@ skysign at gmail.com
 * https://github.com/skysign/WSAPT
 * https://github.com/kmdigit/TopCoder
 * https://sedew.tistory.com/
+* https://github.com/Jinchul81/practice
