@@ -31,7 +31,7 @@ public class Main {
         int[][] dp = new int[S.length][T.length];
         String r = LCS(dp, S, T);
 
-//        d0(dp, S, T);
+        d0(dp, S, T);
 
         pw.println(r);
         pw.close();
@@ -88,7 +88,9 @@ public class Main {
                 j--;
             }
             // 왼쪽(i-1), 위(j-1), 둘중에 큰 쪽으로 이동합니다.
-            else if(dp[i-1][j] < dp[i][j-1]) {
+            // 같을 때, 양쪽다 이동 가능함으로, 답의 수는 x2 개 됩니다.
+            //else if(dp[i-1][j] <= dp[i][j-1]) { <- 답 1번
+            else if(dp[i-1][j] < dp[i][j-1]) { // <- 답 2번
                 j--;
             }
             else {
