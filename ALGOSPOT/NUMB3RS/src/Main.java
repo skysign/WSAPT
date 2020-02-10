@@ -29,7 +29,6 @@ public class Main {
             P = sc.nextInt();
 
             map = new int[N][N];
-
             preSum = new int[N];
 
             for(int i=0; i<N; ++i) {
