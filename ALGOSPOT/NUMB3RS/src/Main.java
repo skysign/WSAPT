@@ -1,24 +1,24 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * NUMB3RS 두니발 박사의 탈옥 / ALGOSPOT
  * 문제링크 : https://algospot.com/judge/problem/read/NUMB3RS
- * 제출링크 : https://algospot.com/judge/submission/detail/656159
+ * 제출링크 : https://algospot.com/judge/submission/detail/656502
  */
 public class Main {
-//    public Scanner sc = new Scanner(System.in);
-    public Reader sc = new Reader();
-    public int N;
-    public int D;
-    public int P;
-    public int[] prefixSum;
-    public int[][] map;
-    public double[][] dp;
-    public int[] DSTs;
-    public int DST;
+    int N;
+    int D;
+    int P;
+    int DST;
+    int[][] map;
+    double[][] dp;
+    int[] preSum;
 
     public void solve() throws IOException {
         int T = sc.nextInt();
@@ -29,7 +29,8 @@ public class Main {
             P = sc.nextInt();
 
             map = new int[N][N];
-            prefixSum = new int[N];
+
+            preSum = new int[N];
 
             for(int i=0; i<N; ++i) {
                 for(int j=0; j<N; ++j) {
@@ -39,91 +40,235 @@ public class Main {
 
             prep();
 
-            /* 2초가 제한시간인대, 1952ms 겨우 패스 했네요. */
-            int cntTown = sc.nextInt();
-            for(int i=0; i<cntTown; ++i) {
+            int NN = sc.nextInt();
+            for(int i=0; i<NN; ++i) {
                 DST = sc.nextInt();
-                dp = new double[D+1][N];
-                double r = calProb_rec(0, P);
-                System.out.printf("%.8f ", r);
-            }
-            System.out.println();
-
-            /* 답은 나오지만, 시간초과로 오답 처리 됩니다.
-            calProb(1, P, 1);
-
-            int cntTown = sc.nextInt();
-            for(int i=0; i<cntTown; ++i) {
-                int idxTown = sc.nextInt();
-                System.out.printf("%.8f", dp[D][idxTown]);
+                dp = new double[D][N];
+                fill2D(dp, -1);
+                double r = calProb(0, P);
+                System.out.print(r);
                 System.out.print(" ");
+//                String tt = (""+r);
+//                print(tt.substring(0, Math.min(tt.length(), 2+8)));
+//                print(" ");
             }
             System.out.println();
-            */
+//            println();
         }
     }
 
-    /**
-     * 책의 코드 8.23 을 자바로 구현한 메서드입니다.
-     * @param days
-     * @param idxTown
-     * @return
-     */
-    public double calProb_rec(int days, int idxTown) {
-        int i = idxTown;
+    public double calProb(int d, int idx) {
+        if(d == D)
+            return (idx == DST)? 1.0: 0.0;
 
-        if(D == days) {
-            return (idxTown == DST)? 1.0: 0.0;
+        if(dp[d][idx] > -0.5) {
+            return dp[d][idx];
         }
 
-        if(dp[days][idxTown] > 0.0) {
-            return dp[days][idxTown];
+        int n = N;
+        double r = 0;
+        int i = idx;
+        for(int j=0; j<n; ++j) {
+            if(1 == map[idx][j])
+                r += calProb(d+1, j) * (((double)1)/preSum[i]);
         }
 
-        for(int j=0; j<N; ++j) {
-            if(1 == map[i][j]) {
-                double r = calProb_rec(days+1, j);
-                dp[days][idxTown] += (r / prefixSum[i]);
-            }
-        }
+        dp[d][idx] = r;
 
-        return dp[days][idxTown];
+        return r;
     }
 
     public void prep() {
-        for(int i=0; i<N; ++i) {
-            for(int j=0; j<N; ++j) {
-                prefixSum[i] += map[i][j];
+        int n = N;
+        for(int i=0; i<n; ++i) {
+            for(int j=0; j<n; ++j) {
+                preSum[i] += map[i][j];
             }
         }
     }
 
-    /**
-     * 책의 코드 8.22 와 같은 역할을 하는 코드입니다.
-     * 답은 나오지만, 시간초과로, 오답 처리 됩니다.
-     * 마지막 D일 째에, 두니발 박사가 있을 확률이 dp[D][] 에 저장되어 있습니다.
-     * @param d 날짜
-     * @param idx 출발하는 마을인덱스
-     * @param prevProb 출발하는 마을 인덱스에 있을 확률
-     */
-    public void calProb(int d, int idx, double prevProb) {
-        double _1_double = 1;
-        int i=idx;
-
-        for(int j=0; j<N; ++j) {
-            if(1 == map[i][j]) {
-                dp[d][j] += _1_double/prefixSum[i] * prevProb;
-                if(d < D) {
-                    calProb(d+1, j, dp[d][j]);
-                }
-            }
-        }
+    public void _solve() throws IOException {
+        solve();
+//        bw.flush();
     }
 
     public static void main(String[] args) throws IOException {
         Main main = new Main();
-        main.solve();
+        main._solve();
     }
+
+//        int n = ;
+//        for(int i=0; i<n; ++i) {
+//
+//        }
+
+//        int n = ;
+//        for(int j=0; j<n; ++j) {
+//
+//        }
+
+//        int n = ;
+//        for(int j=0; j<n; ++j) {
+//
+//        }
+
+//        int n = ;
+//        for(int i=0; i<n; ++i) {
+//            for(int j=0; j<n; ++j) {
+//
+//            }
+//        }
+
+//        int N = ;
+//        for(int i=0; i<n; ++i) {
+//            for(int j=0; j<n; ++j) {
+//                for(int k=0; k<n; ++k) {
+//
+//                }
+//            }
+//        }
+
+    // Commonly used numbers as a divider of mod operation to prevent overflow
+    public final int _10_007 = 10007;
+    public final int _1_000_000_007 = 1000000007;
+    public final int MOD = _1_000_000_007;
+
+    public void print(String s) throws IOException {
+        bw.write(s);
+    }
+
+    public void println() throws IOException {
+        print("\n");
+    }
+
+    public void println(int a) throws IOException {
+        print(a+"");
+    }
+
+    public void println(long a) throws IOException {
+        print(a+"");
+    }
+
+    public void println(double a) throws IOException {
+        print(a+"");
+    }
+
+    public void println(String s) throws IOException {
+        bw.write(s+"\n");
+    }
+
+    // -1
+    public final int MINUS_1 = -1;
+
+    // 4 ways
+    public int[] d4i = new int[]{-1, 1, 0, 0};
+    public int[] d4j = new int[]{0, 0, -1, 1};
+
+    // 8 ways
+    public int[] d8i = new int[]{-1, 1, 0, 0,  -1, -1, 1, 1};
+    public int[] d8j = new int[]{0, 0, -1, 1,  -1, 1, 1, -1};
+
+    // Initialize 2D arrays with value v
+    public void fill2D(int[][] _2D, int v) {
+        for(int[] _1D: _2D) {
+            Arrays.fill(_1D, v);
+        }
+    }
+
+    public void fill2D(double[][] _2D, double v) {
+        for(double[] _1D: _2D) {
+            Arrays.fill(_1D, v);
+        }
+    }
+
+    public void print2D(int[][] dp) throws IOException {
+        print("    ");
+
+        for(int j=0; j<dp[0].length; ++j){
+            print(SS(j)+j + " ");
+        }
+        println();
+
+        for(int i=0; i<dp.length; ++i){
+            print(SS(i)+i+"|");
+            for(int j=0; j<dp[0].length; ++j){
+                print(SS(dp[i][j])+dp[i][j] + " ");
+            }
+            println();
+        }
+    }
+
+
+    public final int LENGHT_OF_NUMBER = 3;
+    /**
+     * Generate space string for alignment when we print 2D arrays.
+     * its length is LENGHT_OF_NUMBER - the length of number
+     * Basically, we assume that number a is less than 1000.
+     * So, LENGHT_OF_NUMBER is 3 by default.
+     * @param a
+     * @return
+     */
+    public String SS(int a) {
+        String s = a+"";
+        int l = LENGHT_OF_NUMBER - s.length();
+        StringBuilder sb = new StringBuilder();
+
+        for(int i=0; i<l; ++i) {
+            sb.append(" ");
+        }
+
+        return sb.toString();
+    }
+
+    // Initialize 3D arrays with value v
+    public void fill3D(int[][][] _3D, int v) {
+        for(int[][] _2D: _3D) {
+            for(int[] _1D: _2D) {
+                Arrays.fill(_1D, v);
+            }
+        }
+    }
+
+    // GCD
+    int GCD(int a, int b) {
+        if(0 == b) {
+            return a;
+        }
+
+        return GCD(b, a%b);
+    }
+
+    long GCD(long a, long b) {
+        if(0 == b) {
+            return a;
+        }
+
+        return GCD(b, a%b);
+    }
+
+    boolean IsEven(int a) {
+        return (a>>1) == ((a>>1)<<1);
+    }
+
+    boolean IsOdd(int a) {
+        return (a>>1) != ((a>>1)<<1);
+    }
+
+    boolean IsEven(long a) {
+        return (a>>1) == ((a>>1)<<1);
+    }
+
+    boolean IsOdd(long a) {
+        return (a>>1) != ((a>>1)<<1);
+    }
+
+    public Reader sc = new Reader();
+//    Sometimes, Reader class cause unknown problem, when I submit my java code to judge server.
+//    For more detail, please see https://algospot.com/forum/read/4731/
+//    public Scanner sc = new Scanner(System.in);
+
+//    public BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public BufferedWriter bw;
 
     // https://www.geeksforgeeks.org/fast-io-in-java-in-competitive-programming/
     public class Reader
