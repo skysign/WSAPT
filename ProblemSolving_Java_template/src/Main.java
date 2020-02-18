@@ -4,7 +4,6 @@ import java.io.OutputStreamWriter;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Main {
     int N;
@@ -53,6 +52,52 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Main main = new Main();
         main._solve();
+    }
+
+    public int[][] pSum2D(int[][] dt) {
+        int[][] pSum2D = new int[dt.length][dt[0].length];
+        return _prefixSum2D(dt, pSum2D, dt.length, dt[0].length);
+    }
+
+    public int[][] pSum2D(int[][] dt, int[][] pSum2D) {
+        return _prefixSum2D(dt, pSum2D, dt.length, dt[0].length);
+    }
+
+    public int[][] _prefixSum2D(int[][] dt, int[][] pSum2D, int I, int J) {
+        pSum2D[0][0] = dt[0][0];
+        for(int j=1; j<J; ++j) {
+            pSum2D[0][j] = dt[0][j] + pSum2D[0][j-1];
+        }
+
+        for(int i=1; i<I; ++i) {
+            pSum2D[i][0] = dt[i][0] + pSum2D[i-1][0];
+        }
+
+        for(int i=1; i<I; ++i) {
+            for(int j=1; j<J; ++j) {
+                pSum2D[i][j] = dt[i][j] + pSum2D[i-1][j] + pSum2D[i][j-1] - pSum2D[i-1][j-1];
+            }
+        }
+
+        return pSum2D;
+    }
+
+    public int area2DbyCnt(int[][] pSum2D, int i1, int j1, int i2, int j2) {
+        return area2DbyIdx(pSum2D, i1-1, j1-1, i2-1, j2-1);
+    }
+
+    public int area2DbyIdx(int[][] pSum2D, int i1, int j1, int i2, int j2) {
+        int r = pSum2D[i2][j2];
+
+        if(i1>0)
+            r -= pSum2D[i1-1][j2];
+        if(j1>0)
+            r -= pSum2D[i2][j1-1];
+
+        if((i1>0) && (j1>0))
+            r += pSum2D[i1-1][j1-1];
+
+        return r;
     }
 
     public int[][] rotate90(int[][] a, int N) {
@@ -122,14 +167,14 @@ public class Main {
         return dst;
     }
 
-    public class MyPair<K, V> extends Pair implements Comparable {
-        public MyPair(K key, V value) {
+    public class Pair<K, V> extends _Pair implements Comparable {
+        public Pair(K key, V value) {
             super(key, value);
         }
 
         @Override
         public int compareTo(Object o) {
-            MyPair other = (MyPair)o;
+            Pair other = (Pair)o;
             int k1 = Integer.parseInt(this.getKey().toString());
             int k2 = Integer.parseInt(other.getKey().toString());
 
@@ -144,20 +189,20 @@ public class Main {
     }
 
     // http://cr.openjdk.java.net/~vadim/8140503/webrev.01/modules/base/src/main/java/javafx/util/Pair.java.html
-    public class Pair<K,V> {
+    public class _Pair<K,V> {
         private K key;
         public K getKey() { return key; }
         private V value;
         public V getValue() { return value; }
-        public Pair(K key, V value) {
+        public _Pair(K key, V value) {
             this.key = key;
             this.value = value;
         }
 
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (o instanceof Pair) {
-                Pair pair = (Pair) o;
+            if (o instanceof _Pair) {
+                _Pair pair = (_Pair) o;
                 if (key != null ? !key.equals(pair.key) : pair.key != null) return false;
                 if (value != null ? !value.equals(pair.value) : pair.value != null) return false;
                 return true;
@@ -469,62 +514,83 @@ public class Main {
         }
     }
 
-    public void test_matrix_methods() throws IOException {
-        // Test Case 1
-        int m1[][] = { {1, 2, 3, 4},
-                {5, 6, 7, 8},
-                {9, 10, 11, 12},
-                {13, 14, 15, 16} };
-
-        // Tese Case 2
-        int m2[][] = { {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9} };
-
-        println("Matrix Original");
-        print2D(m1);
-
-        println("Matrix Rotate 90");
-        print2D(rotate90(m1, m1.length));
-
-        println("Matrix Rotate 180");
-        print2D(rotate180(m1, m1.length));
-
-        println("Matrix Rotate 270");
-        print2D(rotate270(m1, m1.length));
-
-        println("Matrix Flip Horizontal");
-        int[][] m1h = clone2D(m1);
-        flip_h(m1h, m1h.length);
-        print2D(m1h);
-
-        println("Matrix Flip Vertical");
-        int[][] m1v = clone2D(m1);
-        flip_v(m1v, m1v.length);
-        print2D(m1v);
-
-        println();
-
-        println("Matrix Original");
-        print2D(m2);
-
-        println("Matrix Rotate 90");
-        print2D(rotate90(m2, m2.length));
-
-        println("Matrix Rotate 180");
-        print2D(rotate180(m2, m2.length));
-
-        println("Matrix Rotate 270");
-        print2D(rotate270(m2, m2.length));
-
-        println("Matrix Flip Horizontal");
-        int[][] m2h = clone2D(m2);
-        flip_h(m2h, m2h.length);
-        print2D(m2h);
-
-        println("Matrix Flip Vertical");
-        int[][] m2v = clone2D(m2);
-        flip_v(m2v, m2v.length);
-        print2D(m2v);
-    }
+//    public void test_matrix_methods() throws IOException {
+//        // Test Case 1
+//        int m1[][] = { {1, 2, 3, 4},
+//                {5, 6, 7, 8},
+//                {9, 10, 11, 12},
+//                {13, 14, 15, 16} };
+//
+//        // Tese Case 2
+//        int m2[][] = { {1, 2, 3},
+//                {4, 5, 6},
+//                {7, 8, 9} };
+//
+//        println("Matrix Original");
+//        print2D(m1);
+//
+//        println("Matrix Rotate 90");
+//        print2D(rotate90(m1, m1.length));
+//
+//        println("Matrix Rotate 180");
+//        print2D(rotate180(m1, m1.length));
+//
+//        println("Matrix Rotate 270");
+//        print2D(rotate270(m1, m1.length));
+//
+//        println("Matrix Flip Horizontal");
+//        int[][] m1h = clone2D(m1);
+//        flip_h(m1h, m1h.length);
+//        print2D(m1h);
+//
+//        println("Matrix Flip Vertical");
+//        int[][] m1v = clone2D(m1);
+//        flip_v(m1v, m1v.length);
+//        print2D(m1v);
+//
+//        println();
+//
+//        println("Matrix Original");
+//        print2D(m2);
+//
+//        println("Matrix Rotate 90");
+//        print2D(rotate90(m2, m2.length));
+//
+//        println("Matrix Rotate 180");
+//        print2D(rotate180(m2, m2.length));
+//
+//        println("Matrix Rotate 270");
+//        print2D(rotate270(m2, m2.length));
+//
+//        println("Matrix Flip Horizontal");
+//        int[][] m2h = clone2D(m2);
+//        flip_h(m2h, m2h.length);
+//        print2D(m2h);
+//
+//        println("Matrix Flip Vertical");
+//        int[][] m2v = clone2D(m2);
+//        flip_v(m2v, m2v.length);
+//        print2D(m2v);
+//    }
+//
+//    public void test_pSum2D_methods() throws IOException {
+//        // Test Case 1
+//        int m1[][] = { {1, 1, 1, 1},
+//                {1, 1, 1, 1},
+//                {1, 1, 1, 1},
+//                {1, 1, 1, 1} };
+//
+//        println("Matrix Original");
+//        print2D(m1);
+//
+//        int[][] m1pSum2D = new int[m1.length][m1[0].length];
+//        println("pSum2D");
+//        pSum2D(m1, m1pSum2D);
+//        print2D(m1pSum2D);
+//
+//        println(area2DbyIdx(m1pSum2D, 1, 1, 3, 3));
+//        println(area2DbyIdx(m1pSum2D, 0, 0, 3, 3));
+//        println(area2DbyIdx(m1pSum2D, 0, 1, 3, 3));
+//        println(area2DbyIdx(m1pSum2D, 1, 0, 3, 3));
+//    }
 }
