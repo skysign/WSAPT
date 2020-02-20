@@ -28,3 +28,22 @@ skysign at gmail.com
 * https://sedew.tistory.com/
 * https://github.com/Jinchul81/practice
 * https://github.com/DonghunP/problem_solving/tree/master/Problem_Solving
+
+## WSAPT 스터디 미팅에서 토론 했던 문제들
+### 2월 24일
+* https://www.acmicpc.net/problem/2504
+ * https://www.hackerrank.com/challenges/largest-rectangle/problem
+ * https://algospot.com/judge/problem/read/FENCE
+* https://algospot.com/judge/problem/read/JOSEPHUS
+
+### 2월 17일
+* https://atcoder.jp/contests/dp/tasks/dp_e
+ * https://skysign.tistory.com/162
+* https://algospot.com/judge/problem/read/QUANTIZE
+ * https://github.com/DonghunP/problem_solving/blob/master/Problem_Solving/Algospot/Quantization.cpp
+* https://leetcode.com/problems/n-queens/
+* https://leetcode.com/problems/n-queens-ii/
+
+### 2월 10일
+* https://algospot.com/judge/problem/read/TRIPATHCNT
+ * https://skysign.tistory.com/188
