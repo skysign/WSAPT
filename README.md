@@ -24,26 +24,26 @@ skysign at gmail.com
 ## WSAPT 스터디 에서 그동안 푼 문제들
 아래 리포에서 찾아 보실 수 있습니다.
 * [https://github.com/skysign/WSAPT](https://github.com/skysign/WSAPT){:target="_blank"}
-* https://github.com/kmdigit/TopCoder
-* https://sedew.tistory.com/
-* https://github.com/Jinchul81/practice
-* https://github.com/DonghunP/problem_solving/tree/master/Problem_Solving
+* [https://github.com/kmdigit/TopCoder](https://github.com/kmdigit/TopCoder){:target="_blank"}
+* [https://sedew.tistory.com/](https://sedew.tistory.com/){:target="_blank"}
+* [https://github.com/Jinchul81/practice](https://github.com/Jinchul81/practice){:target="_blank"}
+* [https://github.com/DonghunP/problem_solving/tree/master/Problem_Solving](https://github.com/DonghunP/problem_solving/tree/master/Problem_Solving){:target="_blank"}
 
 ## WSAPT 스터디 미팅에서 토론 했던 문제들
 ### 2월 24일
 * [https://www.acmicpc.net/problem/2504](https://www.acmicpc.net/problem/2504){:target="_blank"}
-* https://www.hackerrank.com/challenges/largest-rectangle/problem
- - [https://algospot.com/judge/problem/read/FENCE](https://algospot.com/judge/problem/read/FENCE){:target="_blank"}
-* https://algospot.com/judge/problem/read/JOSEPHUS
+* [https://www.hackerrank.com/challenges/largest-rectangle/problem](https://www.hackerrank.com/challenges/largest-rectangle/problem){:target="_blank"}
+  - [https://algospot.com/judge/problem/read/FENCE](https://algospot.com/judge/problem/read/FENCE){:target="_blank"}
+* [https://algospot.com/judge/problem/read/JOSEPHUS](https://algospot.com/judge/problem/read/JOSEPHUS){:target="_blank"}
 
 ### 2월 17일
-* https://atcoder.jp/contests/dp/tasks/dp_e
- - https://skysign.tistory.com/162
-* https://algospot.com/judge/problem/read/QUANTIZE
- - https://github.com/DonghunP/problem_solving/blob/master/Problem_Solving/Algospot/Quantization.cpp
-* https://leetcode.com/problems/n-queens/
-* https://leetcode.com/problems/n-queens-ii/
+* [https://atcoder.jp/contests/dp/tasks/dp_e](https://atcoder.jp/contests/dp/tasks/dp_e){:target="_blank"}
+  - [https://skysign.tistory.com/162](https://skysign.tistory.com/162){:target="_blank"}
+* [https://algospot.com/judge/problem/read/QUANTIZE](https://algospot.com/judge/problem/read/QUANTIZE){:target="_blank"}
+  - [https://github.com/DonghunP/problem_solving/blob/master/Problem_Solving/Algospot/Quantization.cpp](https://github.com/DonghunP/problem_solving/blob/master/Problem_Solving/Algospot/Quantization.cpp){:target="_blank"}
+* [https://leetcode.com/problems/n-queens/](https://leetcode.com/problems/n-queens/){:target="_blank"}
+* [https://leetcode.com/problems/n-queens-ii/](https://leetcode.com/problems/n-queens-ii/){:target="_blank"}
 
 ### 2월 10일
-* https://algospot.com/judge/problem/read/TRIPATHCNT
- * https://skysign.tistory.com/188
+* [https://algospot.com/judge/problem/read/TRIPATHCNT](https://algospot.com/judge/problem/read/TRIPATHCNT){:target="_blank"}
+  - [https://skysign.tistory.com/188](https://skysign.tistory.com/188){:target="_blank"}
