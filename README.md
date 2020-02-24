@@ -32,6 +32,7 @@ skysign at gmail.com
 ## WSAPT 스터디 미팅에서 토론 했던 문제들
 ### 2월 24일
 * [https://www.acmicpc.net/problem/2504](https://www.acmicpc.net/problem/2504){:target="_blank"}
+  - [https://algospot.com/judge/problem/read/BRACKETS2](https://algospot.com/judge/problem/read/BRACKETS2){:target="_blank"}
 * [https://www.hackerrank.com/challenges/largest-rectangle/problem](https://www.hackerrank.com/challenges/largest-rectangle/problem){:target="_blank"}
   - [https://algospot.com/judge/problem/read/FENCE](https://algospot.com/judge/problem/read/FENCE){:target="_blank"}
 * [https://algospot.com/judge/problem/read/JOSEPHUS](https://algospot.com/judge/problem/read/JOSEPHUS){:target="_blank"}
