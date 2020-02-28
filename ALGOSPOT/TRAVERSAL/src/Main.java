@@ -10,12 +10,16 @@ import java.util.List;
 /**
  * TRAVERSAL 트리 순회 순서 변경 / ALGOSPOT
  * 문제링크 : https://algospot.com/judge/problem/read/TRAVERSAL
- * 제출링크 : https://algospot.com/judge/submission/detail/659612
+ * 제출링크 : https://algospot.com/judge/submission/detail/659612 ← post order만 출력한 것
+ * 제출링크 : https://algospot.com/judge/submission/detail/659648 ← binary tree를 만들어서, post order로 출력한 것
  */
 public class Main {
     int N;
     ArrayList<Integer> alPre;  // pre-order
     ArrayList<Integer> alIn;  // in-order
+    public enum LR {
+        L, R
+    }
 
     public void solve() throws IOException {
         int T = sc.nextInt();
@@ -33,7 +37,23 @@ public class Main {
                 alIn.add(sc.nextInt());
             }
 
-            printPostOrder(alPre, alIn);
+//            printPostOrder(alPre, alIn);
+//            printPostOrder(alPre.subList(1, idxCenter+1), alIn.subList(0, idxCenter));
+//            printPostOrder(alPre.subList(idxCenter+1, n), alIn.subList(idxCenter+1, n));
+
+            int root = alPre.get(0);
+            int n = alPre.size();
+            int idxCenter = alIn.indexOf(root);
+            BNode<Integer> rootNode = new BNode(root);
+
+            buildBinaryTree(alPre.subList(1, idxCenter+1), alIn.subList(0, idxCenter), rootNode, LR.L);
+            buildBinaryTree(alPre.subList(idxCenter+1, n), alIn.subList(idxCenter+1, n), rootNode, LR.R);
+//            println();
+//            myPreOrder(rootNode);
+//            println();
+//            myInOrder(rootNode);
+//            println();
+            myPostOrder(rootNode);
             println();
         }
     }
@@ -52,6 +72,58 @@ public class Main {
         print(root + " ");
     }
 
+    public void buildBinaryTree(List<Integer> alPre, List<Integer> alIn, BNode<Integer> node, LR lr) {
+        if(alPre.size() == 0)
+            return;
+
+        int center = alPre.get(0);
+        int n = alPre.size();
+        BNode<Integer> childNode = new BNode(center);
+        if(LR.L == lr) {
+            node.mL = childNode;
+        }
+        else {
+            node.mR = childNode;
+        }
+
+        int idxCenter = alIn.indexOf(center);
+        buildBinaryTree(alPre.subList(1, idxCenter+1), alIn.subList(0, idxCenter), childNode, LR.L);
+        buildBinaryTree(alPre.subList(idxCenter+1, n), alIn.subList(idxCenter+1, n), childNode, LR.R);
+    }
+
+    public void myPreOrder(BNode<Integer> node) throws IOException {
+        if(null == node)
+            return;
+
+        int v = (int)node.mV;
+        print(v + " ");
+
+        myPreOrder(node.mL);
+        myPreOrder(node.mR);
+    }
+
+    public void myInOrder(BNode node) throws IOException {
+        if(null == node)
+            return;
+
+        myInOrder(node.mL);
+
+        int v = (int)node.mV;
+        print(v + " ");
+
+        myInOrder(node.mR);
+    }
+
+    public void myPostOrder(BNode node) throws IOException {
+        if(null == node)
+            return;
+
+        myPostOrder(node.mL);
+        myPostOrder(node.mR);
+
+        int v = (int)node.mV;
+        print(v + " ");
+    }
 //        int n = ;
 //        for(int i=0; i<n; ++i) {
 //
@@ -89,8 +161,8 @@ public class Main {
     }
 
     public class BNode<TV> extends Node {
-        Node mL;
-        Node mR;
+        BNode<TV> mL;
+        BNode<TV> mR;
 
         BNode(TV v) {
             super(v);
