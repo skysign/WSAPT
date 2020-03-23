@@ -28,8 +28,22 @@ skysign at gmail.com
 * [https://sedew.tistory.com/](https://sedew.tistory.com/){:target="_blank"}
 * [https://github.com/Jinchul81/practice](https://github.com/Jinchul81/practice){:target="_blank"}
 * [https://github.com/DonghunP/problem_solving/tree/master/Problem_Solving](https://github.com/DonghunP/problem_solving/tree/master/Problem_Solving){:target="_blank"}
+* [https://github.com/chanshik/HackerRank](https://github.com/chanshik/HackerRank){:target="_blank"}
+* [https://github.com/chanshik/codewars](https://github.com/chanshik/codewars){:target="_blank"}
 
 ## WSAPT 스터디 미팅에서 토론 했던 문제들
+
+### 3월 23일
+* [https://www.root-me.org/en/Challenges/Cryptanalysis/Encoding-ASCII](https://www.root-me.org/en/Challenges/Cryptanalysis/Encoding-ASCII){:target="_blank"}
+* [https://www.root-me.org/en/Challenges/Cryptanalysis/Encoding-UU](https://www.root-me.org/en/Challenges/Cryptanalysis/Encoding-UU){:target="_blank"}
+* [https://www.acmicpc.net/problem/13398](https://www.acmicpc.net/problem/13398){:target="_blank"}
+* [https://algospot.com/judge/problem/read/TRAVERSAL](https://algospot.com/judge/problem/read/TRAVERSAL){:target="_blank"}
+ - [https://skysign.tistory.com/191](https://skysign.tistory.com/191){:target="_blank"}
+
+### 3월 9일
+* [https://algospot.com/judge/problem/read/TRAVERSAL](https://algospot.com/judge/problem/read/TRAVERSAL){:target="_blank"}
+ - [https://skysign.tistory.com/191](https://skysign.tistory.com/191){:target="_blank"}
+
 ### 2월 24일
 * [https://www.acmicpc.net/problem/2504](https://www.acmicpc.net/problem/2504){:target="_blank"}
   - [https://algospot.com/judge/problem/read/BRACKETS2](https://algospot.com/judge/problem/read/BRACKETS2){:target="_blank"}
