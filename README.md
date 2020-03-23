@@ -38,11 +38,11 @@ skysign at gmail.com
 * [https://www.root-me.org/en/Challenges/Cryptanalysis/Encoding-UU](https://www.root-me.org/en/Challenges/Cryptanalysis/Encoding-UU){:target="_blank"}
 * [https://www.acmicpc.net/problem/13398](https://www.acmicpc.net/problem/13398){:target="_blank"}
 * [https://algospot.com/judge/problem/read/TRAVERSAL](https://algospot.com/judge/problem/read/TRAVERSAL){:target="_blank"}
- - [https://skysign.tistory.com/191](https://skysign.tistory.com/191){:target="_blank"}
+  - [https://skysign.tistory.com/191](https://skysign.tistory.com/191){:target="_blank"}
 
 ### 3월 9일
 * [https://algospot.com/judge/problem/read/TRAVERSAL](https://algospot.com/judge/problem/read/TRAVERSAL){:target="_blank"}
- - [https://skysign.tistory.com/191](https://skysign.tistory.com/191){:target="_blank"}
+  - [https://skysign.tistory.com/191](https://skysign.tistory.com/191){:target="_blank"}
 
 ### 2월 24일
 * [https://www.acmicpc.net/problem/2504](https://www.acmicpc.net/problem/2504){:target="_blank"}
