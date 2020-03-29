@@ -33,6 +33,12 @@ skysign at gmail.com
 
 ## WSAPT 스터디 미팅에서 토론 했던 문제들
 
+
+### 3월 30일
+* 2019 카카오 겨울 인턴십 코딩 테스트, 4번 문제 토론
+* [https://algospot.com/judge/problem/read/DICTIONARY](https://algospot.com/judge/problem/read/DICTIONARY){:target="_blank"}
+  - [https://skysign.tistory.com/195](https://skysign.tistory.com/195){:target="_blank"}
+
 ### 3월 23일
 * [https://www.root-me.org/en/Challenges/Cryptanalysis/Encoding-ASCII](https://www.root-me.org/en/Challenges/Cryptanalysis/Encoding-ASCII){:target="_blank"}
 * [https://www.root-me.org/en/Challenges/Cryptanalysis/Encoding-UU](https://www.root-me.org/en/Challenges/Cryptanalysis/Encoding-UU){:target="_blank"}
