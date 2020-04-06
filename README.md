@@ -33,6 +33,12 @@ skysign at gmail.com
 
 ## WSAPT 스터디 미팅에서 토론 했던 문제들
 
+### 4월 13일
+* 2019 카카오 겨울 인턴십 코딩 테스트, 4번문제
+
+### 4월 6일
+* [https://www.acmicpc.net/problem/1717](https://www.acmicpc.net/problem/1717){:target="_blank"}
+* [https://www.acmicpc.net/problem/1976](https://www.acmicpc.net/problem/1976){:target="_blank"}
 
 ### 3월 30일
 * 2019 카카오 겨울 인턴십 코딩 테스트, 4번 문제 토론
