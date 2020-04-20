@@ -35,14 +35,14 @@ skysign at gmail.com
 
 ### 4월 27일
 * 2019 카카오 겨울 인턴십 코딩 테스트, 5번 '징검다리 건너기' 문제
-* https://programmers.co.kr/learn/courses/30/lessons/64062
+* [https://programmers.co.kr/learn/courses/30/lessons/64062](https://programmers.co.kr/learn/courses/30/lessons/64062){:target="_blank"}
 
 ### 4월 20일
-* 2020년 라인 백엔드 면접, 프로그래밍 1번 문제
+* 2020년 라인 백엔드 면접, 프로그래밍 1번 문제 (slack 확인해주세요)
 
 ### 4월 13일
 * 2019 카카오 겨울 인턴십 코딩 테스트, 4번 '호텔 방 배정' 문제
-* https://programmers.co.kr/learn/courses/30/lessons/64063
+* [https://programmers.co.kr/learn/courses/30/lessons/64063](https://programmers.co.kr/learn/courses/30/lessons/64063){:target="_blank"}
 
 ### 4월 6일
 * [https://www.acmicpc.net/problem/1717](https://www.acmicpc.net/problem/1717){:target="_blank"}
