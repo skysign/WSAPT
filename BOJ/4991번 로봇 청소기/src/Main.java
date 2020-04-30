@@ -1,7 +1,7 @@
 /**
  * 4991번 로봇 청소기 / BOJ
  * 문제링크 : https://www.acmicpc.net/problem/4991
- * 제출링크 : https://www.acmicpc.net/source/19512047
+ * 제출링크 : https://www.acmicpc.net/source/19520818
  * 문제풀이 : https://skysign.tistory.com/214
  */
 
@@ -14,10 +14,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
+    /** 입력값의 column갯수 */
     int col;
+    /** 입력값의 row갯수 */
     int row;
+    /** 입력값을 저장하고 있는 맵 */
     char[][] map;
+    /** 청소로봇과 모든 쓰레기 사이에 거리 */
     int[][] d;
+    /** 청소로봇과 모든 쓰레기 갯수*/
     int N;
 
     public void solve() throws IOException {
@@ -25,14 +30,16 @@ public class Main {
             col = sc.nextInt();
             row = sc.nextInt();
 
+            /* 문제의 정의에 따라서, 0 0 입력일 때 종료 */
             if((col == row) && (col == 0))
                 return;
 
+            /** 청소로봇이 모든 쓰레기를 치우며, 이동하는 거리의 합중에서 최소값*/
             int rMinSumOfDistance = Integer.MAX_VALUE;
             map = new char[row][col];
-            // 청소로봇의 시작 위치
+            /** 청소로봇의 시작 위치 */
             Pair<Integer, Integer> robot = null;
-            // 쓰레기들의 위치
+            /** 쓰레기들의 위치 */
             ArrayList<Pair<Integer, Integer>> alPosTrash = new ArrayList<>();
 
             for(int i=0; i<row; ++i) {
@@ -50,7 +57,13 @@ public class Main {
                 }
             }
 
-            // robot 위치 + 쓰레기들의 위치
+            /**
+             * 문제에서 청소로봇이 이동하면서, 쓰레기를 치운다고 설명하고 있지만,
+             * 문제에서 요구하는 것을 보다, 코딩에 하기 쉽도로고 바꿔써 보면
+             * alPosAll(0)에서 출발해서,alPosAll(1) ~ alPosAll(N-1)까지
+             * 모두 방뭉하는 거리의 최소값을 찾는 문제입니다.
+             */
+            /** 청소로봇 + 쓰레기들의 위치 */
             ArrayList<Pair<Integer, Integer>> alPosAll = new ArrayList();
             alPosAll.add(robot);
             alPosAll.addAll(alPosTrash);
@@ -58,11 +71,15 @@ public class Main {
             N = alPosAll.size();
 
             d = new int[alPosAll.size()][alPosAll.size()];
-            // distance[i][j] 사이에 갈 수 없는 경우 -1
+
+            // i에서 출발해서, j에 도착하는 거리는 distance[i][j]에 저장
+            // i에서 추발해서, j에 도착할 수 없으면 -1 저장
+            // 시작은 모두 도착할 수 없다고 가정
             fill2D(d, -1);
             
             // robot의 시작 위치와, 쓰레기들의 위치를 o * 에서 인덱스로 바꿔줌
-            // flood fill 에서 쉽게 찾기 위해서, 인덱스로 바꿔준다
+            // flood fill 에서 청소로봇과, 쓰레기를 찾아서, d 에 거리를 저장하기 쉽도록 인덱스로 바꿔준다
+            // ASCII코드에서 0~10은 모두 제어문자임으로, 알파벳에 속하는 '.' 과 'x'등과 겹치지 않는다.
             for(int i=0; i<alPosAll.size(); ++i) {
                 Pair<Integer, Integer> pos = alPosAll.get(i);
                 int xi = (Integer)pos.getKey();
@@ -72,41 +89,44 @@ public class Main {
             }
 
             for(int i=0; i<alPosAll.size(); ++i) {
-                // false 도착할 수 없는 위치에 쓰레기가 있음
+                // i 에서 출발해서, i를 제외한 다른 위치(청소로봇 or 쓰레기)까지의 거리를 구한다.
+                // false : 청소로봇이 이동할 수 없는 위치에 쓰레기가 있음
                 if(false == updateDistanceByFloodFill(alPosAll, i)) {
                     rMinSumOfDistance = -1;
                     break;
                 }
+                // flood fill을 사용해서, O(N * row * col)의 시간으로,
+                // 청소로봇과 쓰레기들 사이의 이동거리를 알아 낼 수 있습니다.
+                // 입력값의 최대값을 가정하면, O(11 * 20 * 20) 시간으로 찾을 수 있습니다.
+
+                // 완전탐색(exhaustive search)으로 거리를 찾을 수 있지만,
+                // 2가지 이유 때문에, 이 문제에서는 flood fill을 사용합니다.
+                // 1. 이 문제에서는 이동거리만 구하면 되고, 이동 경로는 필요하지 안습니다.
+                // 2. flood fill이 완전탐색보다 빨리 동작합니다.
             }
 
-            // 도착할 수 없는 쓰레기 있으므로, -1 프린트뒤, while루프로 돌아감
+            // -1 프린트 한다음, 가장위의 while루프로 돌아감
             if(-1 == rMinSumOfDistance) {
                 println(rMinSumOfDistance);
                 continue;
             }
 
-            // update distance(d) by Floyd Alogorihm
-            int N = alPosAll.size();
-            for(int m=0; m<N; ++m) {
-                for(int i=0; i<N; ++i) {
-                    for(int j=0; j<N; ++j) {
-                        if((-1 != d[i][j]) && (-1 != d[i][m]) && (-1 != d[m][j])) {
-                            d[i][j] = Math.min(d[i][j], d[i][m] + d[m][j]);
-                        }
-                    }
-                }
-            }
-
-            // Permutation
             // 쓰레기들을 치우는 순서에 따라서,
             // 청소로봇이 움직이는 거리가 달라진다.
+            // 따라서, 쓰레기의 갯수에 따라서, Permutation(순열)을 만들어,
+            // 순열의 순서대로, 청소로봇이 이동했을 때, 이동 경로의 합을 구한다.
+
+            // 플로이드 워셜(floyd warshall), 해밀턴 패스(halmilton path) 등의 방법으로도,
+            // 이 문제를 푸는 것이 가능할 것으로 생각하지만,
+            // 순열을 사용해서 푸는 것이 보다 간단한 풀이입니다.
+            // 입력에 따라서, 이동하는 방식이 2차원의 전후좌우 4가지 방향 밖에 없기 때문에,
+            // 쓰레기들을 방문하는 순서를 순열로만들고, 가능한 순열을 모두 만든 후에,
+            // 순열의 순서대로 쓰레기를 방문하여, 청소로봇의 최소이동 경로를 찾는다.
             int[] idxTrashes = new int[alPosTrash.size()];
             for(int i=0; i<alPosTrash.size(); ++i) {
                 idxTrashes[i] = i+1;
             }
 
-            // 쓰레기들의 순서를 순열로 만들어서,
-            // 순열의 순서대로, 청소로봇이 이동했을 때, 이동 경로의 합을 구한다.
             ArrayList<int[]> alPermutationTrash = new ArrayList<>();
             permutation(idxTrashes, 0, idxTrashes.length, idxTrashes.length, alPermutationTrash);
 
@@ -122,6 +142,7 @@ public class Main {
                     sumOfDistance += d[pathes[i]][pathes[i+1]];
                 }
 
+                // 이동 경로합의 최소값
                 rMinSumOfDistance = Math.min(rMinSumOfDistance, sumOfDistance);
             }
 
@@ -129,6 +150,12 @@ public class Main {
         }
     }
 
+    /**
+     * i 에서 출발해서, i를 제외한 다른 위치(청소로봇 or 쓰레기)까지의 거리를 구한다.
+     * @param alPosAll 청소로봇과 쓰레기들의 위치
+     * @param idx 시작위치를 가리키는 인덱스
+     * @return false 이동할 수 없는 위치에 쓰레기가 있음, true 모든 쓰레기가 이동할 수 있는 위치에 있음
+     */
     public boolean updateDistanceByFloodFill(ArrayList<Pair<Integer, Integer>> alPosAll, int idx) {
         int[][] visitied = new int[row][col];
         ArrayList<Pair<Integer, Integer>> alPos = new ArrayList<>();
@@ -199,47 +226,6 @@ public class Main {
         // 0 != visitied[i][j] 이미 flooeded되서, 한번 방문 했던 곳
         return -1;
     }
-
-//            // Permutation
-//            int[] idxDirties = new int[alPos.size()];
-//            for(int i=0; i<alPos.size(); ++i) {
-//                idxDirties[i] = i;
-//            }
-//
-//            ArrayList<int[]> alPermutationDirties = new ArrayList<>();
-//            permutation(idxDirties, 0, idxDirties.length, idxDirties.length, alPermutationDirties);
-//
-//            long minSumOfLength = Long.MAX_VALUE;
-//
-//            for(int[] permutation: alPermutationDirties) {
-//                ArrayList<Pair<Integer, Integer>> alPos = new ArrayList<>();
-//                alPos.add(robot);
-//
-//                for(int idx: permutation) {
-//                    alPos.add(alPos.get(idx));
-//                }
-//
-//                long sumOfLength = 0;
-//
-//                for(int i=0; i<alPos.size()-1; ++i) {
-//                    Pair<Integer, Integer> from = alPos.get(i);
-//                    Pair<Integer, Integer> to = alPos.get(i+1);
-//
-//                    int length = floodFromTo(from, to);
-//
-//                    // 0 도달 할 수 없음
-//                    if(0 == length) {
-//                        sumOfLength = -1;
-//                        break;
-//                    }
-//                    else {
-//                        sumOfLength += length;
-//                    }
-//                }
-//                minSumOfLength = Math.min(minSumOfLength, sumOfLength);
-//            }
-//
-//            println(minSumOfLength);
 
 //        int n = ;
 //        for(int i=0; i<n; ++i) {
