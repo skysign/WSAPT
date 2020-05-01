@@ -1,7 +1,7 @@
 /**
  * 4991번 로봇 청소기 / BOJ
  * 문제링크 : https://www.acmicpc.net/problem/4991
- * 제출링크 : https://www.acmicpc.net/source/19520818
+ * 제출링크 : https://www.acmicpc.net/source/19521047
  * 문제풀이 : https://skysign.tistory.com/214
  */
 
@@ -132,15 +132,14 @@ public class Main {
 
             rMinSumOfDistance = Integer.MAX_VALUE;
 
-            for(int[] permutationTrashes: alPermutationTrash) {
-                int[] pathes = new int[permutationTrashes.length +1];
-                System.arraycopy(permutationTrashes, 0, pathes, 1, permutationTrashes.length);
-
+            for(int[] per: alPermutationTrash) {
                 int sumOfDistance = 0;
 
-                for(int i=0; i<pathes.length-1; ++i) {
-                    sumOfDistance += d[pathes[i]][pathes[i+1]];
+                for(int i=0; i<per.length-1; ++i) {
+                    sumOfDistance += d[per[i]][per[i+1]];
                 }
+
+                sumOfDistance += d[0][per[0]];
 
                 // 이동 경로합의 최소값
                 rMinSumOfDistance = Math.min(rMinSumOfDistance, sumOfDistance);
