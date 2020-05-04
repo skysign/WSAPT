@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
@@ -52,6 +53,65 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Main main = new Main();
         main._solve();
+    }
+
+    // begin Permutation
+    /*
+     * https://bcp0109.tistory.com/14
+     * depth 0
+     * n arr의 길이
+     * r 뽑는 갯수
+     */
+    void permutation(int[] arr, int depth, int n, int r, ArrayList<int[]> al) {
+        if (depth == r) {
+            int[] rs = new int[r];
+            System.arraycopy(arr, 0, rs, 0, r);
+            al.add(rs);
+            return;
+        }
+
+        for (int i=depth; i<n; i++) {
+            swap(arr, depth, i);
+            permutation(arr, depth + 1, n, r, al);
+            swap(arr, depth, i);
+        }
+    }
+
+    void swap(int[] arr, int depth, int i) {
+        int temp = arr[depth];
+        arr[depth] = arr[i];
+        arr[i] = temp;
+    }
+    // end Permutation
+
+    public class MNode<TV> extends Node {
+        ArrayList<MNode<TV>> mChidren ;
+
+        MNode(TV v) {
+            super(v);
+            mChidren = new ArrayList<>();
+        }
+    }
+
+    public class BNode<TV> extends Node {
+        BNode<TV> mL;
+        BNode<TV> mR;
+
+        BNode(TV v) {
+            super(v);
+        }
+    }
+
+    public class Node<TV> {
+        public TV mV;
+
+        Node(TV v) {
+            set(v);
+        }
+
+        public void set(TV v) {
+            mV = v;
+        }
     }
 
     public int[][] pSum2D(int[][] dt) {
@@ -156,12 +216,37 @@ public class Main {
         }
     }
 
-    public int[][] clone2D(int[][] src) {
-        int N = src.length;
-        int[][] dst = new int[N][N];
+    public char[][] clone2D(char[][] src) {
+        int row = src.length;
+        int col = src[0].length;
+        char[][] dst = new char[row][col];
 
-        for (int i=0; i<N; i++) {
-            System.arraycopy(src[i],0, dst[i],0, N);
+        for (int i=0; i<row; i++) {
+            System.arraycopy(src[i],0, dst[i],0, col);
+        }
+
+        return dst;
+    }
+
+    public boolean[][] clone2D(boolean[][] src) {
+        int row = src.length;
+        int col = src[0].length;
+        boolean[][] dst = new boolean[row][col];
+
+        for (int i=0; i<row; i++) {
+            System.arraycopy(src[i],0, dst[i],0, col);
+        }
+
+        return dst;
+    }
+
+    public int[][] clone2D(int[][] src) {
+        int row = src.length;
+        int col = src[0].length;
+        int[][] dst = new int[row][col];
+
+        for (int i=0; i<row; i++) {
+            System.arraycopy(src[i],0, dst[i],0, col);
         }
 
         return dst;
@@ -192,8 +277,15 @@ public class Main {
     public class _Pair<K,V> {
         private K key;
         public K getKey() { return key; }
+        public K L() { return getKey(); }
+        public void setKey(K kk) { key = kk; }
         private V value;
         public V getValue() { return value; }
+        public V R() { return getValue(); }
+        public void setValue(V vv) { value = vv; }
+
+        public void set(K kk, V vv) { key = kk; value = vv; }
+
         public _Pair(K key, V value) {
             this.key = key;
             this.value = value;
@@ -221,6 +313,10 @@ public class Main {
     public final int _10_007 = 10007;
     public final int _1_000_000_007 = 1000000007;
     final int MOD = _1_000_000_007;
+
+    public void print(int v) throws IOException {
+        print(v+"");
+    }
 
     public void print(String s) throws IOException {
         bw.write(s);
