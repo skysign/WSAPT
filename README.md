@@ -33,6 +33,14 @@ skysign at gmail.com
 
 ## WSAPT 스터디 미팅에서 토론 했던 문제들
 
+### 5월 11일
+* BOJ 9663번 N-Queen
+* [https://www.acmicpc.net/problem/9663](https://www.acmicpc.net/problem/9663){:target="_blank"}
+
+### 5월 4일
+* BOJ 4991번 로봇 청소기
+* [https://www.acmicpc.net/problem/4991](https://www.acmicpc.net/problem/4991){:target="_blank"}
+
 ### 4월 27일
 * 2019 카카오 겨울 인턴십 코딩 테스트, 5번 '징검다리 건너기' 문제
 * [https://programmers.co.kr/learn/courses/30/lessons/64062](https://programmers.co.kr/learn/courses/30/lessons/64062){:target="_blank"}
