@@ -448,6 +448,11 @@ public class Main {
         }
     }
 
+    // LCM
+    int LCM(int a, int b) {
+        return a * (b / GCD(a, b));
+    }
+
     // GCD
     int GCD(int a, int b) {
         if(0 == b) {
