@@ -55,6 +55,18 @@ public class Main {
         main._solve();
     }
 
+    // prime number
+    boolean IsPrimeNnumber(int n) {
+        if (n < 2)
+            return false;
+
+        for (int i=2; i*i<=n; i++)
+            if (n % i == 0)
+                return false;
+
+        return true;
+    }
+
     // begin Permutation
     /*
      * https://bcp0109.tistory.com/14
