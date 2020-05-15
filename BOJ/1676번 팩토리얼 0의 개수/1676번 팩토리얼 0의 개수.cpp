@@ -23,12 +23,18 @@ void solve() {
     int r = 0;
 
     // 5의 갯수를 세어보자
-    for (int i = 5; i <= N; i += 5) {
-        int v = i;
-        while (DoesItContain5(v)) {
-            ++r;
-            v /= 5;
-        }
+    // 방법 #1
+    //for (int i = 5; i <= N; i += 5) {
+    //    int v = i;
+    //    while (DoesItContain5(v)) {
+    //        ++r;
+    //        v /= 5;
+    //    }
+    //}
+
+    // 방법 #2
+    for (int i = 5; i <= N; i *= 5) {
+        r += (N / i);
     }
 
     cout << r;
