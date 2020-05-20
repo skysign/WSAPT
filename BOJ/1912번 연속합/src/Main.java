@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * 1912번 연속합 / BOJ
+ * BOJ 1912번 연속합
  * 문제링크 : https://www.acmicpc.net/problem/1912
  * 제출링크 : https://www.acmicpc.net/source/18605858
+ * 문제풀이 : https://skysign.tistory.com/193
+ * 유튜브 문제풀이 : https://www.youtube.com/watch?v=dAtNiVwnTN4
  */
 
 public class Main {
@@ -25,12 +27,13 @@ public class Main {
             dt[i] = sc.nextInt();
         }
 
-        dp = new int[N+1];
+        dp = new int[N];
+        dp[0] = dt[0];
 
-        int r = Integer.MIN_VALUE;
+        int r = dp[0];
 
-        for(int i=1;i<N+1; ++i) {
-            dp[i] = Math.max(dt[i-1], dt[i-1]+dp[i-1]);
+        for(int i=1;i<N; ++i) {
+            dp[i] = Math.max(dt[i], dt[i]+dp[i-1]);
             r = Math.max(r, dp[i]);
         }
 
