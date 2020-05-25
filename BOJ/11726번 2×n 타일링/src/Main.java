@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
 /**
- * 11726번 2×n 타일링 / BAEKJOON ONLINE JUDGE / acmicpc.net
+ * BOJ 11726번 2×n 타일링
  * 문제링크 : https://www.acmicpc.net/problem/11726
  * 제출링크 : https://www.acmicpc.net/source/17183178
+ * 문제풀이 : https://skysign.tistory.com/179
  */
 public class Main {
     public void solve() {
