@@ -27,11 +27,18 @@ skysign at gmail.com
 * [https://github.com/kmdigit/TopCoder](https://github.com/kmdigit/TopCoder){:target="_blank"}
 * [https://sedew.tistory.com/](https://sedew.tistory.com/){:target="_blank"}
 * [https://github.com/Jinchul81/practice](https://github.com/Jinchul81/practice){:target="_blank"}
-* [https://github.com/DonghunP/problem_solving/tree/master/Problem_Solving](https://github.com/DonghunP/problem_solving/tree/master/Problem_Solving){:target="_blank"}
 * [https://github.com/chanshik/HackerRank](https://github.com/chanshik/HackerRank){:target="_blank"}
 * [https://github.com/chanshik/codewars](https://github.com/chanshik/codewars){:target="_blank"}
 
 ## WSAPT 스터디 미팅에서 토론 했던 문제들
+
+### 6월 1일
+* BOJ 11052번 카드 구매하기
+* [https://www.acmicpc.net/problem/11052](https://www.acmicpc.net/problem/11052){:target="_blank"}
+
+### 5월 25일
+* BOJ 2529번 부등호
+* [https://www.acmicpc.net/problem/2529](https://www.acmicpc.net/problem/2529){:target="_blank"}
 
 ### 5월 11일
 * BOJ 9663번 N-Queen
