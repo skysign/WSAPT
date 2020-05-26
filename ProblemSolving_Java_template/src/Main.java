@@ -67,6 +67,79 @@ public class Main {
         return true;
     }
 
+    // begin Combination
+    void testCombination() throws IOException {
+        // 4개 중에 2개 고르기
+        int n = 4;
+        int r = 2;
+
+        // 조합의 갯수
+        println(countCombination(n, r));
+
+
+        // 조합의 입력 데이터 만들기
+        int[] arr = new int[n];
+        for(int i=1; i<=n; ++i) {
+            arr[i-1] = i;
+        }
+
+        boolean[] visited = new boolean[n];
+        ArrayList<int[]> al = new ArrayList<>();
+        combination(arr, visited, 0, n, 2, r, al);
+
+        for(int[] comb: al) {
+            for(int x: comb) {
+                print(x);
+                print(' ');
+            }
+            println();
+        }
+    }
+
+
+    // 출처 : https://bcp0109.tistory.com/15
+    /**
+     * @param n 전체 갯수
+     * @param r 고르는 갯수
+     */
+    int countCombination(int n, int r) {
+        if (r == 0 || r == n)
+            return 1;
+
+        return countCombination(n-1, r-1) + countCombination(n-1, r);
+    }
+
+    // 출처 : https://seungbong8-8.tistory.com/15
+    // nCr = n!/(r! * (n-r)!)
+    void combination(int[] arr, boolean[] visited, int start, int n, int r, int R, ArrayList<int[]> al) {
+        if (r == 0) {
+            print(arr, visited, n, R, al);
+            return;
+        }
+
+        for (int i = start; i < n; i++) {
+            visited[i] = true;
+            combination(arr, visited, i + 1, n, r - 1, R, al);
+            visited[i] = false;
+        }
+    }
+
+    void print(int[] arr, boolean[] visited, int n, int R, ArrayList<int[]> al) {
+        int[] comb = new int[R];
+
+        for (int i = 0, idx = 0; i < n; i++) {
+            if (visited[i] == true) {
+//                System.out.print(arr[i] + " ");
+                comb[idx] = arr[i];
+                idx++;
+            }
+        }
+
+        al.add(comb);
+//        System.out.println();
+    }
+    // end Combination
+
     // begin Permutation
     /*
      * https://bcp0109.tistory.com/14
@@ -328,6 +401,10 @@ public class Main {
 
     public void print(int v) throws IOException {
         print(v+"");
+    }
+
+    public void print(char c) throws IOException {
+        bw.write(c);
     }
 
     public void print(String s) throws IOException {
