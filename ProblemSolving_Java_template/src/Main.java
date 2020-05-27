@@ -6,6 +6,13 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * BOJ 
+ * 문제링크 : 
+ * 제출링크 : 
+ * 문제풀이 : 
+ */
+
 public class Main {
     int N;
     int[][] dp;
@@ -42,7 +49,7 @@ public class Main {
 //                for(int k=0; k<n; ++k) {
 //
 //                }
-//            }
+//            }`
 //        }
 
     public void _solve() throws IOException {
@@ -55,7 +62,31 @@ public class Main {
         main._solve();
     }
 
-    // prime number
+    // toArray() example
+    void testToArray() throws IOException {
+        ArrayList<Integer> al = new ArrayList();
+        al.add(1);
+        al.add(3);
+        al.add(5);
+        al.add(7);
+
+        // al.size() 과 new Integer[0]의 길이를 비교해서,
+        // al.size()가 크면, 같은 타입으로, 배열을 새로 할당하고, 길이는 al.size()로 함
+        // al.size()가 작으면, 할당된 배열을 그대로 사용함
+        // ex) new Integer[5] 라고 하면, arr의 크기는 5임
+        Integer[] arr = al.toArray(new Integer[0]);
+        for(int x: arr) {
+            println(x);
+        }
+
+        //
+        int[] arr2 = al.stream().mapToInt(i -> i).toArray();
+        for(int x: arr2) {
+            println(x);
+        }
+    }
+
+    // 소수 prime number
     boolean IsPrimeNnumber(int n) {
         if (n < 2)
             return false;
@@ -67,7 +98,7 @@ public class Main {
         return true;
     }
 
-    // begin Combination
+    // begin 조합 Combination
     void testCombination() throws IOException {
         // 4개 중에 2개 고르기
         int n = 4;
@@ -99,6 +130,7 @@ public class Main {
 
     // 출처 : https://bcp0109.tistory.com/15
     /**
+     * 조합의 갯수
      * @param n 전체 갯수
      * @param r 고르는 갯수
      */
@@ -111,6 +143,16 @@ public class Main {
 
     // 출처 : https://seungbong8-8.tistory.com/15
     // nCr = n!/(r! * (n-r)!)
+    /**
+     * 조합
+     * @param arr
+     * @param visited
+     * @param start
+     * @param n
+     * @param r
+     * @param R
+     * @param al
+     */
     void combination(int[] arr, boolean[] visited, int start, int n, int r, int R, ArrayList<int[]> al) {
         if (r == 0) {
             print(arr, visited, n, R, al);
@@ -141,7 +183,8 @@ public class Main {
     // end Combination
 
     // begin Permutation
-    /*
+    /**
+     * 순열
      * https://bcp0109.tistory.com/14
      * depth 0
      * n arr의 길이
@@ -399,6 +442,8 @@ public class Main {
     public final int _1_000_000_007 = 1000000007;
     final int MOD = _1_000_000_007;
 
+    public BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
     public void print(int v) throws IOException {
         print(v+"");
     }
@@ -579,8 +624,6 @@ public class Main {
 //    Sometimes, Reader class cause unknown problem, when I submit my java code to judge server.
 //    For more detail, please see https://algospot.com/forum/read/4731/
 //    public Scanner sc = new Scanner(System.in);
-
-    public BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     // https://www.geeksforgeeks.org/fast-io-in-java-in-competitive-programming/
     public class Reader
