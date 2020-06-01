@@ -1,11 +1,8 @@
-/**
- * BOJ 
- * 문제링크 : 
- * 제출링크 : 
- * 문제풀이 : 
- * 유튜브 문제풀이 : 
- * CPP소스 : 
- * 자바소스 : 
+﻿/**
+ * BOJ 2225번 합분해
+ * 문제링크 : https://www.acmicpc.net/problem/2225
+ * 제출링크 : https://www.acmicpc.net/source/20136342
+ * 문제풀이 : https://skysign.tistory.com/250
  */
 
 #include <iostream>
@@ -30,15 +27,26 @@ bool IsPrimeNnumber(int n);
 void solve();
 
 // 문제 푸는 코드 시작
-#define N_MAX (1000+1)
+#define N_MAX (200+1)
+#define K_MAX (200+1)
+#define MOD (_1_000_000_000)
+
+LL dp[N_MAX][K_MAX] = { {1, }, };
 
 void solve() {
-	int N;
-	cin >> N;
-	
-	for(int i=0; i<N; ++i) {
+    int N, K;
+    cin >> N >> K;
 
-	}
+    for (int n = 0; n <= N; ++n) {
+        for (int k = 1; k <= K; ++k) {
+            for (int l = 0; l <= n; ++l) {
+                dp[n][k] += dp[n - l][k-1];
+                dp[n][k] %= MOD;
+            }
+        }
+    }
+
+    cout << dp[N][K];
 }
 
 int main()
@@ -48,8 +56,8 @@ int main()
     cout.tie(nullptr);
 
     solve();
-	
-	return 0;
+
+    return 0;
 }
 
 // LCM
