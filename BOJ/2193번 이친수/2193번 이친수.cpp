@@ -1,8 +1,9 @@
 ﻿/**
  * BOJ 2193번 이친수
  * 문제링크 : https://www.acmicpc.net/problem/2193
- * 제출링크 :
- * 유튜브 문제풀이 링크 : 
+ * 제출링크 : https://www.acmicpc.net/source/20121295
+ * 유튜브 문제풀이 : https://youtu.be/Lc2mtrf8qJY
+ * 문제풀이 : https://skysign.tistory.com/246
  */
 
 #include <iostream>
