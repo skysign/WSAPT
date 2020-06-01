@@ -9,12 +9,12 @@
 #include <algorithm>
 using namespace std;
 
-void solve();
-
 #define N_MAX (1000+1)
 
 int dt[N_MAX] = { 0, };
 int dp[N_MAX] = { 0, };
+
+void solve();
 
 void solve() {
 	int N;

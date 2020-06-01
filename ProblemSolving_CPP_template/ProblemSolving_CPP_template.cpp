@@ -38,6 +38,8 @@ int main()
     cout.tie(nullptr);
 
     solve();
+	
+	return 0;
 }
 
 // LCM
