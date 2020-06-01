@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "11053번 가장 긴 증가하는 부분 수열", "11053번 가장 긴 증가하는 부분 수열.vcxproj", "{BA8F6DDE-26BB-40F3-B5BC-BC20DC91D877}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA8F6DDE-26BB-40F3-B5BC-BC20DC91D877}.Debug|x64.ActiveCfg = Debug|x64
+		{BA8F6DDE-26BB-40F3-B5BC-BC20DC91D877}.Debug|x64.Build.0 = Debug|x64
+		{BA8F6DDE-26BB-40F3-B5BC-BC20DC91D877}.Debug|x86.ActiveCfg = Debug|Win32
+		{BA8F6DDE-26BB-40F3-B5BC-BC20DC91D877}.Debug|x86.Build.0 = Debug|Win32
+		{BA8F6DDE-26BB-40F3-B5BC-BC20DC91D877}.Release|x64.ActiveCfg = Release|x64
+		{BA8F6DDE-26BB-40F3-B5BC-BC20DC91D877}.Release|x64.Build.0 = Release|x64
+		{BA8F6DDE-26BB-40F3-B5BC-BC20DC91D877}.Release|x86.ActiveCfg = Release|Win32
+		{BA8F6DDE-26BB-40F3-B5BC-BC20DC91D877}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AEEEA484-4194-4513-9CA1-513EEE1228AE}
+	EndGlobalSection
+EndGlobal
