@@ -12,6 +12,6 @@
 
 # 함께 알고리즘 문제 풀고 있는 사람들
 - WSAPT 스터디에서 알고리즘 문제 함께 풀고 있습니다.
-- https://wsapt.github.io/public/
+- [https://wsapt.github.io/public/](https://wsapt.github.io/public/){:target="_blank"}
 
 skysign at gmail.com
