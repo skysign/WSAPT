@@ -1,5 +1,15 @@
 import java.util.Scanner;
 
+/**
+ * BOJ 2156번 포도주 시식
+ * 문제링크 : https://www.acmicpc.net/problem/2156
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/ZirZOCx9Rko
+ *
+ * 자바소스 :
+ */
+
 public class Main {
     public void solve() {
         Scanner sc = new Scanner(System.in);
