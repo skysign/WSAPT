@@ -7,7 +7,7 @@ import java.util.Scanner;
  * 유튜브 문제 풀이
  * https://youtu.be/ZirZOCx9Rko
  *
- * 자바소스 :
+ * 자바소스 : https://bit.ly/2AUzq87
  */
 
 public class Main {
