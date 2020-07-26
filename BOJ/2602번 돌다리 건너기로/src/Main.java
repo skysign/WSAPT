@@ -4,9 +4,9 @@
  * 문제링크 : https://www.acmicpc.net/problem/2602
  *
  * 유튜브 문제 풀이
+ * https://youtu.be/6mQQh0cELZc
  *
- *
- * 자바소스 :
+ * 자바소스 : https://bit.ly/3hzVWCP
  */
 import java.util.Scanner;
 
@@ -76,4 +76,3 @@ public class Main {
         main.solve();
     }
 }
-
