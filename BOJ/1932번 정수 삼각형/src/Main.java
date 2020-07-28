@@ -2,12 +2,13 @@ import java.util.Scanner;
 
 /**
  * BOJ 1932번 정수 삼각형
+ *
  * 문제링크 : https://www.acmicpc.net/problem/1932
  *
  * 유튜브 문제 풀이
+ * https://youtu.be/EVl-Z-byTPc
  *
- *
- * 자바소스 :
+ * 자바소스 : https://bit.ly/2P23amT
  */
 
 public class Main {
