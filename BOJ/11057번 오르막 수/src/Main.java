@@ -15,7 +15,6 @@ public class Main {
     public void solve() {
         Scanner sc = new Scanner(System.in);
         N = sc.nextInt();
-//        int r = orumak(N-1, 0);
 
         int r = 0;
         int[][] dp = new int[N+1][10];
