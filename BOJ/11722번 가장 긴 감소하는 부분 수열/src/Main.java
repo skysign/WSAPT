@@ -6,9 +6,9 @@ import java.util.Scanner;
  * 문제링크 : https://www.acmicpc.net/problem/11722
  *
  * 유튜브 문제 풀이
+ * https://youtu.be/66BcgtGgZac
  *
- *
- * 자바소스 :
+ * 자바소스 : https://bit.ly/3irBggS
  */
 
 public class Main {
