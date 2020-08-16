@@ -1,14 +1,15 @@
 import java.util.Scanner;
 
 /**
- * BOJ 2156번 포도주 시식
+ * BOJ 13398번 연속합 2
  *
- * 문제링크 :
+ * 문제링크 : https://www.acmicpc.net/problem/13398
  *
  * 유튜브 문제 풀이
+ * https://youtu.be/OZS0DGY9L_M
+ * https://youtu.be/cYvGKRpDkzY
  *
- *
- * 자바소스 :
+ * 자바소스 : https://bit.ly/3kN4uJ1
  */
 
 public class Main {
