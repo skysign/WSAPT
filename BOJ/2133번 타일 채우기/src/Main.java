@@ -1,5 +1,14 @@
 import java.util.Scanner;
-
+/**
+ * BOJ 2133번 타일 채우기
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/2133
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/E_-dFdvy288
+ *
+ * 자바소스 : https://bit.ly/2QDEEtd
+ */
 public class Main {
     public void solve() {
         Scanner sc = new Scanner(System.in);
@@ -38,6 +47,7 @@ public class Main {
 
         System.out.println(dp[N]);
     }
+
     public static void main(String[] args) {
         Main main = new Main();
         main.solve();
