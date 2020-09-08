@@ -1,6 +1,16 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * BOJ 1012번 유기농 배추
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/1012
+ *
+ * 유튜브 문제 풀이
+ *
+ *
+ * 자바소스 : https://bit.ly/2R642ry
+ */
 public class Main {
     public int M;
     public int N;
