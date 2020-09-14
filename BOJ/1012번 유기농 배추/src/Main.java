@@ -7,7 +7,7 @@ import java.util.Scanner;
  * 문제링크 : https://www.acmicpc.net/problem/1012
  *
  * 유튜브 문제 풀이
- *
+ * https://youtu.be/Mz0nxWRnQuA
  *
  * 자바소스 : https://bit.ly/2R642ry
  */
