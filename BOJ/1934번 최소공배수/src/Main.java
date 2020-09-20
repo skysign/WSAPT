@@ -1,9 +1,3 @@
-/**
- * BOJ 1934번 최소공배수
- * 문제링크 : https://www.acmicpc.net/problem/1934
- * 제출링크 : https://www.acmicpc.net/source/19794089
- * 문제풀이 : https://skysign.tistory.com/224
- */
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -11,6 +5,20 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+/**
+ * BOJ 1934번 최소공배수
+ *
+ * 유튜브 문제 풀이
+ * https://www.youtube.com/channel/UCea29OwF9BvXShqKkAwtA4Q
+ *
+ * 블로그 문제풀이
+ * https://skysign.tistory.com/224
+ *
+ * 문제 링크 : https://www.acmicpc.net/problem/1934
+ *
+ * 자바 소스 : https://bit.ly/3cgHGgN
+ */
 
 public class Main {
     public void solve() throws IOException {
