@@ -9,9 +9,14 @@ import java.util.Arrays;
 /**
  * BOJ 1912번 연속합
  * 문제링크 : https://www.acmicpc.net/problem/1912
- * 제출링크 : https://www.acmicpc.net/source/18605858
- * 문제풀이 : https://skysign.tistory.com/193
- * 유튜브 문제풀이 : https://www.youtube.com/watch?v=dAtNiVwnTN4
+ *
+ * 유튜브 문제풀이 :
+ * https://www.youtube.com/watch?v=dAtNiVwnTN4
+ *
+ * 블로그 문제풀이 :
+ * https://skysign.tistory.com/193
+ *
+ * 자바소스 : https://bit.ly/2RKH3CW
  */
 
 public class Main {
