@@ -1,5 +1,14 @@
 import java.util.*;
-
+/**
+ * BOJ 1260번 DFS와 BFS
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/1260
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/rand1XTwEnE
+ *
+ * 자바소스 :
+ */
 public class Main {
     public int N;
 
