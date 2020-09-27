@@ -7,7 +7,7 @@ import java.util.*;
  * 유튜브 문제 풀이
  * https://youtu.be/rand1XTwEnE
  *
- * 자바소스 :
+ * 자바소스 : https://bit.ly/2HAgrTg
  */
 public class Main {
     public int N;
