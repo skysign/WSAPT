@@ -1,5 +1,14 @@
 import java.util.Scanner;
-
+/**
+ * BOJ 16956번 늑대와 양
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/ZFdfi0-SV7o
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/16956
+ *
+ * 자바소스 : https://bit.ly/2EZmsIc
+ */
 public class Main {
     public int R, C;
     public char[][] map;
