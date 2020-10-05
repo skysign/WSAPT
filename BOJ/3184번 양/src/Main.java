@@ -1,7 +1,16 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Scanner;
-
+/**
+ * BOJ 3184번 양
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/agDzpOA5670
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/3184
+ *
+ * 자바소스 : https://bit.ly/34tCUcr
+ */
 public class Main {
     public int R;
     public int C;

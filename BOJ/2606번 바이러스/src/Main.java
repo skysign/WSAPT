@@ -3,20 +3,15 @@ import java.util.Deque;
 import java.util.Scanner;
 
 public class Main {
-    int cntComputer;    /** 컴퓨터의 개수 */
+    int cntComputer;/** 컴퓨터의 개수 */
     int cntEdge;    /** 컴퓨터가 서로 연결되어 있는 엣지의 수 */
-    /**
-     * map[fr][to] ==1 이면, fr 컴퓨터에서 to 컴퓨터로 연결되어 있음
-
-     */
-    int[][] map;
+    int[][] map; /** map[fr][to] ==1 이면, fr 컴퓨터에서 to 컴퓨터로 연결되어 있음 */
 
     public void solve() {
         Scanner sc = new Scanner(System.in);
 
         cntComputer = sc.nextInt();
         cntEdge = sc.nextInt();
-
         map = new int[cntComputer+1][cntComputer+1]; /** 컴퓨터의 번호를 그대로, 인덱스로 사용하기 위해서 +1을 합니다 */
 
         for(int i=0; i<cntEdge; ++i) {
