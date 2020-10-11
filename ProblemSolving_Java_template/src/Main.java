@@ -219,6 +219,11 @@ public class Main {
             super(v);
             mChidren = new ArrayList<>();
         }
+
+        public void addChild(MNode<TV> nodeChild) {
+            nodeChild.setParent(this);
+            mChidren.add(nodeChild);
+        }
     }
 
     public class BNode<TV> extends Node {
@@ -232,13 +237,23 @@ public class Main {
 
     public class Node<TV> {
         public TV mV;
+        public Node<TV> mParent;
 
         Node(TV v) {
+            setParent(null);
             set(v);
         }
 
         public void set(TV v) {
             mV = v;
+        }
+
+        public void setParent(Node<TV> parent) {
+            mParent = parent;
+        }
+
+        public Node<TV> getParent() {
+            return mParent;
         }
     }
 
