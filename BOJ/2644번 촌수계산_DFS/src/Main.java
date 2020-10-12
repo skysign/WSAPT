@@ -2,14 +2,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 /**
- * BOJ 2644번 촌수계산_DFS
+ * BOJ 2644번 촌수계산 (DFS 풀이)
  *
  * 유튜브 문제 풀이
+ * https://youtu.be/nLdVqod-Z80
  *
+ * 문제링크 : https://www.acmicpc.net/problem/2644
  *
- * 문제링크 :
- *
- * 자바소스 :
+ * 자바소스 : https://bit.ly/2Fq2MgS
  */
 public class Main {
     int[][] map;
