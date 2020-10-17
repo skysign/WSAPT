@@ -494,13 +494,14 @@ public class Main {
     // -1
     public final int MINUS_1 = -1;
 
-    // 4 ways
-    public int[] d4i = new int[]{-1, 1, 0, 0};
-    public int[] d4j = new int[]{0, 0, -1, 1};
+    // Travel 4 ways, start from 12h, and rotate as clockwise
+    public int[] d4i = new int[]{1, 0, -1, 0};
+    public int[] d4j = new int[]{0, 1, 0, -1};
 
-    // 8 ways
-    public int[] d8i = new int[]{-1, 1, 0, 0,  -1, -1, 1, 1};
-    public int[] d8j = new int[]{0, 0, -1, 1,  -1, 1, 1, -1};
+    // Travel 8 ways, start from 12h, and rotate as clockwise
+    //                          12     3       6       9
+    public int[] d4i = new int[]{1, 1, 0, -1, -1, -1,  0,  1};
+    public int[] d4j = new int[]{0, 1, 1,  1,  0, -1, -1, -1};
 
     // Initialize 2D arrays with value v
     public void fill2D(int[][] _2D, int v) {
