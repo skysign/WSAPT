@@ -2,7 +2,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Scanner;
 /**
- * BOJ 2156번 포도주 시식
+ * BOJ 4963번 섬의 개수
  *
  * 유튜브 문제 풀이
  * https://youtu.be/YEs45M7ujPI
