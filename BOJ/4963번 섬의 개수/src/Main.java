@@ -1,14 +1,23 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Scanner;
-
+/**
+ * BOJ 2156번 포도주 시식
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/YEs45M7ujPI
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/4963
+ *
+ * 자바소스 : https://bit.ly/2H5FVIp
+ */
 public class Main {
     int W, H;
 
     // Travel 8 ways, start from 12h, and rotate as clockwise
     //                          12     3       6       9
-    public int[] d4i = new int[]{1, 1, 0, -1, -1, -1,  0,  1};
-    public int[] d4j = new int[]{0, 1, 1,  1,  0, -1, -1, -1};
+    public int[] d8i = new int[]{1, 1, 0, -1, -1, -1,  0,  1};
+    public int[] d8j = new int[]{0, 1, 1,  1,  0, -1, -1, -1};
 
     public int[][] map;
     public int[][] visited;
@@ -47,7 +56,6 @@ public class Main {
             W = sc.nextInt();
             H = sc.nextInt();
         }
-
     }
 
     public void bfs(int y, int x, int cntIsland) {
@@ -60,9 +68,9 @@ public class Main {
             int sX = pos[1];
             visited[sY][sX] = cntIsland;
 
-            for(int idx=0; idx<d4i.length; ++idx) {
-                int dY = sY + d4i[idx];
-                int dX = sX + d4j[idx];
+            for(int idx = 0; idx< d8i.length; ++idx) {
+                int dY = sY + d8i[idx];
+                int dX = sX + d8j[idx];
 
                 if(IsInMap(dY, dX) &&
                    (map[dY][dX] == 1) &&
