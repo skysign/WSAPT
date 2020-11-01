@@ -34,7 +34,7 @@ public class Main {
 
             int r = 0;
             r = BFS(queue, 2);
-            r -= 2;
+            r -= 1;
             System.out.println(r);
         }
     }
@@ -49,7 +49,7 @@ public class Main {
             int sX = yx[1];
 
             if ((sY == dstY) && (sX == dstX)) {
-                r = Math.min(r, depth);
+                r = Math.min(r, map[sY][sX]);
             }
 
             for(int idx = 0; idx<d8i.length; ++idx) {
