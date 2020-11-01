@@ -1,6 +1,14 @@
-import java.lang.reflect.Array;
 import java.util.*;
-
+/**
+ * BOJ 11724번 연결 요소의 개수
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/yvWmjljjYJY
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/11724
+ *
+ * 자바소스 : https://bit.ly/3mGMEaO
+ */
 public class Main {
     public int nVertex;
     public int nEdge;
