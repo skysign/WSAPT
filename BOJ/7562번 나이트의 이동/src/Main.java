@@ -1,7 +1,16 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Scanner;
-
+/**
+ * BOJ 7562번 나이트의 이동
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/LGT7_DY-MVo
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/7562
+ *
+ * 자바소스 : https://bit.ly/3kOX0F3
+ */
 public class Main {
     int T;
     int M;
