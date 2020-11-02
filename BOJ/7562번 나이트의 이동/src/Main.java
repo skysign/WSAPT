@@ -56,10 +56,7 @@ public class Main {
                 int dY = sY + d8i[idx];
                 int dX = sX + d8j[idx];
 
-                if (IsIn(dY, dX) &&
-                        (map[dY][dX] == 0)) { // 둘다 정답 처리 됩니다.
-//                      ((map[dY][dX] == 0) || (map[dY][dX] > depth))) {
-//                      방문 했던 곳이라도, depth가 작으면 다시 방문 해야 한다고 생각했는대, 아닌가 봐요 ^^
+                if (IsIn(dY, dX) && (map[dY][dX] == 0)) {
                     if(!IsContained(queueNext, dY, dX)) {
                         queueNext.add(new int[]{dY, dX});
                         map[dY][dX] = depth;
