@@ -1,5 +1,14 @@
 import java.util.*;
-
+/**
+ * BOJ 11725번 트리의 부모 찾기
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/M-O1OqWFKMo
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/11725
+ *
+ * 자바소스 : https://bit.ly/36jKDuD
+ */
 public class Main {
     HashMap<Integer, Vertex<Integer>> mapVertex;
     int nNode;
