@@ -62,6 +62,41 @@ public class Main {
         main._solve();
     }
 
+    public class Vertex<TV> {
+        public TV mV;
+        ArrayList<UndirectedEdge> mEdges = new ArrayList();
+
+        Vertex(TV v) {
+            mV = v;
+        }
+
+        public void addEdge(UndirectedEdge<TV> edge) {
+            mEdges.add(edge);
+        }
+
+        public Vertex<TV> getConnectedVertexFromEdge(int i) {
+            Vertex<TV> v1 = this.mEdges.get(i).mV1;
+            Vertex<TV> v2 = this.mEdges.get(i).mV2;
+
+            if (this == v1)
+                return v2;
+
+            return v1;
+        }
+    }
+
+    public class UndirectedEdge<TV> {
+        public Vertex<TV> mV1;
+        public Vertex<TV> mV2;
+
+        UndirectedEdge(Vertex<TV> v1, Vertex<TV> v2) {
+            mV1 = v1;
+            mV2 = v2;
+            mV1.addEdge(this);
+            mV2.addEdge(this);
+        }
+    }
+
     // toArray() example
     void testToArray() throws IOException {
         ArrayList<Integer> al = new ArrayList();
@@ -500,8 +535,8 @@ public class Main {
 
     // Travel 8 ways, start from 12h, and rotate as clockwise
     //                          12     3       6       9
-    public int[] d4i = new int[]{1, 1, 0, -1, -1, -1,  0,  1};
-    public int[] d4j = new int[]{0, 1, 1,  1,  0, -1, -1, -1};
+    public int[] d8i = new int[]{1, 1, 0, -1, -1, -1,  0,  1};
+    public int[] d8j = new int[]{0, 1, 1,  1,  0, -1, -1, -1};
 
     // Initialize 2D arrays with value v
     public void fill2D(int[][] _2D, int v) {
