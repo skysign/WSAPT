@@ -1,19 +1,28 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
     public int M, N, H;
     public int[][][] map;
     Deque<int[]> que0;
+    static int[] dZ = { 1, -1, 0, 0, 0, 0 };
+    static int[] dY = { 0, 0, 1, -1, 0, 0 };
+    static int[] dX = { 0, 0, 0, 0, 1, -1 };
 
-    public void solve() {
-        Scanner sc = new Scanner(System.in);
+    public void solve() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(input.readLine());
+//        Scanner sc = new Scanner(System.in);
 
-        M = sc.nextInt();
-        N = sc.nextInt();
-        H = sc.nextInt();
-        sc.nextLine();
+        M = Integer.parseInt(st.nextToken()); // sc.nextInt();
+        N = Integer.parseInt(st.nextToken());// sc.nextInt();
+        H = Integer.parseInt(st.nextToken());// sc.nextInt();
+        // sc.nextLine();
 
         map = new int[H][N][M];
         Deque<int[]> queue = new ArrayDeque();
@@ -21,8 +30,10 @@ public class Main {
 
         for(int i = 0; i < H; ++i) {
             for(int j = 0; j < N; ++j) {
+                st = new StringTokenizer(input.readLine());
+
                 for(int k = 0; k < M; ++k) {
-                    map[i][j][k] = sc.nextInt();
+                    map[i][j][k] = Integer.parseInt(st.nextToken()); // sc.nextInt();
 
                     if(map[i][j][k] == 0) {
                         que0.add(new int[]{i, j, k});
@@ -32,7 +43,7 @@ public class Main {
                     }
                 }
 
-                sc.nextLine();
+                // sc.nextLine();
             }
         }
 
@@ -49,23 +60,11 @@ public class Main {
 
         while(queue.size() > 0) {
             int[] zyx = queue.pop();
-            int tmpZ = zyx[0];
-            int tmpY = zyx[1];
-            int tmpX = zyx[2];
-            Deque<int[]> queueTmp = new ArrayDeque();
 
-            queueTmp.add(new int[]{tmpZ +1, tmpY, tmpX});
-            queueTmp.add(new int[]{tmpZ -1, tmpY, tmpX});
-            queueTmp.add(new int[]{tmpZ, tmpY +1, tmpX});
-            queueTmp.add(new int[]{tmpZ, tmpY -1, tmpX});
-            queueTmp.add(new int[]{tmpZ, tmpY, tmpX +1});
-            queueTmp.add(new int[]{tmpZ, tmpY, tmpX -1});
-
-            while(queueTmp.size() > 0) {
-                zyx = queueTmp.pop();
-                int z = zyx[0];
-                int y = zyx[1];
-                int x = zyx[2];
+            for(int idx = 0; idx<dZ.length; ++idx) {
+                int z = zyx[0] + dZ[idx];
+                int y = zyx[1] + dY[idx];
+                int x = zyx[2] + dX[idx];
 
                 if(IsInMap(z, y, x)) {
                     if(map[z][y][x] == 0) {
@@ -83,7 +82,7 @@ public class Main {
         return -1;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 	    Main main = new Main();
 	    main.solve();
     }
@@ -96,6 +95,9 @@ public class Main {
 
             if(map[z][y][x] == 0) {
                 return false;
+            }
+            else if (map[z][y][x] == 1) {
+                que0.remove(zyx);
             }
         }
 
