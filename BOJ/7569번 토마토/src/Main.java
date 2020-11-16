@@ -5,7 +5,16 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-
+/**
+ * BOJ 7569번 토마토
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/B7r6HHQxYgw
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/16918
+ *
+ * 자바소스 : https://bit.ly/35xcyrJ
+ */
 public class Main {
     public int M, N, H;
     public int[][][] map;
@@ -17,11 +26,11 @@ public class Main {
     public void solve() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(input.readLine());
-//        Scanner sc = new Scanner(System.in);
+        // Scanner sc = new Scanner(System.in);
 
         M = Integer.parseInt(st.nextToken()); // sc.nextInt();
-        N = Integer.parseInt(st.nextToken());// sc.nextInt();
-        H = Integer.parseInt(st.nextToken());// sc.nextInt();
+        N = Integer.parseInt(st.nextToken()); // sc.nextInt();
+        H = Integer.parseInt(st.nextToken()); // sc.nextInt();
         // sc.nextLine();
 
         map = new int[H][N][M];
