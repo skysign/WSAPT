@@ -9,9 +9,10 @@ import java.util.StringTokenizer;
  * BOJ 7569번 토마토
  *
  * 유튜브 문제 풀이
- * https://youtu.be/B7r6HHQxYgw
+ * https://youtu.be/m-FkF2qopCs
+ * https://youtu.be/lQs9M9AxbUA
  *
- * 문제링크 : https://www.acmicpc.net/problem/16918
+ * 문제링크 : https://www.acmicpc.net/problem/7569
  *
  * 자바소스 : https://bit.ly/35xcyrJ
  */
