@@ -2,7 +2,17 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.StringTokenizer;
-
+/**
+ * BOJ 16918번 봄버맨
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/fFg5VXpsIxk
+ * https://youtu.be/XsrxGopW5-A
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/16918
+ *
+ * 자바소스 : https://bit.ly/36YH4Kt
+ */
 public class Main {
     int R, C, N;
     int[][] map;
@@ -69,7 +79,6 @@ public class Main {
                     if (map[i][j] == 0)
                         map[i][j] = -1;
                 }
-
             }
         }
     }
