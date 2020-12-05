@@ -1,5 +1,4 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Main {
@@ -39,6 +38,11 @@ public class Main {
     }
 
     public int solve2(int numberFr, int numberTo) {
+        int visited[] = new int[10000];
+        for (int i = 0; i < visited.length; ++i) {
+            visited[i] = Integer.MAX_VALUE;
+        }
+
         Deque<int[]> que = new ArrayDeque<>();
         que.add(new int[]{numberFr, 0});
 
@@ -58,8 +62,9 @@ public class Main {
                             dns[i] = j;
                             int number = (dns[0] * 1000) + (dns[1] * 100) + (dns[2] * 10) + dns[3];
 
-                            if (map.containsKey(number)) {
+                            if (map.containsKey(number) && (item[1] + 1 < visited[number])) {
                                 que.add(new int[]{number, item[1] + 1});
+                                visited[number] = item[1] + 1;
                             }
 
                             dns[i] = ns[i];
@@ -91,15 +96,14 @@ public class Main {
             }
         }
 
-        // 1000이하 소수들은 모두 소수가 아닌 것으로 처리
+        // 1000이하 소수들은 모두 소수가 아닌 것으로 간주함
+        // map 에 추가하지 않음
         for (int i = 1000; i<n; ++i) {
             if (bPrimes[i])
                 map.put(i, bPrimes[i]);
         }
 
         bPrimes = null;
-
-        System.gc();
     }
 
     public static void main(String[] args) throws IOException {
