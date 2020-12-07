@@ -9,6 +9,18 @@ using namespace std;
 
 void solve();
 
+/**
+ * BOJ 1963번 소수 경로
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/dG6cyKnyJ5o
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/1963
+ *
+ * 자바소스 : https://bit.ly/3gwq2YN
+ * CPP소스 : https://bit.ly/33Rkz9x
+ */
+
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
