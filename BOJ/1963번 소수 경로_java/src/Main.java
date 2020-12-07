@@ -1,16 +1,28 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * BOJ 1963번 소수 경로
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/dG6cyKnyJ5o
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/1963
+ *
+ * 자바소스 : https://bit.ly/3gwq2YN
+ * CPP소스 : https://bit.ly/33Rkz9x
+ */
+
 public class Main {
-    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     int N;
-    Map<Integer, Boolean> map = new HashMap<>();
+    boolean[] bPrimes;
 
     public void solve() throws IOException {
         // 10000미만의 모든 소수를 구하고
-        SieveOfEratosthenes(10000, map);
+        SieveOfEratosthenes(10000);
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
@@ -62,7 +74,7 @@ public class Main {
                             dns[i] = j;
                             int number = (dns[0] * 1000) + (dns[1] * 100) + (dns[2] * 10) + dns[3];
 
-                            if (map.containsKey(number) && (item[1] + 1 < visited[number])) {
+                            if (bPrimes[number] && (item[1] + 1 < visited[number])) {
                                 que.add(new int[]{number, item[1] + 1});
                                 visited[number] = item[1] + 1;
                             }
@@ -81,8 +93,8 @@ public class Main {
         return -1;
     }
 
-    public void SieveOfEratosthenes(int n, Map<Integer, Boolean> map) {
-        boolean[] bPrimes = new boolean[n];
+    public void SieveOfEratosthenes(int n) {
+        bPrimes = new boolean[n];
 
         // Both 0 and 1 are not prime numbers
         // Assume from number 2, they are all of prime numbers
@@ -97,13 +109,10 @@ public class Main {
         }
 
         // 1000이하 소수들은 모두 소수가 아닌 것으로 간주함
-        // map 에 추가하지 않음
-        for (int i = 1000; i<n; ++i) {
+        for (int i = 0; i<1000; ++i) {
             if (bPrimes[i])
-                map.put(i, bPrimes[i]);
+                bPrimes[i] = false;
         }
-
-        bPrimes = null;
     }
 
     public static void main(String[] args) throws IOException {
