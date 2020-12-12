@@ -4,12 +4,12 @@ import java.util.Deque;
 import java.util.StringTokenizer;
 
 public class Main {
-    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     // Travel 4 ways, start from 12h, and rotate as clockwise
-    public int[] d4i = new int[]{1, 0, -1, 0};
-    public int[] d4j = new int[]{0, 1, 0, -1};
+    public final int[] d4i = new int[]{1, 0, -1, 0};
+    public final int[] d4j = new int[]{0, 1, 0, -1};
 
     int N;
     char[][] map;
@@ -33,9 +33,7 @@ public class Main {
         bfsRGCB.setSameColor(bfsRGCB);
 
         int rNormal = bfsNormal.countAreas();
-        bfsNormal = null;
         int rRGCB = bfsRGCB.countAreas();
-        bfsRGCB = null;
 
         bw.write(Integer.toString(rNormal));
         bw.write(' ');
@@ -65,8 +63,7 @@ public class Main {
     class BFSNormal extends BFS implements sameColor {
         @Override
         public boolean isSameColor(int y, int x, char color) {
-            char dstColor = map[y][x];
-            return (dstColor == color);
+            return (map[y][x] == color);
         }
     }
 
@@ -79,41 +76,39 @@ public class Main {
 
         int countAreas() {
             int r = 0;
-            boolean[][] visitied = new boolean[N][N];
+            boolean[][] visited = new boolean[N][N];
 
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N; ++j) {
-                    if (false == visitied[i][j]) {
+                    if (!visited[i][j]) {
                         ++r;
-                        searchBFS(i, j, visitied);
+                        searchBFS(i, j, visited);
                     }
                 }
             }
 
-            visitied = null;
-
             return r;
         }
 
-        void searchBFS(int i, int j, boolean[][] visitied) {
+        void searchBFS(int beginY, int beginX, boolean[][] visited) {
             Deque<int[]> queue = new ArrayDeque<>();
-            queue.add(new int[]{i, j});
+            queue.add(new int[]{beginY, beginX});
+            visited[beginY][beginX] = true;
 
             while (queue.size() > 0) {
                 int[] item = queue.pop();
                 int sy = item[0];
                 int sx = item[1];
-                visitied[sy][sx] = true;
-
                 char color = map[sy][sx];
 
                 for(int idx = 0; idx < d4i.length; ++idx) {
                     int dy = sy + d4i[idx];
                     int dx = sx + d4j[idx];
 
-                    if (isIn(dy, dx) && (false == visitied[dy][dx])) {
+                    if (isIn(dy, dx) && (!visited[dy][dx])) {
                         if(mSameColor.isSameColor(dy, dx, color)) {
                             queue.add(new int[]{dy, dx});
+                            visited[dy][dx] = true;
                         }
                     }
                 }
