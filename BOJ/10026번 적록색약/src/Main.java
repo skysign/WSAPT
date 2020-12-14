@@ -2,7 +2,16 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.StringTokenizer;
-
+/**
+ * BOJ 10026번 적록색약
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/Oql_VxK9MQE
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/10026
+ *
+ * 자바소스 : https://bit.ly/3oSeBxw
+ */
 public class Main {
     final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
