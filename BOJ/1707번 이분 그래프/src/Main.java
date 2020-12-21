@@ -1,6 +1,15 @@
 import java.io.*;
 import java.util.*;
-
+/**
+ * BOJ 1707번 이분 그래프
+ *
+ * 유튜브 문제 풀이
+ * https://youtu.be/5UxWEw6CTxQ
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/1707
+ *
+ * 자바소스 : https://bit.ly/3mF7qXE
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -59,9 +68,6 @@ public class Main {
     }
 
     String solve2(int vertex, ArrayList<ArrayList<Integer>> al, status[] ss) {
-//        if (status.NOT_VISITED == ss[vertex])
-//            return "NO";
-
         Deque<Integer> que = new ArrayDeque<>();
         que.add(vertex);
 
