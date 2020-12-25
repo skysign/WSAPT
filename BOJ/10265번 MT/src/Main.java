@@ -6,18 +6,14 @@ public class Main {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int N, K;
     int[] dt;
-    int[] dag;
-    ArrayList[] dagVisited;
-    int[][] rs;
+    ArrayList<List<Integer>> SCC;
+    ArrayList<Set<Integer>> allPouch;
 
     public void solve() throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
         dt = new int[N+1];
-        dag = new int[N+1];
-        dagVisited = new ArrayList[N+1];
-        rs = new int[N+1][K+1];
 
         st = new StringTokenizer(br.readLine());
 
@@ -25,90 +21,96 @@ public class Main {
             dt[i] = Integer.parseInt(st.nextToken());
         }
 
+        SCC = new ArrayList();
+        allPouch = new ArrayList();
+
         int r = solve2();
 
         bw.write(Integer.toString(r));
+        bw.write('\n');
         bw.flush();
         bw.close();
     }
 
-
     int solve2() {
-        for (int i = 1; i <=N; ++i) {
-            dagVisited[i] = new ArrayList<Integer>();
-            dag[i] = getLengthOfDAG(i, dagVisited[i]);
+        for (int n = 1; n <=N; ++n) {
+            DFS_SCC(n, new ArrayList<Integer>());
         }
 
-        fill2D(rs, -1);
-
-        ArrayList<Integer> visited = new ArrayList<Integer>();
-        return knapsack(N, K, visited);
+        return knapsack(0, K, allPouch);
     }
 
-    int getLengthOfDAG(int begin, ArrayList<Integer> visited) {
-        Deque<Integer> que = new ArrayDeque<>();
-        que.add(begin);
-        visited.add(begin);
+    void DFS_SCC(int v, ArrayList<Integer> visited) {
+        int toV = dt[v];
 
-        int r = 1;
+        visited.add(v);
 
-        while (que.size() > 0) {
-            int fr = que.pop();
-            int to = dt[fr];
+        // 같이 타고 싶은 사람이 있어요
+        if (toV > 0) {
+            // SCC 를 발견
+            if (visited.contains(toV)) {
+                int idxScc = -1;
 
-            if (visited.contains(to)) {
-                break;
+                // 이전에 발견한 SCC 인가?
+                for (int idx = 0; idx < SCC.size(); ++idx) {
+                    List<Integer> sccOrEnd0 = SCC.get(idx);
+
+                    if (sccOrEnd0.contains(dt[v])) {
+                        idxScc = idx;
+                        break;
+                    }
+                }
+
+                // 아니면, 처음 발견한 SCC 인가?
+                if (idxScc == -1) {
+                    // scc 리스트에, 처음 발견한 scc를 넣고
+                    List<Integer> scc = visited.subList(visited.indexOf(toV), visited.size());
+                    SCC.add(scc);
+                    // 해당 scc에 연결된 path의 길이를 저장함
+                    HashSet<Integer> pouch = new HashSet();
+                    pouch.add(visited.size());
+                    allPouch.add(pouch);
+                }
+                else {
+                    // 기존에 발견했던 SCC
+                    // 길이를 추가함
+                    allPouch.get(idxScc).add(visited.size());
+                }
             }
-
-            r++;
-
-            if (dt[to] != 0) {
-                que.add(to);
-                visited.add(to);
+            else {
+                DFS_SCC(toV, visited);
             }
         }
-
-        return r;
+//        else {
+//            // 0 으로 끝나는 경우, 없음
+//            ArrayList<Integer> end0 = new ArrayList<>();
+//            end0.add(toV);
+//            SCC.add(end0);
+//            HashSet<Integer> pouch = new HashSet();
+//            pouch.add(visited.size());
+//            allPouch.add(pouch);
+//        }
     }
 
-    int knapsack(int n, int k, ArrayList<Integer> visited) {
-        if (n <= 0)
+    int knapsack(int idxPouch, int k, ArrayList<Set<Integer>> pouches) {
+        if (idxPouch >= pouches.size())
             return 0;
 
         if (k <= 0)
             return 0;
 
-        if (rs[n][k] != -1)
-            return rs[n][k];
+        // idxPouch에서 공을 꺼내지 않고, 최대값
+        int r1 = knapsack(idxPouch +1, k, pouches);
 
-        int r1 = 0;
-
-        if (dag[n] <= k && IsIntersectionEmpty(visited, dagVisited[n])) {
-            ArrayList<Integer> neweVisited = new ArrayList();
-            neweVisited.addAll(dagVisited[n]);
-            neweVisited.addAll(visited);
-            r1 = knapsack(n-1, k -dag[n], neweVisited) + dag[n];
+        int r2 = 0;
+        Set<Integer> pouch = pouches.get(idxPouch);
+        for (int ball: pouch) {
+            if (ball <= k) {
+                r2 = Math.max(r2, knapsack(idxPouch +1, k -ball, pouches) +ball);
+            }
         }
 
-        int r2 = knapsack(n-1, k, visited);
-
-        return rs[n][k] = Math.max(r1, r2);
-    }
-
-    boolean IsIntersectionEmpty(ArrayList<Integer> al1, ArrayList<Integer> al2) {
-        for (int item: al1) {
-            if (al2.contains(item))
-                return false;
-        }
-
-        return true;
-    }
-
-    // Initialize 2D arrays with value v
-    public void fill2D(int[][] _2D, int v) {
-        for(int[] _1D: _2D) {
-            Arrays.fill(_1D, v);
-        }
+        return Math.max(r1, r2);
     }
 
     public static void main(String[] args) throws IOException {
