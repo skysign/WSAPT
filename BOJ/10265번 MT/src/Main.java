@@ -5,23 +5,32 @@ public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int N, K;
-    int[] dt;
-    ArrayList<List<Integer>> SCC;
-    ArrayList<Set<Integer>> allPouch;
+    int[] edge;
+    ArrayList[] reverseEdge;
+    int[] root;
+
+    ArrayList<HashSet<Integer>> allPouch;
 
     public void solve() throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
-        dt = new int[N+1];
+        edge = new int[N+1];
+        reverseEdge = new ArrayList[N+1];
+        root = new int[N+1];
 
         st = new StringTokenizer(br.readLine());
 
         for (int i = 1; i <= N; ++i) {
-            dt[i] = Integer.parseInt(st.nextToken());
+            // from i, to edge[i]
+            edge[i] = Integer.parseInt(st.nextToken());
+
+            if (reverseEdge[edge[i]] == null)
+                reverseEdge[edge[i]] = new ArrayList<Integer>();
+
+            reverseEdge[edge[i]].add(i);
         }
 
-        SCC = new ArrayList();
         allPouch = new ArrayList();
 
         int r = solve2();
@@ -34,65 +43,73 @@ public class Main {
 
     int solve2() {
         for (int n = 1; n <=N; ++n) {
-            DFS_SCC(n, new ArrayList<Integer>());
+            if (edge[n] != 0) {
+                DFS_SCC(n, new ArrayList<Integer>());
+            }
         }
 
         return knapsack(0, K, allPouch);
     }
 
-    void DFS_SCC(int v, ArrayList<Integer> visited) {
-        int toV = dt[v];
+    void DFS_reverse(int toV, int depth, HashSet<Integer> pouch) {
+        pouch.add(depth +1);
+        edge[toV] = 0;
 
-        visited.add(v);
-
-        // 같이 타고 싶은 사람이 있어요
-        if (toV > 0) {
-            // SCC 를 발견
-            if (visited.contains(toV)) {
-                int idxScc = -1;
-
-                // 이전에 발견한 SCC 인가?
-                for (int idx = 0; idx < SCC.size(); ++idx) {
-                    List<Integer> sccOrEnd0 = SCC.get(idx);
-
-                    if (sccOrEnd0.contains(dt[v])) {
-                        idxScc = idx;
-                        break;
-                    }
-                }
-
-                // 아니면, 처음 발견한 SCC 인가?
-                if (idxScc == -1) {
-                    // scc 리스트에, 처음 발견한 scc를 넣고
-                    List<Integer> scc = visited.subList(visited.indexOf(toV), visited.size());
-                    SCC.add(scc);
-                    // 해당 scc에 연결된 path의 길이를 저장함
-                    HashSet<Integer> pouch = new HashSet();
-                    pouch.add(visited.size());
-                    allPouch.add(pouch);
-                }
-                else {
-                    // 기존에 발견했던 SCC
-                    // 길이를 추가함
-                    allPouch.get(idxScc).add(visited.size());
-                }
-            }
-            else {
-                DFS_SCC(toV, visited);
+        if (reverseEdge[toV] != null) {
+            for (Object obj: reverseEdge[toV]) {
+                Integer reverseToV = (Integer)obj;
+                DFS_reverse(reverseToV, depth +1, pouch);
             }
         }
-//        else {
-//            // 0 으로 끝나는 경우, 없음
-//            ArrayList<Integer> end0 = new ArrayList<>();
-//            end0.add(toV);
-//            SCC.add(end0);
-//            HashSet<Integer> pouch = new HashSet();
-//            pouch.add(visited.size());
-//            allPouch.add(pouch);
-//        }
     }
 
-    int knapsack(int idxPouch, int k, ArrayList<Set<Integer>> pouches) {
+    void DFS_SCC(int v, ArrayList<Integer> visitedVertex) {
+        visitedVertex.add(v);
+
+        int toV = edge[v];
+
+        if (toV == 0) {
+            return;
+        }
+
+        // SCC를 찾았다
+        // 따라서, toV는 visitedVertex 에 반드시 존재한다.
+        if (visitedVertex.contains(toV)) {
+            // scc 에는 scc 구성하는 vertex가 모두 들어 있음
+            List<Integer> scc = visitedVertex.subList(visitedVertex.indexOf(toV), visitedVertex.size());
+
+            for (int vInSCC: scc) {
+                root[vInSCC] = toV;
+                edge[vInSCC] = 0;
+            }
+
+            int lengthOfSCC = scc.size();
+
+            HashSet<Integer> pouch = new HashSet();
+            pouch.add(lengthOfSCC);
+            allPouch.add(pouch);
+            int sccRoot = toV;
+
+            for (int vInSCC: scc) {
+                if (reverseEdge[vInSCC] != null) {
+                    for (Object obj: reverseEdge[vInSCC]) {
+                        Integer reverseToV = (Integer)obj;
+
+                        // scc를 구성하고 있는 vertex사이에 존재하는 edge가 아니라,
+                        // scc 밖으로 향하는 reverseEdge일 때만
+                        if (root[vInSCC] != root[reverseToV]) {
+                            DFS_reverse(reverseToV, lengthOfSCC, pouch);
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            DFS_SCC(toV, visitedVertex);
+        }
+    }
+
+    int knapsack(int idxPouch, int k, ArrayList<HashSet<Integer>> pouches) {
         if (idxPouch >= pouches.size())
             return 0;
 
@@ -103,10 +120,16 @@ public class Main {
         int r1 = knapsack(idxPouch +1, k, pouches);
 
         int r2 = 0;
-        Set<Integer> pouch = pouches.get(idxPouch);
+        HashSet<Integer> pouch = pouches.get(idxPouch);
+        Integer[] balls = pouch.toArray(new Integer[0]);
+        Arrays.sort(balls);
+
         for (int ball: pouch) {
             if (ball <= k) {
                 r2 = Math.max(r2, knapsack(idxPouch +1, k -ball, pouches) +ball);
+            }
+            else {
+                break;
             }
         }
 
