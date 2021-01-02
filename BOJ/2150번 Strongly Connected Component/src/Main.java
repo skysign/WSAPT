@@ -75,10 +75,8 @@ public class Main {
     }
 
     class MyComparator implements Comparator<Integer[]> {
-
         @Override
         public int compare(Integer[] t1, Integer[] t2) {
-
             if (t1[0] > t2[0])
                 return 1;
 

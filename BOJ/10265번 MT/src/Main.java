@@ -6,9 +6,13 @@ public class Main {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int N, K;
     int[] edge;
+    boolean[] visited;
     ArrayList[] reverseEdge;
     int[] root;
 
+    int[][] dp;
+
+    ArrayList<ArrayList<Integer>> allSCC;
     ArrayList<HashSet<Integer>> allPouch;
 
     public void solve() throws IOException {
@@ -16,8 +20,10 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
         edge = new int[N+1];
+        visited = new boolean[N+1];
         reverseEdge = new ArrayList[N+1];
         root = new int[N+1];
+        allSCC = new ArrayList();
 
         st = new StringTokenizer(br.readLine());
 
@@ -36,77 +42,81 @@ public class Main {
         int r = solve2();
 
         bw.write(Integer.toString(r));
-        bw.write('\n');
+//        bw.write('\n');
         bw.flush();
         bw.close();
     }
 
     int solve2() {
+        Stack<Integer> stk = new Stack();
+
         for (int n = 1; n <=N; ++n) {
-            if (edge[n] != 0) {
-                DFS_SCC(n, new ArrayList<Integer>());
+            if (!visited[n]) {
+                SCC_Tarjan(n, stk);
             }
         }
 
-        return knapsack(0, K, allPouch);
-    }
-
-    void DFS_reverse(int toV, int depth, HashSet<Integer> pouch) {
-        pouch.add(depth +1);
-        edge[toV] = 0;
-
-        if (reverseEdge[toV] != null) {
-            for (Object obj: reverseEdge[toV]) {
-                Integer reverseToV = (Integer)obj;
-                DFS_reverse(reverseToV, depth +1, pouch);
-            }
-        }
-    }
-
-    void DFS_SCC(int v, ArrayList<Integer> visitedVertex) {
-        visitedVertex.add(v);
-
-        int toV = edge[v];
-
-        if (toV == 0) {
-            return;
-        }
-
-        // SCC를 찾았다
-        // 따라서, toV는 visitedVertex 에 반드시 존재한다.
-        if (visitedVertex.contains(toV)) {
-            // scc 에는 scc 구성하는 vertex가 모두 들어 있음
-            List<Integer> scc = visitedVertex.subList(visitedVertex.indexOf(toV), visitedVertex.size());
-
-            for (int vInSCC: scc) {
-                root[vInSCC] = toV;
-                edge[vInSCC] = 0;
-            }
-
-            int lengthOfSCC = scc.size();
-
+        for (ArrayList<Integer> scc: allSCC) {
             HashSet<Integer> pouch = new HashSet();
-            pouch.add(lengthOfSCC);
             allPouch.add(pouch);
-            int sccRoot = toV;
+            pouch.add(scc.size());
 
-            for (int vInSCC: scc) {
-                if (reverseEdge[vInSCC] != null) {
-                    for (Object obj: reverseEdge[vInSCC]) {
-                        Integer reverseToV = (Integer)obj;
+            ArrayDeque<Integer> que = new ArrayDeque<>();
+            que.addAll(scc);
+            int length = scc.size();
 
-                        // scc를 구성하고 있는 vertex사이에 존재하는 edge가 아니라,
-                        // scc 밖으로 향하는 reverseEdge일 때만
-                        if (root[vInSCC] != root[reverseToV]) {
-                            DFS_reverse(reverseToV, lengthOfSCC, pouch);
-                        }
+            while (que.size() > 0) {
+                int v = que.pop();
+                if (null == reverseEdge[v])
+                    continue;
+
+                for (Object obj: reverseEdge[v]) {
+                    Integer toV = (Integer)obj;
+
+                    if (root[toV] == 0) {
+                        root[toV] = v;
+                        length++;
+                        que.add(v);
+                        pouch.add(length);
                     }
                 }
             }
         }
-        else {
-            DFS_SCC(toV, visitedVertex);
+
+        dp = new int[allPouch.size()][K +1];
+        fill2D(dp, -1);
+
+        return knapsack(0, K, allPouch);
+    }
+
+    void SCC_Tarjan(int v, Stack<Integer> stk) {
+        if (visited[v]) {
+            if ((0 == root[v]) && (0 == root[edge[v]])) {
+                ArrayList<Integer> scc = new ArrayList();
+                allSCC.add(scc);
+                scc.add(v);
+
+                // I'm root
+                root[v] = v;
+
+                // SCC is found
+                while ((v != stk.peek()) && (stk.size() > 0)) {
+                    int vInSCC = stk.pop();
+                    root[vInSCC] = v;
+                    scc.add(vInSCC);
+                }
+
+                /// remove v itself in stk
+                stk.pop();
+            }
+
+            return;
         }
+
+        visited[v] = true;
+        stk.push(v);
+
+        SCC_Tarjan(edge[v], stk);
     }
 
     int knapsack(int idxPouch, int k, ArrayList<HashSet<Integer>> pouches) {
@@ -116,15 +126,18 @@ public class Main {
         if (k <= 0)
             return 0;
 
+        if (dp[idxPouch][k] != -1)
+            return dp[idxPouch][k];
+
         // idxPouch에서 공을 꺼내지 않고, 최대값
         int r1 = knapsack(idxPouch +1, k, pouches);
 
-        int r2 = 0;
+        int r2 = -1;
         HashSet<Integer> pouch = pouches.get(idxPouch);
         Integer[] balls = pouch.toArray(new Integer[0]);
         Arrays.sort(balls);
 
-        for (int ball: pouch) {
+        for (int ball: balls) {
             if (ball <= k) {
                 r2 = Math.max(r2, knapsack(idxPouch +1, k -ball, pouches) +ball);
             }
@@ -133,7 +146,16 @@ public class Main {
             }
         }
 
-        return Math.max(r1, r2);
+        dp[idxPouch][k] = Math.max(r1, r2);
+
+        return dp[idxPouch][k];
+    }
+
+    // Initialize 2D arrays with value v
+    public void fill2D(int[][] _2D, int v) {
+        for(int[] _1D: _2D) {
+            Arrays.fill(_1D, v);
+        }
     }
 
     public static void main(String[] args) throws IOException {
