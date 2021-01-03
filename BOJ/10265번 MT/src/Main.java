@@ -2,8 +2,9 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedReader br;
+    BufferedWriter bw;
+
     int N, K;
     int[] edge;
     boolean[] visited;
@@ -15,7 +16,10 @@ public class Main {
     ArrayList<ArrayList<Integer>> allSCC;
     ArrayList<HashSet<Integer>> allPouch;
 
-    public void solve() throws IOException {
+    public void solve(InputStream in, PrintStream out) throws IOException {
+        br = new BufferedReader(new InputStreamReader(in));
+        bw = new BufferedWriter(new OutputStreamWriter(out));
+
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
@@ -42,7 +46,7 @@ public class Main {
         int r = solve2();
 
         bw.write(Integer.toString(r));
-//        bw.write('\n');
+        bw.write('\n');
         bw.flush();
         bw.close();
     }
@@ -76,7 +80,7 @@ public class Main {
                     if (root[toV] == 0) {
                         root[toV] = v;
                         length++;
-                        que.add(v);
+                        que.add(toV);
                         pouch.add(length);
                     }
                 }
@@ -129,7 +133,6 @@ public class Main {
         if (dp[idxPouch][k] != -1)
             return dp[idxPouch][k];
 
-        // idxPouch에서 공을 꺼내지 않고, 최대값
         int r1 = knapsack(idxPouch +1, k, pouches);
 
         int r2 = -1;
@@ -160,6 +163,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Main main = new Main();
-        main.solve();
+        main.solve(System.in, System.out);
     }
 }
