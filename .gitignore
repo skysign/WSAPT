@@ -361,3 +361,7 @@ FodyWeavers.xsd
 
 out
 .idea
+
+
+# gradle
+.gradle/

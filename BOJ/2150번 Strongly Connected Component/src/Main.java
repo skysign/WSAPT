@@ -1,6 +1,14 @@
 import java.io.*;
 import java.util.*;
-
+/**
+ * BOJ 2150번 Strongly Connected Component
+ *
+ * 유튜브 문제 풀이 : https://youtu.be/d46QTzFGLTQ
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/2150
+ *
+ * 자바소스 : https://bit.ly/38vdSwQ
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
