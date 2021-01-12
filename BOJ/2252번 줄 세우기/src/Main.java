@@ -1,6 +1,14 @@
 import java.io.*;
 import java.util.*;
-
+/**
+ * BOJ 2252번 줄 세우기
+ *
+ * 유튜브 문제 풀이 : https://youtu.be/B0W3Wh3Xbu8
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/1260
+ *
+ * 자바소스 : https://bit.ly/2HAgrTg
+ */
 public class Main {
     BufferedReader br;
     BufferedWriter bw;
