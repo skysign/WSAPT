@@ -1,6 +1,14 @@
 import java.io.*;
 import java.util.*;
-
+/**
+ * BOJ 10265번 MT
+ *
+ * 유튜브 문제 풀이 : https://youtu.be/DBgcB9Se5S4
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/10265
+ *
+ * 자바소스 : https://bit.ly/2LDGA5N
+ */
 public class Main {
     BufferedReader br;
     BufferedWriter bw;
