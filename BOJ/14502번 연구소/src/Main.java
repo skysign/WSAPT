@@ -1,10 +1,17 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.StringTokenizer;
-
+/**
+ * BOJ 14502번 연구소
+ *
+ * 유튜브 문제 풀이 : https://youtu.be/3BgD9XkZydo
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/14502
+ *
+ * 자바소스 : https://bit.ly/2LVlsI9
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -14,7 +21,6 @@ public class Main {
     static int VIRUS = 2;
 
     int[][] map;
-    boolean[][] visited;
     ArrayList<int []> alEmpty;
     ArrayList<int []> alVirus;
     int N, M;
@@ -25,7 +31,6 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
 
         map = new int[N][M];
-        visited = new boolean[N][M];
         alEmpty = new ArrayList<>();
         alVirus = new ArrayList<>();
 
@@ -35,14 +40,11 @@ public class Main {
             for (int j = 0; j<M; ++j) {
                 map[i][j] = Integer.parseInt(st.nextToken());
 
-                if (map[i][j] != EMPTY) {
-                    visited[i][j] = true;
-
-                    if (map[i][j] == VIRUS)
-                        alVirus.add(new int[]{i, j});
-                }
-                else { // v == VIRUS
+                if (map[i][j] == EMPTY) {
                     alEmpty.add(new int[]{i, j});
+                }
+                else if (map[i][j] == VIRUS) {
+                    alVirus.add(new int[]{i, j});
                 }
             }
         }
@@ -107,14 +109,12 @@ public class Main {
 
         for (int i = 0, idx = 0; i < n; i++) {
             if (visited[i] == true) {
-//                System.out.print(arr[i] + " ");
                 comb[idx] = arr[i];
                 idx++;
             }
         }
 
         al.add(comb);
-//        System.out.println();
     }
 
     int BFS_virus_spread_return_safe_area(int[][] wall3) {
