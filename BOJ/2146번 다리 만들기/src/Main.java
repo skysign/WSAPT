@@ -3,7 +3,15 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.StringTokenizer;
-
+/**
+ * BOJ 2146번 다리 만들기
+ *
+ * 유튜브 문제 풀이 :
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/2146
+ *
+ * 자바소스 :
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -46,6 +54,7 @@ public class Main {
     public void setIdOfIsland(int sy, int sx, int oriId, int idOfIsland) {
         Deque<int[]> que = new ArrayDeque<>();
         que.add(new int[]{sy, sx});
+        visited[sy][sx] = true;
 
         while (que.size() > 0) {
             int[] yx = que.pop();
@@ -58,8 +67,13 @@ public class Main {
                 int dy = y + d4i[idx];
                 int dx = x + d4j[idx];
 
-                if (IsInMap(dy, dx) && (oriId == map[dy][dx])) {
-                    que.add(new int[]{dy, dx});
+                if (IsInMap(dy, dx)) {
+                    if (oriId == map[dy][dx]) {
+                        if (visited[dy][dx] == false) {
+                            que.add(new int[]{dy, dx});
+                            visited[dy][dx] = true;
+                        }
+                    }
                 }
             }
         }
