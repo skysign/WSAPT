@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
  *
  * 문제링크 : https://www.acmicpc.net/problem/2146
  *
- * 자바소스 :
+ * 자바소스 : https://bit.ly/2YfeJvx
  */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -106,11 +106,11 @@ public class Main {
 
         Deque<int[]> que = new ArrayDeque<>();
         que.add(new int[]{sy, sx});
+        visited[sy][sx] = true;
 
-        Deque<int[]> queNext = new ArrayDeque<>();
-
-        while (queNext != null) {
-            while (que.size() > 0) {
+        while (que.size() > 0) {
+            int length = que.size();;
+            for(int i=0; i<length; ++i) {
                 int[] yx = que.pop();
                 int y = yx[0];
                 int x = yx[1];
@@ -130,27 +130,16 @@ public class Main {
                         if (fromId != map[dy][dx]) {
                             if (visited[dy][dx] == false) {
                                 int[] tyx = new int[]{dy, dx};
-
-                                if (!IsContained(tyx, queNext))
-                                    queNext.add(tyx);
+                                que.add(tyx);
+                                visited[dy][dx] = true;
                             }
                         }
                     }
                 }
-            } // while (que.size() > 0)
+            } // for(int i=0; i<length; ++i) {
 
             depth++;
-
-            if (queNext.size() <= 0) {
-                queNext = null;
-            }
-            else {
-                // swap two queues
-                Deque<int[]> queTmp = que;
-                que = queNext;
-                queNext = queTmp;
-            }
-        } // while (queNext != null) {
+        } // while (que.size() > 0)
 
         return r;
     }
