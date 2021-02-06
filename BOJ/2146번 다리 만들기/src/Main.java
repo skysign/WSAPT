@@ -84,23 +84,24 @@ public class Main {
     }
 
     public int solve2() {
-        int r = 0;
+        int r = Integer.MAX_VALUE;
 
         for (int i=0; i<N; ++i) {
             for (int j=0; j<N; ++j) {
                 if (0 != map[i][j]) {
                     int tmp = floodFillWithoutRecursion(i, j, map[i][j]);
-                    r = Math.max(r, tmp);
+                    if (tmp > 0) {
+                        r = Math.min(r, tmp);
+                    }
                 }
             }
         }
 
-        return (Integer.MAX_VALUE - r);
+        return r;
     }
 
     public int floodFillWithoutRecursion(int sy, int sx, int fromId) {
-        int depth = -1;
-        int r = 0;
+        int lengthOfBridge = 0;
 
         fill2D(visited, false);
 
@@ -110,6 +111,7 @@ public class Main {
 
         while (que.size() > 0) {
             int length = que.size();;
+
             for(int i=0; i<length; ++i) {
                 int[] yx = que.pop();
                 int y = yx[0];
@@ -118,8 +120,7 @@ public class Main {
                 visited[y][x] = true;
 
                 if ((map[y][x] > 0) & (fromId != map[y][x])) {
-                    r = Math.max(r, Integer.MAX_VALUE -depth);
-                    return r;
+                    return (lengthOfBridge -1);
                 }
 
                 for (int idx=0; idx<d4i.length; ++idx) {
@@ -138,25 +139,16 @@ public class Main {
                 }
             } // for(int i=0; i<length; ++i) {
 
-            depth++;
+            lengthOfBridge++;
         } // while (que.size() > 0)
 
-        return r;
+        return (lengthOfBridge -1);
     }
 
     public void fill2D(boolean[][] _2D, boolean v) {
         for(boolean[] _1D: _2D) {
             Arrays.fill(_1D, v);
         }
-    }
-
-    public boolean IsContained(int[] tyx, Deque<int[]> que) {
-        for(int[] yx: que) {
-            if ((tyx[0] == yx[0]) && (tyx[1] == yx[1]))
-                return true;
-        }
-
-        return false;
     }
 
     public static void main(String[] args) throws IOException {
