@@ -1,8 +1,14 @@
 import java.io.*;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.StringTokenizer;
-
+import java.util.*;
+/**
+ * BOJ 2156번 포도주 시식
+ *
+ * 유튜브 문제 풀이 :
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/13460
+ *
+ * 자바소스 : https://bit.ly/3jqkyzU
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -13,15 +19,20 @@ public class Main {
     int Ri, Rj, Bi, Bj;
     boolean[][][][] visited;
 
-    static int LT = 0;
-    static int RT = 1;
-    static int UP = 2;
-    static int DN = 3;
-    int[] LRUD = { LT, RT, UP, DN};
+    enum Direction {
+        LT(0), RT(1), UP(2), DN(3);
+
+        public int mV;
+
+        Direction(int v) {
+            mV = v;
+        }
+    }
+
     int[] dIs = { 0, 0,-1, 1};
     int[] dJs = {-1, 1, 0, 0};
 
-    public void solve() throws IOException {
+    public void solve() throws IOException, CloneNotSupportedException {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         N = Integer.parseInt(st.nextToken());
@@ -54,164 +65,223 @@ public class Main {
 
         int r = tilt();
 
-        if (r == Integer.MAX_VALUE)
-            r = -1;
-
         bw.write(String.valueOf(r));
         bw.close();
     }
 
-    int tilt() {
-        int r = Integer.MAX_VALUE;
-        Deque<int[]> que = new ArrayDeque<>();
-        que.add(new int[]{Ri, Rj, Bi, Bj});
+    int tilt() throws CloneNotSupportedException {
+        Deque<Ball[]> que = new ArrayDeque<>();
+        Ball[] _balls = new Ball[2];
+        _balls[0] = new Ball(Ri, Rj, 'R');
+        _balls[1] = new Ball(Bi, Bj, 'B');
+
+        que.add(_balls);
         visited[Ri][Rj][Bi][Bj] = true;
 
         for (int depth=1; depth<=10; ++depth) {
             for (int size=que.size(); size>0; --size) {
-                int[] RijBij = que.pop();
+                Ball[] orignalBalls = que.pop();
 
-                int ri = RijBij[0];
-                int rj = RijBij[1];
-                int bi = RijBij[2];
-                int bj = RijBij[3];
+                for (Direction dir: Direction.values()) {
+                    // 공들을 복사
+                    // 공을 굴려서, 공의 위치가 변함
+                    // 따라서, 공을 굴리기 전에 복사해야함
+                    Ball[] balls = new Ball[orignalBalls.length];
 
-                for(int dir: LRUD) {
-                    int di = dIs[dir];
-                    int dj = dJs[dir];
+                    for (int i=0; i<orignalBalls.length; ++i) {
+                        balls[i] = (Ball)orignalBalls[i].clone();
+                    }
 
-                    boolean bRedFirst = whichBallIsRolledFirstly(dir, ri, rj, bi, bj);
+                    Arrays.sort(balls, comps[dir.mV]);
 
-                    if (bRedFirst) {
-                        putBall('B', bi, bj);
-
-                        int[] Rij = rollBall(ri, rj, di, dj);
-
-                        if (isBallFell(Rij)) {
-                            int[] Bij = rollBall(bi, bj, di, dj);
-                            if (isBallFell(Bij)) {
-                                clearBall(bi, bj);
-                                continue;   // RED, BLUE 동시 구멍에 빠짐
-                            }
-
-                            return depth;
-                        }
-                        else {
-                            putBall('R', Rij);
-                            clearBall(bi, bj);
-
-                            int[] Bij = rollBall(bi, bj, di, dj);
-
-                            if (isBallFell(Bij)) {
-                                clearBall(Rij);
-                                continue;   // BLUE 구멍에 빠짐
-                            }
-
-                            clearBall(Rij);
-
-                            if (visited[Rij[0]][Rij[1]][Bij[0]][Bij[1]])
-                                continue;
-
-                            que.add(new int[]{Rij[0], Rij[1], Bij[0], Bij[1]});
-                            visited[Rij[0]][Rij[1]][Bij[0]][Bij[1]] = true;
+                    // 공을 굴리면서, map에 mark한다
+                    for (Ball ball: balls) {
+                        rollBall(ball, dir);
+                        if (!ball.mbO) {
+                            markBall(ball);
                         }
                     }
-                    else {
-                        putBall('R', ri, rj);
 
-                        int[] Bij = rollBall(bi, bj, di, dj);
+                    // O에 빠진 공 체크
+                    boolean bRedO = false;
+                    boolean bBlueO = false;
 
-                        if (isBallFell(Bij)) {
-                            clearBall(ri, rj);
-                            continue;
-                        }
-                        else {
-                            putBall('B', Bij);
-                            clearBall(ri, rj);
-
-                            int[] Rij = rollBall(ri, rj, di, dj);
-
-                            if (isBallFell(Rij)) {
-                                return depth;
+                    for (Ball ball: balls) {
+                        if (ball.mbO) {
+                            if (ball.mColor == 'R') {
+                                bRedO = true;
                             }
+                            else if (ball.mColor == 'B') {
+                                bBlueO = true;
+                            }
+                        }
+                    }
 
-                            clearBall(Bij);
+                    // 빨간공만 O에 빠졌는지 확인
+                    if ((bRedO == true) && (bBlueO == false) ) {
+                        return depth;
+                    }
 
-                            if (visited[Rij[0]][Rij[1]][Bij[0]][Bij[1]])
-                                continue;
+                    // map을 다시 써야 하니까
+                    // map 표시했던 공굴린 위치를 지운다.
+                    for (Ball ball: balls) {
+                        if (!ball.mbO) {
+                            unmarkBall(ball);
+                        }
+                    }
 
-                            que.add(new int[]{Rij[0], Rij[1], Bij[0], Bij[1]});
-                            visited[Rij[0]][Rij[1]][Bij[0]][Bij[1]] = true;
+                    if (bBlueO == false) {
+                        if (!IsVisited(balls)) {
+                            checkVisitied(balls);
+                            que.add(balls);
                         }
                     }
                 }
             }
         }
 
-        return r;
+        return -1;
     }
 
-    void clearBall(int[] ij) {
-        putBall('.', ij[0], ij[1]);
-    }
+    private void checkVisitied(Ball[] balls) {
+        int ri = 0, rj = 0, bi = 0, bj = 0;
 
-    void clearBall(int i, int j) {
-        putBall('.', i, j);
-    }
-
-    void putBall(char c, int i, int j) {
-        map[i][j] = c;
-    }
-
-    void putBall(char c, int[] ij) {
-        int i = ij[0];
-        int j = ij[1];
-        putBall(c, i, j);
-    }
-
-    // return true(RED) false(BLUE)
-    boolean whichBallIsRolledFirstly(int dir, int ri, int rj, int bi, int bj) {
-        if (dir == LT || dir == RT) {
-            if (ri == bi) {
-                if (dir == LT) {
-                    return rj == Math.min(rj, bj);
-                }
-                // right direction, 이면 j값이 큰거 부터 굴리기
-                return rj == Math.max(rj, bj);
+        for (Ball ball: balls) {
+            if (ball.mColor == 'R') {
+                ri = ball.mI;
+                rj = ball.mJ;
             }
-        }
-        else {  // dir == DN or UP
-            if (rj == bj) {
-                if (dir == UP) {
-                    return ri == Math.min(ri, bi);
-                }
-                // right direction, 이면 j값이 큰거 부터 굴리기
-                return ri == Math.max(ri, bi);
+            else if (ball.mColor == 'B') {
+                bi = ball.mI;
+                bj = ball.mJ;
             }
         }
 
-        return true;
+        visited[ri][rj][bi][bj] = true;
     }
 
-    int[] rollBall(int i, int j, int di, int dj) {
-        while (map[i+di][j+dj] == '.' || map[i+di][j+dj] == 'O') {
-            i += di;
-            j += dj;
+    private boolean IsVisited(Ball[] balls) {
+        int ri = 0, rj = 0, bi = 0, bj = 0;
 
-            if (map[i][j] == 'O')
+        for (Ball ball: balls) {
+            if (ball.mColor == 'R') {
+                ri = ball.mI;
+                rj = ball.mJ;
+            }
+            else if (ball.mColor == 'B') {
+                bi = ball.mI;
+                bj = ball.mJ;
+            }
+        }
+
+        return visited[ri][rj][bi][bj];
+    }
+
+    Comparator<Ball> ltFirst = new Comparator<Ball>() {
+        @Override
+        public int compare(Ball b1, Ball b2) {
+            if (b1.mJ < b2.mJ)
+                return -1;
+
+            if (b1.mJ > b2.mJ)
+                return 1;
+
+            return 0;
+        }
+    };
+
+    Comparator<Ball> rtFirst = new Comparator<Ball>() {
+        @Override
+        public int compare(Ball b1, Ball b2) {
+            if (b1.mJ < b2.mJ)
+                return 1;
+
+            if (b1.mJ > b2.mJ)
+                return -1;
+
+            return 0;
+        }
+    };
+
+    Comparator<Ball> upFirst = new Comparator<Ball>() {
+        @Override
+        public int compare(Ball b1, Ball b2) {
+            if (b1.mI < b2.mI)
+                return -1;
+
+            if (b1.mI > b2.mI)
+                return 1;
+
+            return 0;
+        }
+    };
+
+    Comparator<Ball> dnFirst = new Comparator<Ball>() {
+        @Override
+        public int compare(Ball b1, Ball b2) {
+            if (b1.mI < b2.mI)
+                return 1;
+
+            if (b1.mI > b2.mI)
+                return -1;
+
+            return 0;
+        }
+    };
+
+    Comparator<Ball>[] comps = new Comparator[]{ltFirst, rtFirst, upFirst, dnFirst};
+
+    class Ball implements Cloneable {
+        public int mI, mJ;
+        public char mColor;
+        public boolean mbO;
+
+        public void set(int i, int j, char color) {
+            mI = i;
+            mJ = j;
+            mColor = color;
+            mbO = false;
+        }
+
+        public Ball(int i, int j, char color) {
+            set(i, j, color);
+        }
+
+        public Object clone() throws CloneNotSupportedException {
+            return super.clone();
+        }
+    }
+
+    private void rollBall(Ball ball, Direction dir) {
+        int di = dIs[dir.mV];
+        int dj = dJs[dir.mV];
+
+        ball.mbO = false;
+
+        while (map[ball.mI+di][ball.mJ+dj] == '.' || map[ball.mI+di][ball.mJ+dj] == 'O') {
+            ball.mI += di;
+            ball.mJ += dj;
+
+            if (map[ball.mI][ball.mJ] == 'O') {
+                ball.mbO = true;
                 break;
+            }
         }
-
-        return new int[]{i, j};
     }
 
-    boolean isBallFell(int[] ij) {
-        int i = ij[0];
-        int j = ij[1];
-        return (map[i][j] == 'O');
+    private void markBall(Ball ball) {
+        if (!ball.mbO) {
+            map[ball.mI][ball.mJ] = ball.mColor;
+        }
     }
 
-    public static void main(String[] args) throws IOException {
+    private void unmarkBall(Ball ball) {
+        if (!ball.mbO) {
+            map[ball.mI][ball.mJ] = '.';
+        }
+    }
+
+    public static void main(String[] args) throws IOException, CloneNotSupportedException {
         Main main = new Main();
         main.solve();
     }
