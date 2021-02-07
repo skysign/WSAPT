@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 /**
  * BOJ 2146번 다리 만들기
  *
- * 유튜브 문제 풀이 :
+ * 유튜브 문제 풀이 : https://youtu.be/2bY5l8V6ggo
  *
  * 문제링크 : https://www.acmicpc.net/problem/2146
  *

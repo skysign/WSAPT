@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 /**
- * BOJ 2156번 포도주 시식
+ * BOJ 13460번 구슬 탈출 2
  *
  * 유튜브 문제 풀이 :
  *
