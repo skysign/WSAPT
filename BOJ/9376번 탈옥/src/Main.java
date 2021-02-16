@@ -9,7 +9,6 @@ public class Main {
 
     int H, W;
     char[][] map;
-    Deque<int[]> queSangGeun;
     Deque<int[]> quePrisoner;
 
     public void solve() throws IOException {
@@ -18,43 +17,40 @@ public class Main {
 
         for (int t=0; t<T; ++t) {
             st = new StringTokenizer(br.readLine());
-            queSangGeun = new ArrayDeque<>();
             quePrisoner = new ArrayDeque<>();
 
             H = Integer.parseInt(st.nextToken());
             W = Integer.parseInt(st.nextToken());
-            map = new char[H][W];
+            map = new char[H+2][W+2];
+
+            fill2D(map, '.');
 
             for (int i=0; i<H; ++i) {
                 String strLine = br.readLine();
 
                 for (int j=0; j<W; ++j) {
-                    map[i][j] = strLine.charAt(j);
+                    map[i+1][j+1] = strLine.charAt(j);
 
-                    if ((i==0) || (j==0) || (i==H-1) || (j==W-1)) {
-                        if ((map[i][j] == '#') || (map[i][j] == '.')) {
-                            queSangGeun.add(new int[]{i, j});
-                        }
-                    }
-
-                    if (map[i][j] == '$') {
-                        quePrisoner.add(new int[]{i, j});
-                        map[i][j] = '.';
+                    if (map[i+1][j+1] == '$') {
+                        quePrisoner.add(new int[]{i+1, j+1});
+                        map[i+1][j+1] = '.';
                     }
                 } // for (int j=0; j<W; ++j) {
             } // for (int i=0; i<H; ++i) {
 
+            quePrisoner.add(new int[]{0, 0});
+
             int r = solve2();
             bw.write(String.valueOf(r));
             bw.newLine();
+            bw.flush();
         }
 
         bw.close();
     }
 
     public int solve2() {
-        int[][][] pPathes = new int[quePrisoner.size()][H][W];
-        int[][][] sPathes = new int[queSangGeun.size()][H][W];
+        int[][][] pPathes = new int[quePrisoner.size()][H+2][W+2];
 
         int size = quePrisoner.size();
         for (int idx=0; idx<size; ++idx) {
@@ -62,32 +58,23 @@ public class Main {
             bfs_by_door_count(yx, pPathes[idx]);
         }
 
-        size = queSangGeun.size();
-        for (int idx=0; idx<size; ++idx) {
-            int[] yx = queSangGeun.pop();
-            bfs_by_door_count(yx, sPathes[idx]);
-        }
-
         int r = Integer.MAX_VALUE;
 
-        for (int idx=0; idx<sPathes.length; ++idx) {
-            for (int i=0; i<H; ++i) {
-                for (int j=0; j<W; ++j) {
-                    if ((pPathes[0][i][j] != Integer.MAX_VALUE)
-                            && (pPathes[1][i][j] != Integer.MAX_VALUE)
-                            && (sPathes[idx][i][j] != Integer.MAX_VALUE)) {
-                        int sum = pPathes[0][i][j] + pPathes[1][i][j] + sPathes[idx][i][j];
+        for (int i=0; i<H+2; ++i) {
+            for (int j=0; j<W+2; ++j) {
+                if ((map[i][j] == '#') || (map[i][j] == '.')) {
+                    int sum = pPathes[0][i][j] + pPathes[1][i][j] + pPathes[2][i][j];
 
-                        // 문이 있는 곳에서, 3명이 만났으면,
-                        // 문의 수가 2번 중복해서 카운트 되었음
-                        if (map[i][j] == '#') {
-                            sum -= 2;
-                        }
-                        r = Math.min(r, sum);
+                    // 문이 있는 곳에서, 3명이 만났으면,
+                    // 문의 수가 2번 중복해서 카운트 되었음
+                    if (map[i][j] == '#') {
+                        sum -= 2;
                     }
+                    r = Math.min(r, sum);
                 }
             }
         }
+
 
         if (r == Integer.MAX_VALUE) {
             r = 0;
@@ -98,8 +85,10 @@ public class Main {
 
     private void bfs_by_door_count(int[] yx, int[][] pathes) {
         fill2D(pathes, Integer.MAX_VALUE);
+
         Deque<int[]> que = new ArrayDeque<>();
-        que.add(new int[]{yx[0], yx[1], 0});
+        que.add(new int[]{yx[0], yx[1]});
+        pathes[yx[0]][yx[1]] = 0;
 
         ArrayList<int[]> queTmp = new ArrayList<>();
 
@@ -110,13 +99,6 @@ public class Main {
                 int[] yxd = que.pop();
                 int i = yxd[0];
                 int j = yxd[1];
-                int door = yxd[2];
-
-                if (map[i][j] == '#') {
-                    ++door;
-                }
-
-                pathes[i][j] = door;
 
                 for (int idx=0; idx<d4i.length; ++idx) {
                     int ni = i + d4i[idx];
@@ -124,13 +106,19 @@ public class Main {
 
                     if (IsInMap(ni, nj)) {
                         if (map[ni][nj] == '.') {
-                            if (door < pathes[ni][nj]) {
-                                addQueueIfLessDoorPassed(queTmp, new int[]{ni, nj, door});
+                            if (pathes[i][j] < pathes[ni][nj]) {
+                                if (!IsContained(queTmp, ni, nj)) {
+                                    queTmp.add(new int[]{ni, nj});
+                                    pathes[ni][nj] = pathes[i][j];
+                                }
                             }
                         }
                         else if (map[ni][nj] == '#') {
-                            if ((door +1) < pathes[ni][nj]) {
-                                addQueueIfLessDoorPassed(queTmp, new int[]{ni, nj, door});
+                            if ((pathes[i][j] +1) < pathes[ni][nj]) {
+                                if (!IsContained(queTmp, ni, nj)) {
+                                    queTmp.add(new int[]{ni, nj});
+                                    pathes[ni][nj] = pathes[i][j] +1;
+                                }
                             }
                         }
                     }
@@ -145,22 +133,14 @@ public class Main {
         }
     }
 
-    public void addQueueIfLessDoorPassed(ArrayList<int[]> que, int[] newyxd) {
-        int size = que.size();
-
-        for (int i=0; i<size; ++i) {
-            int[] yxd = que.get(i);
-
-            if ((yxd[0] == newyxd[0]) && (yxd[1] == newyxd[1])) {
-                if (yxd[2] > newyxd[2]) {
-                    que.remove(i);
-                    que.add(newyxd);
-                    return;
-                }
+    boolean IsContained(ArrayList<int[]> que, int ni, int nj) {
+        for (int[] yxd: que) {
+            if ((yxd[0] == ni) && (yxd[1] == nj)) {
+                return true;
             }
         }
 
-        que.add(newyxd);
+        return false;
     }
 
     public static void main(String[] args) throws IOException {
@@ -178,7 +158,13 @@ public class Main {
         }
     }
 
+    public void fill2D(char[][] _2D, char v) {
+        for(char[] _1D: _2D) {
+            Arrays.fill(_1D, v);
+        }
+    }
+
     boolean IsInMap(int i, int j) {
-        return ((0<=i) && (i<H) && (0<=j) && (j<W));
+        return ((0<=i) && (i<H+2) && (0<=j) && (j<W+2));
     }
 }
