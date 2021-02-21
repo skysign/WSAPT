@@ -9,7 +9,8 @@ public class Main {
 
     int H, W;
     char[][] map;
-    Deque<int[]> quePrisoner;
+//    int[][][] from;
+    ArrayList<int[]> quePrisoner;
 
     public void solve() throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -17,11 +18,14 @@ public class Main {
 
         for (int t=0; t<T; ++t) {
             st = new StringTokenizer(br.readLine());
-            quePrisoner = new ArrayDeque<>();
+            quePrisoner = new ArrayList<>();
+            quePrisoner.add(new int[]{0, 0});
 
             H = Integer.parseInt(st.nextToken());
             W = Integer.parseInt(st.nextToken());
             map = new char[H+2][W+2];
+//            from = new int[H+2][W+2][2];
+//            fill3D(from, -1);
 
             fill2D(map, '.');
 
@@ -38,8 +42,6 @@ public class Main {
                 } // for (int j=0; j<W; ++j) {
             } // for (int i=0; i<H; ++i) {
 
-            quePrisoner.add(new int[]{0, 0});
-
             int r = solve2();
             bw.write(String.valueOf(r));
             bw.newLine();
@@ -51,17 +53,33 @@ public class Main {
 
     public int solve2() {
         int[][][] pPathes = new int[quePrisoner.size()][H+2][W+2];
-
-        int size = quePrisoner.size();
-        for (int idx=0; idx<size; ++idx) {
-            int[] yx = quePrisoner.pop();
-            bfs_by_door_count(yx, pPathes[idx]);
-        }
-
         int r = Integer.MAX_VALUE;
 
-        for (int i=0; i<H+2; ++i) {
-            for (int j=0; j<W+2; ++j) {
+        for (int idx=0; idx<quePrisoner.size(); ++idx) {
+            int[] yx = quePrisoner.get(idx);
+            bfs_by_door_count(yx, pPathes[idx]);
+
+//            if (idx +1 < quePrisoner.size()) {
+//                yx = quePrisoner.get(idx +1);
+//                int ti = yx[0];
+//                int tj = yx[1];
+//
+//                r += pPathes[idx][ti][tj];
+//
+//                // 지나온 길을 되돌아 가면서, 문 열어 두기
+//                while ((ti != 0) && (tj != 0)) {
+//                    if (map[ti][tj] == '#') {
+//                        map[ti][tj] = '.';
+//                    }
+//
+//                    ti = from[ti][tj][0];
+//                    tj = from[ti][tj][1];
+//                }
+//            }
+        }
+
+        for (int i=1; i<H+2; ++i) {
+            for (int j=1; j<W+2; ++j) {
                 if ((map[i][j] == '#') || (map[i][j] == '.')) {
                     int sum = pPathes[0][i][j] + pPathes[1][i][j] + pPathes[2][i][j];
 
@@ -70,7 +88,12 @@ public class Main {
                     if (map[i][j] == '#') {
                         sum -= 2;
                     }
+
                     r = Math.min(r, sum);
+
+                    if (sum == r) {
+                        r = r;
+                    }
                 }
             }
         }
@@ -90,6 +113,9 @@ public class Main {
         que.add(new int[]{yx[0], yx[1]});
         pathes[yx[0]][yx[1]] = 0;
 
+//        from[yx[0]][yx[1]][0] = 0;
+//        from[yx[0]][yx[1]][1] = 0;
+
         ArrayList<int[]> queTmp = new ArrayList<>();
 
         while (que.size() > 0) {
@@ -107,17 +133,21 @@ public class Main {
                     if (IsInMap(ni, nj)) {
                         if (map[ni][nj] == '.') {
                             if (pathes[i][j] < pathes[ni][nj]) {
+                                pathes[ni][nj] = pathes[i][j];
                                 if (!IsContained(queTmp, ni, nj)) {
                                     queTmp.add(new int[]{ni, nj});
-                                    pathes[ni][nj] = pathes[i][j];
+//                                    from[ni][nj][0] = i;
+//                                    from[ni][nj][1] = j;
                                 }
                             }
                         }
                         else if (map[ni][nj] == '#') {
                             if ((pathes[i][j] +1) < pathes[ni][nj]) {
+                                pathes[ni][nj] = pathes[i][j] +1;
                                 if (!IsContained(queTmp, ni, nj)) {
                                     queTmp.add(new int[]{ni, nj});
-                                    pathes[ni][nj] = pathes[i][j] +1;
+//                                    from[ni][nj][0] = i;
+//                                    from[ni][nj][1] = j;
                                 }
                             }
                         }
@@ -151,6 +181,14 @@ public class Main {
     // Travel 4 ways, start from 12h, and rotate as clockwise
     public int[] d4i = new int[]{1, 0, -1, 0};
     public int[] d4j = new int[]{0, 1, 0, -1};
+
+    public void fill3D(int[][][] _3D, int v) {
+        for(int[][] _2D: _3D) {
+            for(int[] _1D: _2D) {
+                Arrays.fill(_1D, v);
+            }
+        }
+    }
 
     public void fill2D(int[][] _2D, int v) {
         for(int[] _1D: _2D) {
