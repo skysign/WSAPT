@@ -1,15 +1,20 @@
 import java.io.*;
 import java.util.*;
-
-// BOJ 9376번 탈옥
-
+/**
+ * BOJ 9376번 탈옥
+ *
+ * 유튜브 문제 풀이 :
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/9376
+ *
+ * 자바소스 : https://bit.ly/3pCPKh6
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     int H, W;
     char[][] map;
-//    int[][][] from;
     ArrayList<int[]> quePrisoner;
 
     public void solve() throws IOException {
@@ -24,8 +29,6 @@ public class Main {
             H = Integer.parseInt(st.nextToken());
             W = Integer.parseInt(st.nextToken());
             map = new char[H+2][W+2];
-//            from = new int[H+2][W+2][2];
-//            fill3D(from, -1);
 
             fill2D(map, '.');
 
@@ -45,7 +48,6 @@ public class Main {
             int r = solve2();
             bw.write(String.valueOf(r));
             bw.newLine();
-            bw.flush();
         }
 
         bw.close();
@@ -58,24 +60,6 @@ public class Main {
         for (int idx=0; idx<quePrisoner.size(); ++idx) {
             int[] yx = quePrisoner.get(idx);
             bfs_by_door_count(yx, pPathes[idx]);
-
-//            if (idx +1 < quePrisoner.size()) {
-//                yx = quePrisoner.get(idx +1);
-//                int ti = yx[0];
-//                int tj = yx[1];
-//
-//                r += pPathes[idx][ti][tj];
-//
-//                // 지나온 길을 되돌아 가면서, 문 열어 두기
-//                while ((ti != 0) && (tj != 0)) {
-//                    if (map[ti][tj] == '#') {
-//                        map[ti][tj] = '.';
-//                    }
-//
-//                    ti = from[ti][tj][0];
-//                    tj = from[ti][tj][1];
-//                }
-//            }
         }
 
         for (int i=1; i<H+2; ++i) {
@@ -113,9 +97,6 @@ public class Main {
         que.add(new int[]{yx[0], yx[1]});
         pathes[yx[0]][yx[1]] = 0;
 
-//        from[yx[0]][yx[1]][0] = 0;
-//        from[yx[0]][yx[1]][1] = 0;
-
         ArrayList<int[]> queTmp = new ArrayList<>();
 
         while (que.size() > 0) {
@@ -136,8 +117,6 @@ public class Main {
                                 pathes[ni][nj] = pathes[i][j];
                                 if (!IsContained(queTmp, ni, nj)) {
                                     queTmp.add(new int[]{ni, nj});
-//                                    from[ni][nj][0] = i;
-//                                    from[ni][nj][1] = j;
                                 }
                             }
                         }
@@ -146,8 +125,6 @@ public class Main {
                                 pathes[ni][nj] = pathes[i][j] +1;
                                 if (!IsContained(queTmp, ni, nj)) {
                                     queTmp.add(new int[]{ni, nj});
-//                                    from[ni][nj][0] = i;
-//                                    from[ni][nj][1] = j;
                                 }
                             }
                         }
@@ -181,14 +158,6 @@ public class Main {
     // Travel 4 ways, start from 12h, and rotate as clockwise
     public int[] d4i = new int[]{1, 0, -1, 0};
     public int[] d4j = new int[]{0, 1, 0, -1};
-
-    public void fill3D(int[][][] _3D, int v) {
-        for(int[][] _2D: _3D) {
-            for(int[] _1D: _2D) {
-                Arrays.fill(_1D, v);
-            }
-        }
-    }
 
     public void fill2D(int[][] _2D, int v) {
         for(int[] _1D: _2D) {
