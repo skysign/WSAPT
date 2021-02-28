@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -7,7 +8,6 @@ public class Main {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     char[][] map;
-    boolean[][] visited;
     int R, C;
 
     public void solve() throws IOException {
@@ -16,7 +16,6 @@ public class Main {
         C = Integer.parseInt(st.nextToken());
 
         map = new char[R][C];
-        visited = new boolean[R][C];
 
         for (int i=0; i<R; ++i) {
             String str = br.readLine();
@@ -26,15 +25,14 @@ public class Main {
             }
         }
 
-        int r = solve2(0, 0, 1, new ArrayList());
+        int r = solve2(0, 0, 1, new HashSet<>());
 
         bw.write(String.valueOf(r));
         bw.close();
     }
 
-    int solve2(int y, int x, int depth, ArrayList<Character> ar) {
+    int solve2(int y, int x, int depth, HashSet<Character> ar) {
         ar.add(map[y][x]);
-        visited[y][x] = true;
 
         int r = depth;
 
@@ -42,12 +40,12 @@ public class Main {
             int ny = y + d4i[idx];
             int nx = x + d4j[idx];
 
-            if (IsInMap(ny, nx) && (visited[ny][nx] == false) && (ar.contains(map[ny][nx]) == false)) {
-                r = Math.max(r, solve2(ny, nx, depth +1, new ArrayList<>(ar)));
+            if (IsInMap(ny, nx) && (ar.contains(map[ny][nx]) == false)) {
+                r = Math.max(r, solve2(ny, nx, depth +1, ar));
             }
         }
 
-        visited[y][x] = false;
+        ar.remove(map[y][x]);
 
         return r;
     }
