@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 
@@ -31,8 +30,8 @@ public class Main {
         bw.close();
     }
 
-    int solve2(int y, int x, int depth, HashSet<Character> ar) {
-        ar.add(map[y][x]);
+    int solve2(int y, int x, int depth, HashSet<Character> hs) {
+        hs.add(map[y][x]);
 
         int r = depth;
 
@@ -40,12 +39,12 @@ public class Main {
             int ny = y + d4i[idx];
             int nx = x + d4j[idx];
 
-            if (IsInMap(ny, nx) && (ar.contains(map[ny][nx]) == false)) {
-                r = Math.max(r, solve2(ny, nx, depth +1, ar));
+            if (IsInMap(ny, nx) && (hs.contains(map[ny][nx]) == false)) {
+                r = Math.max(r, solve2(ny, nx, depth +1, hs));
             }
         }
 
-        ar.remove(map[y][x]);
+        hs.remove(map[y][x]);
 
         return r;
     }
