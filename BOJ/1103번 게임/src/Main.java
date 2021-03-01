@@ -1,6 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -20,7 +18,6 @@ public class Main {
         visited = new boolean[R][C];
         dp = new int[R][C];
 
-
         for (int i=0; i<R; ++i) {
             String strLine = br.readLine();
 
@@ -28,37 +25,37 @@ public class Main {
                 map[i][j] = strLine.charAt(j);
         }
 
-        int r =  solve2(0, 0, 1);
+        int r =  solve2(0, 0);
 
         bw.write(String.valueOf(r));
         bw.close();
     }
 
-    int solve2(int y, int x, int depth) {
+    int solve2(int y, int x) throws IOException {
         if (!IsInMap(y, x))
             return 0;
 
         if (map[y][x] == 'H')
             return 0;
 
-        if (visited[y][x] == true)
-            return -1;
+        if (visited[y][x] == true) {
+            bw.write(String.valueOf(-1));
+            bw.close();
+            System.exit(0);
+        }
 
         if (dp[y][x] > 0)
-            return dp[y][x] = Math.max(dp[y][x], depth);
+            return dp[y][x];
 
         visited[y][x] = true;
 
-        int r = depth;
+        int r = 0;
         int v = map[y][x] - '0';
 
         for (int idx=0; idx<d4i.length; ++idx) {
             int ny = y + (d4i[idx] *v);
             int nx = x + (d4j[idx] *v);
-            int t = solve2(ny, nx, depth +1);
-
-            if (t == -1)
-                return -1;
+            int t = solve2(ny, nx) +1;
 
             r = Math.max(r, t);
         }
@@ -76,22 +73,6 @@ public class Main {
     // Travel 4 ways, start from 12h, and rotate as clockwise
     public int[] d4i = new int[]{1, 0, -1, 0};
     public int[] d4j = new int[]{0, 1, 0, -1};
-
-    // Initialize 3D arrays with value v
-    public void fill3D(int[][][] _3D, int v) {
-        for(int[][] _2D: _3D) {
-            for(int[] _1D: _2D) {
-                Arrays.fill(_1D, v);
-            }
-        }
-    }
-
-    // Initialize 2D arrays with value v
-    public void fill2D(boolean[][] _2D, boolean v) {
-        for(boolean[] _1D: _2D) {
-            Arrays.fill(_1D, v);
-        }
-    }
 
     public static void main(String[] args) throws IOException {
         Main main = new Main();
