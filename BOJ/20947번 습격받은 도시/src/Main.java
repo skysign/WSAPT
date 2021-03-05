@@ -8,6 +8,7 @@ public class Main {
 
     int N;
     char[][] map;
+    int[][] mapSkip;
     boolean[][] mapDot;
     ArrayList<int[]> Xs;
 
@@ -15,6 +16,7 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         map = new char[N][N];
+        mapSkip = new int[N][N];
         mapDot = new boolean[N][N];
         Xs = new ArrayList<>();
 
@@ -51,7 +53,7 @@ public class Main {
                 break;
         }
 
-        // 폭탄(B)를 찾는 과정에서, X를 모두 '.'으로 지웠기 때문에
+        // 폭탄(B)를 찾는 과정에서, X를 모두 'C'으로 지웠기 때문에
         // 맵에 다시 폭탄 위치를 적어 줍니다.
         for (int[] yx: Xs) {
             int y = yx[0];
@@ -71,99 +73,194 @@ public class Main {
         bw.close();
     }
 
+    void doSkipLineX(int y) {
+        for (int skipX = 0; skipX < N; ++skipX) {
+            mapSkip[y][skipX]++;
+        }
+    }
+
+    void doSkipLineY(int x) {
+        for (int skipY = 0; skipY < N; ++skipY) {
+            mapSkip[skipY][x]++;
+        }
+    }
+
+    void undoSkipLineX(int y) {
+        for (int skipX = 0; skipX < N; ++skipX) {
+            mapSkip[y][skipX]--;
+        }
+    }
+
+    void undoSkipLineY(int x) {
+        for (int skipY = 0; skipY < N; ++skipY) {
+            mapSkip[skipY][x]--;
+        }
+    }
+
     // back-tracking으로 동작하는 함수
     boolean solve2(int sy, int sx) {
-        int[][] rs = explode(sy, sx);
-
-        if (rs == null) {
+        // y, x 가 '.' 위치가 아니므로, 폭탄(B)를 놓을 수 없다.
+        if(false == mapDot[sy][sx]) {
             return false;
         }
 
-        map[sy][sx] = 'B';
+        int[][] rs = new int[4][2];
+        boolean bMetX = false;
+        boolean bMetC = false;
+        int skipY = -1;
+        int skipX = -1;
 
-        // 폭발과 닿았던 건물잔해를 '.'으로 바꿔서, 맵에서 치우고
-        for (int[] Xyx: rs) {
-            int Xy = Xyx[0];
-            int Xx = Xyx[1];
-
-            if (Xy == N) {
-                continue;
+        // y, x 위치에서 4방향으로 가보기
+        for (int idx=0; idx<d4i.length; ++idx) {
+            // 한방향으로 가보기
+            int rtn = dotOrX(sy, sx, d4i[idx], d4j[idx], rs[idx]);
+            switch (rtn) {
+                case 0:
+                    break;
+                case 1:
+                    bMetX = true;
+                    break;
+                case 2:
+                    if (idx % 2 == 0) { // i가 delta 있음
+                        skipX = sx;
+                    }
+                    else {  // j가 delta 있음
+                        skipY = sy;
+                    }
+                    break;
+                case 3:
+                    bMetC = true;
+                    break;
             }
-
-            map[Xy][Xx] = '.';
         }
 
-        if (IsXcleared())
-            return true;
+        if (bMetC)
+            bMetX = false;
 
-        for (int y=sy; y<N; ++y) {
-            for (int x=sx+1; x<N; ++x) {
+        if ((bMetX) && (skipX == -1) && (skipY == -1)) {
+            map[sy][sx] = 'B';
+
+            // 폭발과 닿았던 건물잔해 C 로 변경
+            for (int[] Xyx: rs) {
+                int Xy = Xyx[0];
+                int Xx = Xyx[1];
+
+                if (Xy == N) {
+                    continue;
+                }
+
+                map[Xy][Xx] = 'C';
+            }
+
+            if (IsXcleared())
+                return true;
+        }
+        else {
+            if (skipX != -1) {
+                doSkipLineY(skipX);
+            }
+
+            if (skipY != -1) {
+                doSkipLineX(skipY);
+            }
+        }
+
+        for (int x=sx+1; x<N; ++x) {
+            if (mapSkip[sy][x] > 0)
+                continue;
+
+            if (mapDot[sy][x] == false)
+                continue;
+
+            if (map[sy][x] != '.')
+                continue;
+
+            if (solve2(sy, x)) {
+                return true;
+            }
+        }
+
+        for (int y=sy+1; y<N; ++y) {
+            for (int x=0; x<N; ++x) {
+                if (mapSkip[y][x] > 0)
+                    continue;
+
+                if (mapDot[y][x] == false)
+                    continue;
+
+                if (map[y][x] != '.')
+                    continue;
+
                 if (solve2(y, x)) {
                     return true;
                 }
             }
         }
 
-        // 폭발과 닿았던 건물잔해를 원상복구
-        for (int[] Xyx: rs) {
-            int Xy = Xyx[0];
-            int Xx = Xyx[1];
-
-            if (Xy == N) {
-                continue;
-            }
-
-            map[Xy][Xx] = 'X';
+        if (skipX != -1) {
+            undoSkipLineY(skipX);
         }
 
-        map[sy][sx] = '.';
+        if (skipY != -1) {
+            undoSkipLineX(skipY);
+        }
+
+        if (bMetX) {
+            // 폭발과 닿았던 건물잔해를 원상복구
+            for (int[] Xyx: rs) {
+                int Xy = Xyx[0];
+                int Xx = Xyx[1];
+
+                if (Xy == N) {
+                    continue;
+                }
+
+                map[Xy][Xx] = 'X';
+            }
+
+            map[sy][sx] = '.';
+        }
 
         return false;
-    }
-
-    // y, x 위치에서 폭탄을 폭발시켜보는 함수
-    int[][] explode(int y, int x) {
-        // y, x 가 '.' 위치가 아니므로, 폭탄(B)를 놓을 수 없다.
-        if(false == mapDot[y][x]) {
-            return null;
-        }
-
-        int[][] rs = new int[4][2];
-
-        // y, x 위치에서 4방향으로 가보기
-        for (int idx=0; idx<d4i.length; ++idx) {
-            // 한방으로 가보기
-            rs[idx] = dotOrX(y, x, d4i[idx], d4j[idx]);
-
-            if (rs[idx] == null) {
-                return null;
-            }
-        }
-
-        return rs;
     }
 
     // 폭탄의 한방으로 갔을 때,
     // '.'을 계속 지나서 맵을 벗어나는 경우, {N,N}리턴
     // 건물잔해 'X'를 만난 경우, X의 위치 {y,x} 리턴
     // 그렇지 않는 모든 경우는 실패 null 리턴
-    int[] dotOrX(int y, int x, int dy, int dx) {
+
+    // 바깥 0
+    // X 만난 1
+    // O 만난 2
+    int dotOrX(int y, int x, int dy, int dx, int[] rs) {
         while ((0<=y) && (y<N) && (0<=x) && (x<N)) {
-            if (map[y][x] == '.') {
+            if (map[y][x] == '.' || map[y][x] == 'B' ) {
                 // 점은 지나가기
             }
             else if (map[y][x] == 'X') {
-                return new int[]{y, x};
+                rs[0] = y;
+                rs[1] = x;
+                return 1;
+            }
+            else if (map[y][x] == 'C') {
+                rs[0] = N;
+                rs[1] = N;
+                return 3;
             }
             else { // O 를 만난 경우
-                return null;
+                rs[0] = N;
+                rs[1] = N;
+                return 2;
             }
 
             y += dy;
             x += dx;
         }
 
-        return new int[]{N, N};
+        rs[0] = N;
+        rs[1] = N;
+
+        return 0;
     }
 
     boolean IsXcleared() {
@@ -171,7 +268,9 @@ public class Main {
             int y = yx[0];
             int x = yx[1];
 
-            if (map[y][x] == 'X')
+            if (map[y][x] == 'C')
+                continue;
+            else
                 return false;
         }
 
