@@ -371,6 +371,7 @@ public class Main {
             }
         }
     }
+
     // Travel 4 ways, start from 12h, and rotate as clockwise
     public int[] d4i = new int[]{1, 0, -1, 0};
     public int[] d4j = new int[]{0, 1, 0, -1};
