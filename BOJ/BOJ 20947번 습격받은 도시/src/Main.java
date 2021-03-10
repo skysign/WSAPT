@@ -1,6 +1,16 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * BOJ 20947번 습격받은 도시
+ *
+ * 유튜브 문제 풀이 : https://youtu.be/joTS2ATidt0
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/20947
+ *
+ * 자바소스 : https://bit.ly/2PTSw5v
+ */
+
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
