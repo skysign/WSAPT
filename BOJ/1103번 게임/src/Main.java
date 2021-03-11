@@ -1,6 +1,16 @@
 import java.io.*;
 import java.util.StringTokenizer;
 
+/**
+ * BOJ 1103번 게임
+ *
+ * 유튜브 문제 풀이 : https://youtu.be/NQxKsIugmm4
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/1103
+ *
+ * 자바소스 : http://bit.ly/3crP75w
+ */
+
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
