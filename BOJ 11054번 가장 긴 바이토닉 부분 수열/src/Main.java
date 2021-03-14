@@ -4,11 +4,9 @@ import java.util.StringTokenizer;
 /**
  * BOJ 11054번 가장 긴 바이토닉 부분 수열
  *
- * 유튜브 문제 풀이 :
- *
  * 문제링크 : https://www.acmicpc.net/problem/11054
  *
- * 자바소스 :
+ * 자바소스 : http://bit.ly/2OmbukP
  */
 
 public class Main {
