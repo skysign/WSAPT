@@ -2,6 +2,17 @@ import java.io.*;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 
+/**
+ * BOJ 1987번 알파벳
+ *
+ * 문제 풀이 : https://youtu.be/DkWh6PYunOc
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/1103
+ *
+ * 자바소스 : https://bit.ly/3csgU6Y
+ */
+
+
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
