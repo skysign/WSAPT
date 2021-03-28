@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
  *
  * 문제 풀이 : https://youtu.be/DkWh6PYunOc
  *
- * 문제링크 : https://www.acmicpc.net/problem/1103
+ * 문제링크 : https://www.acmicpc.net/problem/1987
  *
  * 자바소스 : https://bit.ly/3csgU6Y
  */
