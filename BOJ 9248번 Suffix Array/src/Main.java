@@ -13,13 +13,13 @@ public class Main {
         pairs = new Pair[l];
 
         for (int i=0; i<l; ++i) {
-            pairs[i] = new Pair<String, Integer>(dt.substring(i, l), i+1);
+            pairs[i] = new Pair(dt.substring(i, l).toCharArray(), i+1);
         }
 
         Arrays.sort(pairs);
 
         for (int i=0; i<l; ++i) {
-            Integer n = (Integer)(pairs[i].R());
+            int n = pairs[i].mn;
             bw.write(String.valueOf(n) + " ");
         }
         bw.newLine();
@@ -27,8 +27,8 @@ public class Main {
         bw.write("x ");
 
         for (int i=1; i<l; ++i) {
-            String t = getCommonPrefix((String)(pairs[i-1].L()), (String)(pairs[i].L()));
-            bw.write(String.valueOf(t.length()) + " ");
+            int n = getCommonPrefix(pairs[i-1].mc, pairs[i].mc);
+            bw.write(String.valueOf(n) + " ");
         }
 
         bw.close();
@@ -48,48 +48,42 @@ public class Main {
         return stra.substring(0, r);
     }
 
-    public class Pair<K, V> extends _Pair implements Comparable {
-        public Pair(K key, V value) {
-            super(key, value);
+    public int getCommonPrefix(char[] stra, char[] strb) {
+        int l = Math.min(stra.length, strb.length);
+        int r = 0;
+
+        for (int i=0; i<l; ++i) {
+            if (stra[i] == strb[i])
+                r++;
+            else
+                break;
+        }
+
+        return r;
+    }
+
+    class Pair implements Comparable{
+        char[] mc;
+        int    mn;
+
+        Pair(char[] c, int n) {
+            mc = c;
+            mn = n;
         }
 
         @Override
-        public int compareTo(Object o) {
-            Pair other = (Pair)o;
-            String stra = (String)this.L();
-            String strb = (String)other.L();
+        public int compareTo(Object _o) {
+            Pair o = (Pair)_o;
+            int l = Math.min(this.mc.length, o.mc.length);
 
-            return stra.compareTo(strb);
-        }
-    }
-
-    // http://cr.openjdk.java.net/~vadim/8140503/webrev.01/modules/base/src/main/java/javafx/util/Pair.java.html
-    public class _Pair<K,V> {
-        private K key;
-        public K getKey() { return key; }
-        public K L() { return getKey(); }
-        public void setKey(K kk) { key = kk; }
-        private V value;
-        public V getValue() { return value; }
-        public V R() { return getValue(); }
-        public void setValue(V vv) { value = vv; }
-
-        public void set(K kk, V vv) { key = kk; value = vv; }
-
-        public _Pair(K key, V value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o instanceof _Pair) {
-                _Pair pair = (_Pair) o;
-                if (key != null ? !key.equals(pair.key) : pair.key != null) return false;
-                if (value != null ? !value.equals(pair.value) : pair.value != null) return false;
-                return true;
+            for (int i=0; i<l; ++i) {
+                if (this.mc[i] == o.mc[i])
+                    continue;
+                else
+                    return (int)(mc[i] - o.mc[i]);
             }
-            return false;
+
+            return (mc.length - o.mc.length);
         }
     }
 
