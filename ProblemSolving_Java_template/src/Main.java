@@ -62,6 +62,48 @@ public class Main {
         main._solve();
     }
 
+    /**
+     * quick sort
+     * @param dt
+     * @param idxLow 처음에는 0
+     * @param idxHigh 처음에는 dt.length -1
+     */
+    void quick_sort(int[] dt, int idxLow, int idxHigh) {
+        if (idxLow < idxHigh) {
+            int idxPivot = quick_partition(dt, idxLow, idxHigh);
+
+            quick_sort(dt, idxLow, idxPivot-1);
+            quick_sort(dt, idxPivot+1, idxHigh);
+        }
+    }
+
+    int quick_partition(int[] dt, int idxLow, int idxHigh) {
+        int idxPivot = idxHigh;
+        int pivot = dt[idxPivot];
+
+        idxHigh--;
+
+        int idxL = idxLow;
+
+        for (int idxR=idxLow; idxR<=idxHigh; ++idxR) {
+            if (dt[idxR] < pivot) {
+                swap(dt, idxL, idxR);
+                idxL++;
+            }
+        }
+
+        swap(dt, idxL, idxPivot);
+
+        return idxL;
+    }
+
+    void swap(int[] d, int i, int j) {
+        int t = d[i];
+
+        d[i] = d[j];
+        d[j] = t;
+    }
+
     public class Vertex<TV> {
         public TV mV;
         ArrayList<UndirectedEdge> mEdges = new ArrayList();
