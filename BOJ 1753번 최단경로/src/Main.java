@@ -1,7 +1,8 @@
 import java.io.*;
 import java.util.*;
 /**
- * 스터디에서 알고리즘 문제 함께 풀어보실 분들 여기로 → https://wsapt.github.io/public/
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
  *
  * BOJ 1753번 최단경로
  *
