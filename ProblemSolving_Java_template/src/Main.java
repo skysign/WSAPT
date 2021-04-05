@@ -97,12 +97,12 @@ public class Main {
         return idxL;
     }
 
-    void swap(int[] d, int i, int j) {
-        int t = d[i];
-
-        d[i] = d[j];
-        d[j] = t;
-    }
+//    void swap(int[] d, int i, int j) {
+//        int t = d[i];
+//
+//        d[i] = d[j];
+//        d[j] = t;
+//    }
 
     public class Vertex<TV> {
         public TV mV;
