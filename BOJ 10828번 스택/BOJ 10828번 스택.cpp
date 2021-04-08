@@ -6,7 +6,7 @@
  * 
  * 문제링크 : https://www.acmicpc.net/problem/10828
  * 
- * CPP소스 : 
+ * CPP소스 : https://bit.ly/2Q86YqA
  */
 
 #include <iostream>
