@@ -61,7 +61,7 @@ public class Main {
             }
         }
 
-        int r = 0;
+        long r = 0;
 
         for (UndirectedEdge edge: al) {
             r += edge.mWeight;
