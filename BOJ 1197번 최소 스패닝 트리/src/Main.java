@@ -10,7 +10,7 @@ public class Main {
     int V, E;
     Vertex[] vertices;
     UndirectedEdge[] edges;
-    SubSet[] subSets;
+    int[] parents;
     ArrayList<UndirectedEdge> al;
 
     public void solve() throws IOException {
@@ -20,26 +20,18 @@ public class Main {
 
         vertices = new Vertex[V+1];
         edges = new UndirectedEdge[E];
-        subSets = new SubSet[V+1];
+        parents = new int[V+1];
         al = new ArrayList<>();
 
         for (int i=1; i<=V; ++i) {
             vertices[i] = new Vertex(i);
-            subSets[i] = new SubSet();
-            subSets[i].parent = i;
-            subSets[i].rank = 0;
+            parents[i] = i;
         }
 
         for (int i=0; i<E; ++i) {
             st = new StringTokenizer(br.readLine());
             int v1 = Integer.parseInt(st.nextToken());
             int v2 = Integer.parseInt(st.nextToken());
-
-            if (v1 > v2) {
-                int t = v1;
-                v1 = v2;
-                v2 = t;
-            }
 
             int w = Integer.parseInt(st.nextToken());
             edges[i] = new UndirectedEdge(w, vertices[v1], vertices[v2]);
@@ -72,34 +64,25 @@ public class Main {
     }
 
     int find(int v) {
-        if (subSets[v].parent != v) {
-            subSets[v].parent = find(subSets[v].parent);
+        if (parents[v] != v) {
+            parents[v] = find(parents[v]);
         }
 
-        return subSets[v].parent;
+        return parents[v];
     }
 
     void Union(int v1, int v2) {
-        if (subSets[v1].rank > subSets[v2].rank) {
-            subSets[v2].parent = v1;
-        }
-        else if (subSets[v1].rank < subSets[v2].rank) {
-            subSets[v1].parent = v2;
+        if (v1 > v2) {
+            parents[v2] = v1;
         }
         else {
-            subSets[v2].parent = v1;
-            subSets[v1].rank++;
+            parents[v1] = v2;
         }
     }
 
     public static void main(String[] args) throws IOException {
         Main main = new Main();
         main.solve();
-    }
-
-    class SubSet {
-        public int parent;
-        public int rank;
     }
 
     public class Vertex {
