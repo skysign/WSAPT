@@ -9,7 +9,7 @@ import java.io.*;
  *
  * 문제링크 : https://www.acmicpc.net/problem/18430
  *
- * 자바소스 :
+ * 자바소스 : https://bit.ly/3mK6Eu5
  */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
