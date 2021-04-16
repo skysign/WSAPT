@@ -7,10 +7,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * BOJ 
- * 문제링크 : 
- * 제출링크 : 
- * 문제풀이 : 
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 1753번 최단경로
+ *
+ * 유튜브 문제 풀이 :
+ *
+ * 문제링크 :
+ *
+ * 자바소스 :
  */
 
 public class Main {
@@ -62,6 +68,34 @@ public class Main {
         main._solve();
     }
 
+    /** 0,0 위치에서 회전변환, clock-wise 시계방향 회전 */
+    static int Deg0= 0;
+    static int Deg90= 1;
+    static int Deg180= 2;
+    static int Deg270= 3;
+    static int _X= 0;
+    static int _Y= 1;
+
+    int[] cos = {1, 0, -1, 0};  /** cos0, cos90, cos180, cos270 */
+    int[] sin = {0, 1, 0, -1};  /** sin0, sin90, sin180, sin270 */
+
+    /**
+     * Rotate X by clock-wise
+     *
+     * @param deg Deg0, Deg90, Deg180, Deg270
+     * @param x
+     * @param y
+     * @return
+     */
+    int rotateX(int deg, int x, int y) {
+        return (x * cos[deg]) + (y * sin[deg]);
+    }
+
+    /** Rotate Y by clock-wise */
+    int rotateY(int deg, int x, int y) {
+        return (y * cos[deg]) - (x * sin[deg]);
+    }
+
     /**
      * quick sort
      * @param dt
@@ -104,21 +138,21 @@ public class Main {
 //        d[j] = t;
 //    }
 
-    public class Vertex<TV> {
-        public TV mV;
+    public class Vertex {
+        public int mV;
         ArrayList<UndirectedEdge> mEdges = new ArrayList();
 
-        Vertex(TV v) {
+        Vertex(int v) {
             mV = v;
         }
 
-        public void addEdge(UndirectedEdge<TV> edge) {
+        public void addEdge(UndirectedEdge edge) {
             mEdges.add(edge);
         }
 
-        public Vertex<TV> getConnectedVertexFromEdge(int i) {
-            Vertex<TV> v1 = this.mEdges.get(i).mV1;
-            Vertex<TV> v2 = this.mEdges.get(i).mV2;
+        public Vertex getConnectedVertexFromEdge(int i) {
+            Vertex v1 = this.mEdges.get(i).mV1;
+            Vertex v2 = this.mEdges.get(i).mV2;
 
             if (this == v1)
                 return v2;
@@ -128,10 +162,10 @@ public class Main {
     }
 
     public class UndirectedEdge<TV> {
-        public Vertex<TV> mV1;
-        public Vertex<TV> mV2;
+        public Vertex mV1;
+        public Vertex mV2;
 
-        UndirectedEdge(Vertex<TV> v1, Vertex<TV> v2) {
+        UndirectedEdge(Vertex v1, Vertex v2) {
             mV1 = v1;
             mV2 = v2;
             mV1.addEdge(this);
