@@ -1,5 +1,16 @@
 import java.io.*;
-
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 18430번 무기 공학
+ *
+ * 유튜브 문제 풀이 : https://youtu.be/vT1vbyaqlWE
+ *
+ * 문제링크 : https://www.acmicpc.net/problem/18430
+ *
+ * 자바소스 :
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
