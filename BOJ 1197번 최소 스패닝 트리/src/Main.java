@@ -8,11 +8,11 @@ import java.util.StringTokenizer;
  *
  * BOJ 1197번 최소 스패닝 트리
  *
- * 유튜브 문제 풀이 :
+ * 유튜브 문제 풀이: https://youtu.be/0gxqAbUMWeE
  *
- * 문제링크 : https://www.acmicpc.net/problem/1197
+ * 문제링크: https://www.acmicpc.net/problem/1197
  *
- * 자바소스 : https://bit.ly/3v8AThD
+ * 자바소스: https://bit.ly/3v8AThD
  */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
