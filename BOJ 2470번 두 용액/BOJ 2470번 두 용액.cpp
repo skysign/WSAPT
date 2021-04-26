@@ -15,7 +15,6 @@ using namespace std;
  *
  * 자바소스: https://bit.ly/32NOUVB
  */
-// 
 
 void solve();
 vector<int> dt;
