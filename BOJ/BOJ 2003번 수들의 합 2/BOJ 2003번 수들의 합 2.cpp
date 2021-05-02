@@ -2,6 +2,30 @@
 #include <vector>
 using namespace std;
 
+/*
+반례
+9 5
+1 2 3 4 2 5 3 1 1
+답:3
+
+아래 반례 4개 출처 : https://www.acmicpc.net/board/view/56921
+3 1
+1 2 1
+답 : 2
+
+5 2
+5 2 1000 1 1
+답 : 2
+
+1 1
+1
+답 : 1
+
+6 13
+2 3 5 7 11 13
+답 : 1
+*/
+
 int N, M;
 vector<int> dt;
 
