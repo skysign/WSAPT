@@ -1,7 +1,18 @@
 ﻿#include <iostream>
 #include <vector>
 using namespace std;
-
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 2003번 수들의 합 2
+ *
+ * 유튜브 문제 풀이: https://youtu.be/ZzBgcF67mgg
+ *
+ * 문제링크: https://www.acmicpc.net/problem/2003
+ *
+ * CPP소스: https://bit.ly/3eSN23F
+ */
 /*
 반례
 9 5
