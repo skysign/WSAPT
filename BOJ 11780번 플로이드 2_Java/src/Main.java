@@ -1,3 +1,16 @@
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 11780번 플로이드 2
+ *
+ * 유튜브 문제 풀이: https://youtu.be/Mnxwu2mIZWI
+ *
+ * 문제링크: https://www.acmicpc.net/problem/11780
+ *
+ * 자바소스: https://bit.ly/2TfdJsb
+ */
+
 import java.io.*;
 import java.util.ArrayList;
 
