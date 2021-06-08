@@ -1,8 +1,18 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
+
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 11779번 최소비용 구하기 2
+ *
+ * 유튜브 문제 풀이: httpshttps://youtu.be/Hxo5YSPi2UA
+ *
+ * 문제링크: https://www.acmicpc.net/problem/11779
+ *
+ * 자바소스: https://bit.ly/3pAnjC6
+ */
 
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -11,7 +21,7 @@ public class Main {
     int N, M, FR, TO;
     long[] dst;
     String[] strs;
-    PriorityQueue[] alEdge;
+    ArrayList[] alEdge;
     ArrayList[] alPath;
     PriorityQueue<Long[]> pq;
     boolean[] visited;
@@ -20,7 +30,7 @@ public class Main {
         N = Integer.parseInt(br.readLine());
         M = Integer.parseInt(br.readLine());
 
-        alEdge = new PriorityQueue[N+1];
+        alEdge = new ArrayList[N+1];
         alPath = new ArrayList[N+1];
         for (int i=1; i<N+1; ++i) {
             alPath[i] = new ArrayList<Long>();
@@ -45,12 +55,7 @@ public class Main {
             Long v  = Long.parseLong(strs[2]);
 
             if (alEdge[fr.intValue()] == null)
-                alEdge[fr.intValue()] = new PriorityQueue<Long[]>(new Comparator<Long[]>() {
-                    @Override
-                    public int compare(Long[] o1, Long[] o2) {
-                        return  o1[1].compareTo(o2[1]);
-                    }
-                });
+                alEdge[fr.intValue()] = new ArrayList<Long[]>();
 
             alEdge[fr.intValue()].add(new Long[]{to, v});
         }
@@ -70,6 +75,13 @@ public class Main {
             if (alEdge[fr.intValue()] == null)
                 continue;
 
+            Collections.sort(alEdge[fr.intValue()], new Comparator<Long[]>() {
+                @Override
+                public int compare(Long[] o1, Long[] o2) {
+                    return  o1[1].compareTo(o2[1]);
+                }
+            });
+            
             for (Object o: alEdge[fr.intValue()]) {
                 Long[] to2 = (Long[])o;
                 Long to = to2[0];
