@@ -1,3 +1,16 @@
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 1021번 회전하는 큐
+ *
+ * 유튜브 문제 풀이: https://youtu.be/eAPgB7UXBbA
+ *
+ * 문제링크: https://www.acmicpc.net/problem/1021
+ *
+ * 자바소스: https://bit.ly/37Zfjm5
+ */
+
 import java.io.*;
 import java.util.ArrayList;
 
