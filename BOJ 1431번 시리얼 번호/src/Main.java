@@ -1,3 +1,15 @@
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 1431번 시리얼 번호
+ *
+ * 유튜브 문제 풀이: https://youtu.be/2K_nlEraMRQ
+ *
+ * 문제링크: https://www.acmicpc.net/problem/1431
+ *
+ * 자바소스: https://bit.ly/3kiihHQ
+ */
 import java.io.*;
 
 public class Main {
