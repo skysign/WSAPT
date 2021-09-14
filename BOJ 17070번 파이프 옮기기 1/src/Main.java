@@ -1,3 +1,14 @@
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 17070번 파이프 옮기기 1
+ *
+ * 유튜브 문제 풀이: https://youtu.be/tTclXbQbJTA
+ *
+ * 자바소스: https://bit.ly/3tDJUjd
+ */
+
 import java.io.*;
 
 public class Main {
