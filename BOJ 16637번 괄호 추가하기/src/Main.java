@@ -8,7 +8,7 @@
  *
  * 문제링크: https://www.acmicpc.net/problem/16637
  *
- * 자바소스:
+ * 자바소스: https://bit.ly/3iPPdYi
  */
 import java.io.*;
 import java.util.ArrayList;
