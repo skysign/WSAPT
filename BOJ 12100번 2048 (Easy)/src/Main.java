@@ -1,3 +1,15 @@
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 12100번 2048 (Easy)
+ *
+ * 유튜브 문제 풀이: https://youtu.be/gniZkicBGkA
+ *
+ * 문제링크: https://www.acmicpc.net/problem/12100
+ *
+ * 자바소스: https://bit.ly/3qT9p0x
+ */
 import java.io.*;
 import java.util.ArrayList;
 
