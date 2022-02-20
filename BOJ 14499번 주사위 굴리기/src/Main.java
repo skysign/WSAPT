@@ -7,7 +7,7 @@ import java.util.Arrays;
  *
  * BOJ 14499번 주사위 굴리기
  *
- * 유튜브 문제 풀이: https://youtu.be/GVdO6R3-kVA
+ * 유튜브 문제 풀이: https://youtu.be/SCHyY_OcUhE
  *
  * 문제링크: https://www.acmicpc.net/problem/14499
  *
