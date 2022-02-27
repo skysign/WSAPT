@@ -1,6 +1,17 @@
 import java.io.*;
 import java.util.Arrays;
-
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 14500번 테트로미노
+ *
+ * 유튜브 문제 풀이: https://youtu.be/zSWlY-4j9P8
+ *
+ * 문제링크: https://www.acmicpc.net/problem/14500
+ *
+ * 자바소스: https://bit.ly/3IuHw4W
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
