@@ -10,7 +10,7 @@ import java.util.*;
  * 자바소스 : https://bit.ly/36jKDuD
  */
 public class Main {
-    HashMap<Integer, Vertex<Integer>> mapVertex;
+    public HashMap<Integer, Vertex<Integer>> mapVertex;
     int nNode;
     int[] parents;
 
