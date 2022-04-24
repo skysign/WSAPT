@@ -10,7 +10,7 @@ import java.io.*;
  *
  * 문제링크: https://www.acmicpc.net/problem/14889
  *
- * 자바소스: https://bit.ly/39F4Zkp
+ * 자바소스: https://bit.ly/3MqiW6O
  */
 
 public class Main {
