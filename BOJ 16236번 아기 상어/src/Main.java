@@ -4,6 +4,19 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 16236번 아기 상어
+ *
+ * 유튜브 문제 풀이: https://youtu.be/86NLR0ZuIWc
+ *
+ * 문제링크: https://www.acmicpc.net/problem/16236
+ *
+ * 자바소스: https://bit.ly/3kaTNAU
+ */
+
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
