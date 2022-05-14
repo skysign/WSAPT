@@ -2,6 +2,19 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 14890번 경사로
+ *
+ * 유튜브 문제 풀이: https://youtu.be/Yud31Us7-1E
+ *
+ * 문제링크: https://www.acmicpc.net/problem/14890
+ *
+ * 자바소스: https://bit.ly/3yFXJlx
+ */
+
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -9,8 +22,8 @@ public class Main {
 
     int N, L;
     int[][] map;
-    int[][] mapGyungsa;   // 경사로가 배치된 위치, 첫번째 배치된 경사로는 1로 표시, 두번째 배치된 경사로는 2로 표시
-    int[][] mapScore;   // 경사로가 배치되어서, 서로 높이가 다른 지점이 연결가능한지 판정하는대 사용함
+    int[][] mapGyungsa;
+    int[][] mapScore;
     ArrayList<int[][]> alGyungsa = new ArrayList<>();
 
     int[][] gyungH0;
@@ -65,11 +78,6 @@ public class Main {
                 gyungV1[i][0] = 1;
             }
         }
-
-//      gyungH0[0][1] = 1;
-//      gyungV0[1][0] = 1;
-//      gyungH1[0][L - 1] = 1;
-//      gyungV1[L - 1][0] = 1;
 
         int r = 0;  // 길의 수
 
@@ -136,16 +144,6 @@ public class Main {
             }
         }
 
-//        for (int j = 1; j < N; ++j) {
-//            if (map[i][j] != map[i][j + 1]) {
-//                boolean b1 = (map[i][j] + mapScore[i][j]) != map[i][j + 1];
-//                boolean b2 = map[i][j] != (map[i][j + 1] + mapScore[i][j + 1]);
-//
-//                if (b1 == b2)
-//                    return false;
-//            }
-//        }
-
         return true;
     }
 
@@ -169,28 +167,6 @@ public class Main {
 
             }
         }
-
-//        int j = x;
-//        int y = 1;
-//
-//        if ((map[y][j] + mapScore[y][j]) != map[y + 1][j])
-//            return false;
-//
-//        for (int i = 2; i < N; ++i) {
-//            if (map[i][j] != map[i + 1][j]) {
-//                if (map[i][j] > map[i + 1][j]) {
-//                    if ((map[i][j] + mapScore[i][j]) != map[i + 1][j])
-//                        return false;
-//                } else { // map[i][j] < map[i + 1][j]
-//                    if (map[i][j] != (map[i + 1][j] + mapScore[i + 1][j]))
-//                        return false;
-//                }
-//            }
-//        }
-//
-//        y = N-1;
-//        if (map[y][j] != (map[y + 1][j] + mapScore[y + 1][j]))
-//            return false;
 
         return true;
     }
