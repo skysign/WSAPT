@@ -1,5 +1,19 @@
 import java.io.*;
 
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 14499번 최단경로
+ *
+ * 유튜브 문제 풀이: https://youtu.be/VoZuHNw24tw
+ * 유튜브 문제 풀이: https://youtu.be/KDIm_wALXQA
+ *
+ * 문제링크: https://www.acmicpc.net/problem/15684
+ *
+ * 자바소스: https://bit.ly/3PMIQUK
+ */
+
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
