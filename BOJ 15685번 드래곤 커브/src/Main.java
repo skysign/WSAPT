@@ -1,3 +1,15 @@
+/**
+ * 스터디에서 알고리즘 문제 함께 풀어보실 분들
+ * 여기로 → https://wsapt.github.io/public/
+ *
+ * BOJ 15685번 드래곤 커브
+ *
+ * 유튜브 문제 풀이: https://youtu.be/xffCSb2Qh3k
+ *
+ * 문제링크: https://www.acmicpc.net/problem/15685
+ *
+ * 자바소스: https://bit.ly/3PbtHvD
+ */
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Stack;
