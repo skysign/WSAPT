@@ -1,11 +1,11 @@
 /**
  * BOJ 16234번 인구 이동
  *
- * 유튜브 문제 풀이: https://youtu.be/nvxBhRf_OuE
+ * 유튜브 문제 풀이: https://youtu.be/d_W8nLUYT5o
  *
  * 문제링크: https://www.acmicpc.net/problem/16234
  *
- * 자바소스: https://youtu.be/d_W8nLUYT5o
+ * 자바소스: https://bit.ly/3RVTZ6Q
  */
 import java.io.*;
 import java.util.ArrayList;
