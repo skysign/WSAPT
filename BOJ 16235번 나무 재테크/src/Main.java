@@ -10,7 +10,7 @@ import java.util.Arrays;
  *
  * 문제링크: https://www.acmicpc.net/problem/16235
  *
- * 자바소스: https://bit.ly/39F4Zkp
+ * 자바소스: https://bit.ly/3Ji8D49
  */
 
 public class Main {
