@@ -1,3 +1,12 @@
+/**
+ * BOJ 17144번 미세먼지 안녕!
+ *
+ * 유튜브 문제 풀이: https://youtu.be/wJJ3nlrj9-4
+ *
+ * 문제링크: https://www.acmicpc.net/problem/17144
+ *
+ * 자바소스: https://bit.ly/3bIcriK
+ */
 import java.io.*;
 import java.util.Arrays;
 
@@ -42,8 +51,6 @@ public class Main {
                 }
             }
         }
-
-
 
         for (int t = 0; t < T; ++t) {
             hwaksan();
