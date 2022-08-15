@@ -1,3 +1,12 @@
+/**
+ * BOJ 17143번 낚시왕
+ *
+ * 유튜브 문제 풀이: https://youtu.be/bPDOPF21kMw
+ *
+ * 문제링크: https://www.acmicpc.net/problem/17143
+ *
+ * 자바소스: https://bit.ly/3PnU1BR
+ */
 import java.io.*;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -29,8 +38,6 @@ public class Main {
         fill2D(map, -1);
 
         al = new ArrayList<>();
-
-//        N = Integer.parseInt(br.readLine());
 
         for (int m = 0; m < M; ++m) {
             strs = br.readLine().split(" ");
