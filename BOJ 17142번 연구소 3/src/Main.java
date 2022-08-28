@@ -19,6 +19,8 @@ public class Main {
     int cntWall = 0;
     int ans = Integer.MAX_VALUE;
 
+    int cntSpread = 0;
+
     static int EMPTY = 0;
     static int WALL = 1;
     static int VIRUS = 2;
@@ -82,8 +84,10 @@ public class Main {
      * start : 시작값 0, 조합을 구하는 과정에서 rec로 호출되며 사용될 변수
      * selected : 시작값 0, 조합을 구하는 과정에서 rec로 호출되며 사용될 변수
      */
-    public void combination(int start, int selected, int N, int R) {
+    public void combination(int start, int selected, int N, int R) throws IOException {
         if (selected == R) {
+//            bw.write(String.valueOf(++cntSpread) + ']');
+//            bw.newLine();
             findMinSecondFromMap(selectedVirus);
             return;
         }
@@ -91,11 +95,11 @@ public class Main {
         for (int i = start; i < N; ++i) {
             selectedVirus[selected] = alVirus.get(i);
 
-            combination(start + 1, selected + 1, N, R);
+            combination(i + 1, selected + 1, N, R);
         }
     }
 
-    public void findMinSecondFromMap(int[][] virus) {
+    public void findMinSecondFromMap(int[][] virus) throws IOException {
         mapT = new int[N + 2][N + 2];
 
         LinkedList<int[]> toVisit = new LinkedList<>();
@@ -113,10 +117,14 @@ public class Main {
     public int[][] ds = new int[][]{{-1, 0, 1, 0},
             {0, 1, 0, -1}};
 
-    public void floodFill(LinkedList<int[]> toVisit, int[][] mapT) {
+    public void floodFill(LinkedList<int[]> toVisit, int[][] mapT) throws IOException {
         int myCntEmpty = cntEmpty;
+        int cntVisit = 0;
 
         while (!toVisit.isEmpty()) {
+//            bw.write('[' + String.valueOf(++cntVisit) + ']');
+//            bw.newLine();
+
             int[] yxs = toVisit.poll();
             int sy = yxs[0];
             int sx = yxs[1];
