@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -15,12 +16,12 @@ public class Main {
     ArrayList<int[]> alVirus;
 
     int cntEmpty = 0;
+    int cntWall = 0;
     int ans = Integer.MAX_VALUE;
 
     static int EMPTY = 0;
     static int WALL = 1;
     static int VIRUS = 2;
-
 
     public void solve() throws IOException {
         strs = br.readLine().split(" ");
@@ -28,8 +29,16 @@ public class Main {
         M = Integer.parseInt(strs[1]);
 
         map = new int[N + 2][N + 2];
-        fill2D(map, WALL);
-        mapT = new int[N + 2][N + 2];
+//        fill2D(map, WALL);
+        for (int i = 0; i < N + 2; ++i) {
+            map[i][0] = WALL;
+            map[i][N + 1] = WALL;
+
+            map[0][i] = WALL;
+            map[N + 1][i] = WALL;
+        }
+
+
         alVirus = new ArrayList<>();
         selectedVirus = new int[M][2];
 //        alEmpty = new ArrayList<>();
@@ -40,13 +49,14 @@ public class Main {
             for (int j = 1; j <= N; ++j) {
                 int v = Integer.parseInt(strs[j - 1]);
 
+                map[i][j] = v;
+
                 if (v == EMPTY) {
-                    map[i][j] = v;
                     ++cntEmpty;
                 } else if (v == WALL) {
-                    map[i][j] = v;
+                    ++cntWall;
                 } else if (v == VIRUS) {
-                    alVirus.add(new int[]{i, j});
+                    alVirus.add(new int[]{i, j, 1});
                 }
             }
         }
@@ -74,85 +84,43 @@ public class Main {
      */
     public void combination(int start, int selected, int N, int R) {
         if (selected == R) {
-            findMinSecond();
+            findMinSecondFromMap(selectedVirus);
             return;
         }
 
         for (int i = start; i < N; ++i) {
-            selectedVirus[selected][0] = alVirus.get(i)[0];
-            selectedVirus[selected][1] = alVirus.get(i)[1];
+            selectedVirus[selected] = alVirus.get(i);
 
             combination(start + 1, selected + 1, N, R);
         }
     }
 
-    public void findMinSecond() {
-        int t = findMinSecondFromMap(selectedVirus);
+    public void findMinSecondFromMap(int[][] virus) {
+        mapT = new int[N + 2][N + 2];
 
-        if (t != -1) {
-            ans = Math.min(ans, t);
-        }
-    }
+        LinkedList<int[]> toVisit = new LinkedList<>();
 
-    public int findMinSecondFromMap(int[][] virus) {
-        copy2D(map, mapT);
-
+        // 선택된 바이러스는 MAX_VALUE로 표시함
+        // floodfill 에서 MAX_VALUE는 second값으로 덮어 쓰기 됨
         for (int[] syx : virus) {
-            int sy = syx[0];
-            int sx = syx[1];
-
-            floodFill(sy, sx, mapT);
+            toVisit.add(syx);
+            mapT[syx[0]][syx[1]] = 1;
         }
 
-        // 선택된 바이러스 인덱스
-//        bw.write('[');
-//        for (int m : al) {
-//            bw.write(String.valueOf(m));
-//            bw.write(' ');
-//        }
-//        bw.write(']');
-//        bw.newLine();
-//        bw.flush();
-
-        int minSecond = Integer.MIN_VALUE;
-
-        for (int i = 1; i <= N; ++i) {
-            for (int j = 1; j <= N; ++j) {
-                if (map[i][j] == 0) {
-                    int y = i;
-                    int x = j;
-
-                    int v = mapT[y][x];
-
-                    if (v == 0) {
-                        return -1;
-                    } else {
-                        minSecond = Math.max(minSecond, v);
-                    }
-                }
-            }
-        }
-
-        return minSecond;
+        floodFill(toVisit, mapT);
     }
 
     public int[][] ds = new int[][]{{-1, 0, 1, 0},
             {0, 1, 0, -1}};
 
-    private void floodFill(int y, int x, int[][] mapT) {
-        ArrayDeque<int[]> toVisit = new ArrayDeque<>();
-        int[] tmp = new int[]{y, x, 0};
-        toVisit.add(tmp);
+    public void floodFill(LinkedList<int[]> toVisit, int[][] mapT) {
+        int myCntEmpty = cntEmpty;
 
-        while (toVisit.size() > 0) {
-            int[] yx = toVisit.poll();
-            int sy = yx[0];
-            int sx = yx[1];
-            int second = yx[2];
-
-            mapT[sy][sx] = second;
-
-            ++second;
+        while (!toVisit.isEmpty()) {
+            int[] yxs = toVisit.poll();
+            int sy = yxs[0];
+            int sx = yxs[1];
+            int second = yxs[2];
 
             for (int idx = 0; idx < ds[0].length; ++idx) {
                 int dy = ds[0][idx];
@@ -161,31 +129,27 @@ public class Main {
                 int ty = sy + dy;
                 int tx = sx + dx;
 
-                if (map[ty][tx] == 0) {
-                    if (0 == mapT[ty][tx]) {
-                        toVisit.add(new int[]{ty, tx, second});
-                    } else if (second < mapT[ty][tx]) {
-                        toVisit.add(new int[]{ty, tx, second});
-                    }
+                if (0 < mapT[ty][tx]) {
+                    continue;
+                }
+
+                if (1 == map[ty][tx]) {
+                    continue;
+                }
+
+                mapT[ty][tx] = second + 1;
+                toVisit.add(new int[]{ty, tx, second + 1});
+
+                if (0 == map[ty][tx]) {
+                    --myCntEmpty;
+                }
+
+                if (myCntEmpty == 0) {
+                    this.ans = Math.min(this.ans, second);
+                    return;
                 }
             }
         }
-    }
-
-    public void fill2D(int[][] _2D, int v) {
-        for (int[] _1D : _2D) {
-            Arrays.fill(_1D, v);
-        }
-    }
-
-    public int[][] copy2D(int[][] src, int[][] dst) {
-        int N = src.length;
-
-        for (int i = 0; i < N; i++) {
-            System.arraycopy(src[i], 0, dst[i], 0, N);
-        }
-
-        return dst;
     }
 
     public static void main(String[] args) throws IOException {
