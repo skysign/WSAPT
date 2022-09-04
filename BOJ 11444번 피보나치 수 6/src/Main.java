@@ -1,3 +1,12 @@
+/**
+ * BOJ 11444번 피보나치 수 6
+ *
+ * 유튜브 문제 풀이: https://youtu.be/ZPB370V1PHk
+ *
+ * 문제링크: https://www.acmicpc.net/problem/11444
+ *
+ * 자바소스: https://bit.ly/3TCeRkp
+ */
 import java.io.*;
 import java.util.HashMap;
 
@@ -48,7 +57,6 @@ public class Main {
             long tf = (f1 * f1) + (f2 * f2);
             tf = tf % MOD;
 
-            tf = tf % MOD;
             hm.put(idx, tf);
 
             return tf;
