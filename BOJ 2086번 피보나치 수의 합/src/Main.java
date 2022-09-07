@@ -1,6 +1,14 @@
 import java.io.*;
 import java.util.HashMap;
-
+/**
+ * BOJ 2086번 피보나치 수의 합
+ *
+ * 유튜브 문제 풀이: https://youtu.be/_zezT5g_33Q
+ *
+ * 문제링크: https://www.acmicpc.net/problem/2086
+ *
+ * 자바소스: https://bit.ly/3qioRl8
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
