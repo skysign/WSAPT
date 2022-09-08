@@ -1,6 +1,14 @@
 import java.io.*;
 import java.util.Arrays;
-
+/**
+ * BOJ 17779번 게리맨더링 2
+ *
+ * 유튜브 문제 풀이: https://youtu.be/e65okXmqtv8
+ *
+ * 문제링크: https://www.acmicpc.net/problem/17779
+ *
+ * 자바소스: https://bit.ly/3TP4d9P
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
