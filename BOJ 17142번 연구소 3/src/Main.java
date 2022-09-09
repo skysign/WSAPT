@@ -1,7 +1,14 @@
+/**
+ * BOJ BOJ 17142번 연구소 3
+ *
+ * 유튜브 문제 풀이: https://youtu.be/lBOA8H5rUQ4
+ *
+ * 문제링크: https://www.acmicpc.net/problem/17142
+ *
+ * 자바소스: https://bit.ly/3Dcflb6
+ */
 import java.io.*;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Main {
@@ -19,8 +26,6 @@ public class Main {
     int cntWall = 0;
     int ans = Integer.MAX_VALUE;
 
-    int cntSpread = 0;
-
     static int EMPTY = 0;
     static int WALL = 1;
     static int VIRUS = 2;
@@ -31,7 +36,7 @@ public class Main {
         M = Integer.parseInt(strs[1]);
 
         map = new int[N + 2][N + 2];
-//        fill2D(map, WALL);
+
         for (int i = 0; i < N + 2; ++i) {
             map[i][0] = WALL;
             map[i][N + 1] = WALL;
@@ -43,7 +48,6 @@ public class Main {
 
         alVirus = new ArrayList<>();
         selectedVirus = new int[M][2];
-//        alEmpty = new ArrayList<>();
 
         for (int i = 1; i <= N; ++i) {
             strs = br.readLine().split(" ");
@@ -86,8 +90,6 @@ public class Main {
      */
     public void combination(int start, int selected, int N, int R) throws IOException {
         if (selected == R) {
-//            bw.write(String.valueOf(++cntSpread) + ']');
-//            bw.newLine();
             findMinSecondFromMap(selectedVirus);
             return;
         }
@@ -104,8 +106,6 @@ public class Main {
 
         LinkedList<int[]> toVisit = new LinkedList<>();
 
-        // 선택된 바이러스는 MAX_VALUE로 표시함
-        // floodfill 에서 MAX_VALUE는 second값으로 덮어 쓰기 됨
         for (int[] syx : virus) {
             toVisit.add(syx);
             mapT[syx[0]][syx[1]] = 1;
@@ -119,12 +119,8 @@ public class Main {
 
     public void floodFill(LinkedList<int[]> toVisit, int[][] mapT) throws IOException {
         int myCntEmpty = cntEmpty;
-        int cntVisit = 0;
 
         while (!toVisit.isEmpty()) {
-//            bw.write('[' + String.valueOf(++cntVisit) + ']');
-//            bw.newLine();
-
             int[] yxs = toVisit.poll();
             int sy = yxs[0];
             int sx = yxs[1];
