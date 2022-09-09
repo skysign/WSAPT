@@ -1,6 +1,16 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * BOJ 17140번 이차원 배열과 연산
+ *
+ * 유튜브 문제 풀이: https://youtu.be/FDtnxIqg5Fs
+ *
+ * 문제링크: https://www.acmicpc.net/problem/17140
+ *
+ * 자바소스: https://bit.ly/3RRk7yQ
+ */
+
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,17 +40,14 @@ public class Main {
             }
         }
 
-        int ans = -1;
+        for (int t = 0; t <= 100; ++t) {
+            if (map[ansR][ansC] == K) {
+                bw.write(String.valueOf(t));
+                bw.newLine();
+                bw.close();
+                System.exit(0);
+            }
 
-        // R, C 연산을 하지 않아도, 되는 경우
-        if (map[ansR][ansC] == K) {
-            bw.write(String.valueOf(0));
-            bw.newLine();
-            bw.close();
-            System.exit(0);
-        }
-
-        for (int t = 1; t <= 100; ++t) {
             // R 연산
             if (R >= C) {
                 hm = new HashMap[R];
@@ -170,16 +177,9 @@ public class Main {
                     }
                 }
             }
-
-            if (map[ansR][ansC] == K) {
-                bw.write(String.valueOf(t));
-                bw.newLine();
-                bw.close();
-                System.exit(0);
-            }
         }
 
-        bw.write(String.valueOf(ans));
+        bw.write(String.valueOf(-1));
         bw.newLine();
         bw.close();
     }
