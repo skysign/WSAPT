@@ -1,3 +1,12 @@
+/**
+ * BOJ 17837번 새로운 게임 2
+ *
+ * 유튜브 문제 풀이: https://youtu.be/d3ozTN-lP1Y
+ *
+ * 문제링크: https://www.acmicpc.net/problem/17837
+ *
+ * 자바소스: https://bit.ly/3DcUMvd
+ */
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,7 +143,6 @@ public class Main {
                         System.exit(0);
                     }
                 }
-                // RED
                 else {
                     Stack<Integer> stk = new Stack<>();
 
