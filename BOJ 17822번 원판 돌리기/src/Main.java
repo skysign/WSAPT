@@ -6,6 +6,16 @@ public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+    /**
+     * BOJ 17822번 원판 돌리기
+     *
+     * 유튜브 문제 풀이: https://youtu.be/4GzSWjRfDOE
+     *
+     * 문제링크: https://www.acmicpc.net/problem/17822
+     *
+     * 자바소스: https://bit.ly/3QQtOg9
+     */
+
     int N, M, T;
     AtomicInteger[][] map;
     int[] xt, dt, kt;
@@ -18,10 +28,6 @@ public class Main {
             {0, -1}, // ←
             {0, 1}   // →
     };
-
-    int[] v0123 = new int[]{0, 1, 2, 3}; // r
-    int[] v123 = new int[]{1, 2, 3};     // r -1
-    int[] v023 = new int[]{0, 2, 3};     // r +1
 
     ArrayList<AtomicInteger> alRemove;
     String[] strs;
@@ -55,7 +61,6 @@ public class Main {
             dt[t] = Integer.parseInt(strs[1]);
             kt[t] = Integer.parseInt(strs[2]);
         }
-
 
         for (int t = 0; t < T; ++t) {
             for (int n = 1; n <= N; ++n) {
