@@ -264,83 +264,83 @@ public class Main {
     }
 
     public void printMap(String msg) {
-//        try {
-//            bw.write(msg);
-//            bw.newLine();
-//
-//            for (int r = 1; r < map.length - 1; ++r) {
-//                for (int c = 1; c < map[0].length - 1; ++c) {
-//                    int dir = map[r][c].mDir;
-//
-//                    if (map[r][c].mDead == 1) {
-//                        if (r == shark.mR && c == shark.mC) {
-//                            dir = shark.mDir;
-//                            bw.write("*S");
-//                        }
-//                        else {
-//                            dir = 0;
-//                            bw.write("[E");
-//                        }
-//                    } else {
-//                        String str = String.format("%2d", map[r][c].mNum);
-//                        bw.write(str);
-//                    }
-//
-//                    bw.write(String.valueOf(' '));
-//
-////                    ↑, ↖, ←, ↙, ↓, ↘, →, ↗
-////                    1   2   3   4   5   6   7   8
-//                    switch (dir) {
-//                        case 1:
-//                            bw.write(String.valueOf('↑'));
-//                            break;
-//                        case 2:
-//                            bw.write(String.valueOf('↖'));
-//                            break;
-//                        case 3:
-//                            bw.write(String.valueOf('←'));
-//                            break;
-//                        case 4:
-//                            bw.write(String.valueOf('↙'));
-//                            break;
-//                        case 5:
-//                            bw.write(String.valueOf('↓'));
-//                            break;
-//                        case 6:
-//                            bw.write(String.valueOf('↘'));
-//                            break;
-//                        case 7:
-//                            bw.write(String.valueOf('→'));
-//                            break;
-//                        case 8:
-//                            bw.write(String.valueOf('↗'));
-//                            break;
-//                        default:
-//                            bw.write(String.valueOf(' '));
-//                            break;
-//                    }
-//
-//                    if (map[r][c].mDead == 1) {
-//                        if (r == shark.mR && c == shark.mC) {
-//                            bw.write(String.valueOf(dir));
-//                        }
-//                        else {
-//                            bw.write(" ]");
-//                        }
-//                    } else {
-//                        bw.write(String.valueOf(dir));
-//                    }
-//                    bw.write("  ");
-//                }
-//
-//                bw.newLine();
-//            }
-//
-//            bw.newLine();
-//            bw.flush();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            bw.write(msg);
+            bw.newLine();
+
+            for (int r = 1; r < map.length - 1; ++r) {
+                for (int c = 1; c < map[0].length - 1; ++c) {
+                    int dir = map[r][c].mDir;
+
+                    if (map[r][c].mDead == 1) {
+                        if (r == shark.mR && c == shark.mC) {
+                            dir = shark.mDir;
+                            bw.write("*S");
+                        }
+                        else {
+                            dir = 0;
+                            bw.write("[E");
+                        }
+                    } else {
+                        String str = String.format("%2d", map[r][c].mNum);
+                        bw.write(str);
+                    }
+
+                    bw.write(String.valueOf(' '));
+
+//                    ↑, ↖, ←, ↙, ↓, ↘, →, ↗
+//                    1   2   3   4   5   6   7   8
+                    switch (dir) {
+                        case 1:
+                            bw.write(String.valueOf('↑'));
+                            break;
+                        case 2:
+                            bw.write(String.valueOf('↖'));
+                            break;
+                        case 3:
+                            bw.write(String.valueOf('←'));
+                            break;
+                        case 4:
+                            bw.write(String.valueOf('↙'));
+                            break;
+                        case 5:
+                            bw.write(String.valueOf('↓'));
+                            break;
+                        case 6:
+                            bw.write(String.valueOf('↘'));
+                            break;
+                        case 7:
+                            bw.write(String.valueOf('→'));
+                            break;
+                        case 8:
+                            bw.write(String.valueOf('↗'));
+                            break;
+                        default:
+                            bw.write(String.valueOf(' '));
+                            break;
+                    }
+
+                    if (map[r][c].mDead == 1) {
+                        if (r == shark.mR && c == shark.mC) {
+                            bw.write(String.valueOf(dir));
+                        }
+                        else {
+                            bw.write(" ]");
+                        }
+                    } else {
+                        bw.write(String.valueOf(dir));
+                    }
+                    bw.write("  ");
+                }
+
+                bw.newLine();
+            }
+
+            bw.newLine();
+            bw.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) throws IOException {
