@@ -1,6 +1,16 @@
 import java.io.*;
 import java.util.HashMap;
 
+/**
+ * BOJ 19237번 어른 상어
+ *
+ * 유튜브 문제 풀이: https://youtu.be/iRfjDgcPPAo
+ *
+ * 문제링크: https://www.acmicpc.net/problem/19237
+ *
+ * 자바소스: https://bit.ly/3D3yVpz
+ */
+
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
