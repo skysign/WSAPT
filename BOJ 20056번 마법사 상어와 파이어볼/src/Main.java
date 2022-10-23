@@ -4,6 +4,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Stack;
 
+/**
+ * BOJ 20056번 마법사 상어와 파이어볼
+ *
+ * 유튜브 문제 풀이: https://youtu.be/g2B-rKwaVUQ
+ *
+ * 문제링크: https://www.acmicpc.net/problem/20056
+ *
+ * 자바소스: https://bit.ly/3W3Rlho
+ */
+
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
