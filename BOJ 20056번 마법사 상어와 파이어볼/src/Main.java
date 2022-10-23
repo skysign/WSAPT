@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Stack;
 
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -10,20 +11,13 @@ public class Main {
     int N, M, K;
     String[] strs;
 
-    static int UP = 0;
-    static int UR = 1;
-    static int RT = 2;
-    static int DR = 3;
-    static int DN = 4;
-    static int DL = 5;
-    static int LT = 6;
-    static int UL = 7;
-
     static int _M = 2;
     static int _S = 3;
     static int _D = 4;
     static int _NUM = 5;
 
+    //    ↑ ↗ → ↘ ↓ ↙ ← ↖
+    //    0  1  2  3  4  5  6  7
     int[][] dRC = new int[][]{
             {-1, 0},
             {-1, 1},
@@ -44,6 +38,22 @@ public class Main {
 
     HashMap<Integer, int[]> hmFireBalls = new HashMap<>();
     HashMap<Integer, HashMap<Integer, ArrayList<Integer>>> mapRows = new HashMap<>();
+
+    Stack<HashMap<Integer, ArrayList<Integer>>> stkCols = new Stack<>();
+    public HashMap<Integer, ArrayList<Integer>> getCols() {
+        if (stkCols.size() > 0)
+            return stkCols.pop();
+
+        return new HashMap<Integer, ArrayList<Integer>>();
+    }
+    Stack<ArrayList<Integer>> stkRowCol = new Stack<>();
+    public ArrayList<Integer> getRowCol() {
+        if (stkRowCol.size() > 0)
+            return stkRowCol.pop();
+
+        return new ArrayList<Integer>();
+    }
+
     HashMap<Integer, Integer> hmEvenOdd = new HashMap<Integer, Integer>();
 
     public void solve() throws Exception {
@@ -93,14 +103,12 @@ public class Main {
 
     public void mergeFireBall() {
         Object[] keysRow = mapRows.keySet().toArray();
-        Arrays.sort(keysRow);
 
         for (Object _keyRow : keysRow) {
             int keyRow = (int) _keyRow;
             HashMap<Integer, ArrayList<Integer>> mapCols = mapRows.get(keyRow);
 
             Object[] keysCol = mapCols.keySet().toArray();
-            Arrays.sort(keysCol);
 
             for (Object _keyCol : keysCol) {
                 int keyCol = (int) _keyCol;
@@ -111,7 +119,13 @@ public class Main {
                 }
 
                 mapRowCol.clear();
+                stkRowCol.push(mapRowCol);
                 mapCols.remove(keyCol);
+            }
+
+            if (mapCols.size() == 0) {
+                stkCols.push(mapCols);
+                mapRows.remove(keyRow);
             }
         }
     }
@@ -166,11 +180,8 @@ public class Main {
         }
     }
 
-    //    ↑ ↗ → ↘ ↓ ↙ ← ↖
-//    0  1  2  3  4  5  6  7
     public void moveFireBall() throws Exception {
         Object[] keys = hmFireBalls.keySet().toArray();
-        Arrays.sort(keys);
 
         for (Object _key : keys) {
             int key = (int) _key;
@@ -179,7 +190,7 @@ public class Main {
             // r, c, m, s, d
             int sr = fb[0];
             int sc = fb[1];
-            int m = fb[2];
+//            int m = fb[2];
             int s = fb[3];
             int d = fb[4];
 
@@ -208,18 +219,6 @@ public class Main {
             fb[0] = dstR;
             fb[1] = dstC;
 
-//            if (!((0 < dstR) && (dstR <= N))) {
-////                throw new Exception("out of map");
-//                hmFireBalls.remove(key);
-//                continue;
-//            }
-//
-//            if (!((0 < dstC) && (dstC <= N))) {
-////                throw new Exception("out of map");
-//                hmFireBalls.remove(key);
-//                continue;
-//            }
-
             moveToRC(fb);
         }
     }
@@ -229,12 +228,12 @@ public class Main {
         int c = fb[1];
 
         if (mapRows.containsKey(r) == false) {
-            mapRows.put(r, new HashMap<Integer, ArrayList<Integer>>());
+            mapRows.put(r, getCols());
         }
 
         HashMap<Integer, ArrayList<Integer>> mapCols = mapRows.get(r);
         if (mapCols.containsKey(c) == false) {
-            mapCols.put(c, new ArrayList<Integer>());
+            mapCols.put(c, getRowCol());
         }
 
         ArrayList<Integer> mapRowCol = mapCols.get(c);
