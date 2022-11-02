@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -11,23 +8,20 @@ public class Main {
     int N, M;
     int[][] mapSeq;
     int[][] mapTmp;
+    int[][] map;
 
-    Bead[][] map;
     int ans = 0;
     String[] strs;
 
-    class Bead {
-        public int n;
-
-        public Bead(int num) {
-            n = num;
-        }
-    }
-
-    Bead nullBead = new Bead(0);
     ArrayList<int[]> alMagics = new ArrayList<>();
-    HashMap<Integer, Bead> hm = new HashMap<>();
-    HashMap<Integer, int[]> hmSeqRC = new HashMap<>();
+    LinkedList<Integer> llBeads = new LinkedList<>();
+    int cntBead = 0;
+    ArrayList<ArrayList<Integer>> alGroups = new ArrayList<>();
+
+    int[][] SeqRC;
+    int cR;
+    int cC;
+    int maxNumBead;
 
     Stack<Integer> stkTmp = new Stack<>();
 
@@ -37,12 +31,13 @@ public class Main {
         M = Integer.parseInt(strs[1]);
         mapSeq = new int[N][N];
         mapTmp = new int[N][N];
-        map = new Bead[N][N];
+        map = new int[N][N];
 
-        int cr = N / 2;
-        int cc = N / 2;
+        SeqRC = new int[N * N][2];
+        maxNumBead = N * N - 1;
 
-        drawBangle(mapSeq);
+        cR = N / 2;
+        cC = N / 2;
 
         for (int r = 0; r < N; ++r) {
             strs = br.readLine().split(" ");
@@ -51,11 +46,7 @@ public class Main {
                 int v = Integer.parseInt(strs[c]);
 
                 if (v != 0) {
-                    int seq = mapSeq[r][c];
-                    Bead bead = new Bead(v);
-                    hm.put(seq, bead);
-                    map[r][c] = bead;
-                    mapTmp[r][c] = bead.n;
+                    map[r][c] = v;
                 }
             }
         }
@@ -68,88 +59,38 @@ public class Main {
             });
         }
 
-        for (int[] magic : alMagics) {
-            int dir = magic[0];
-            int len = magic[1];
+        // 상어에서 부터 시작해서, 칸의 번호 만들기
+        drawBangle(mapSeq);
 
-            // 블리자드 마법 시전
-            for (int l = 1; l <= len; ++l) {
-                int nr = cr + dRC[dir][0] * l;
-                int nc = cc + dRC[dir][1] * l;
+        // 칸의 번호에 따라서, 구슬 저장하기
+        for (int num = 1; num < SeqRC.length; ++num) {
+            int r = SeqRC[num][0];
+            int c = SeqRC[num][1];
 
-                int seq = mapSeq[nr][nc];
-                hm.remove(seq);
+            if (map[r][c] != 0) {
+                llBeads.add(map[r][c]);
+                ++cntBead;
             }
+        }
 
-            printhm("Before no explosion\n");
+        for (int[] magic : alMagics) {
+            // 블리자드 마법
+            printhm("Before blizzardMagic");
+
+            blizzardMagic(magic);
+
+            printhm("After blizzardMagic");
 
             // 4개 이상 연속하는 구슬 폭발
-            boolean bExploed = explodeBeads();
-            printhm("");
+            explodeBeads();
 
-            while (bExploed) {
-                bExploed = explodeBeads();
-                printhm("");
-            }
+            // 구슬이 변화하는 단계
+            convertBeads();
 
+            printhm("After");
 
-            // 구슬이 변화하는 단계가 된다.
-            HashMap<Integer, Bead> hmTmp = new HashMap<>();
-
-            Integer[] keys = hm.keySet().toArray(new Integer[hm.size()]);
-            Arrays.sort(keys);
-
-            for (int key : keys) {
-                if (stkTmp.size() == 0) {
-                    int n = hm.get(key).n;
-                    stkTmp.push(n);
-                } else {
-                    int lastNum = stkTmp.peek();
-                    int crntNum = hm.get(key).n;
-
-                    if (crntNum == lastNum) {
-                        stkTmp.push(lastNum);
-                    } else {
-                        int newkey = 1 + hmTmp.size();
-                        hmTmp.put(newkey, new Bead(stkTmp.size()));
-                        hmTmp.put(newkey + 1, new Bead(stkTmp.peek()));
-                        stkTmp.clear();
-                        stkTmp.push(crntNum);
-                    }
-                }
-            }
-
-            if (stkTmp.size() > 0) {
-                int newkey = 1 + hmTmp.size();
-                hmTmp.put(newkey, new Bead(stkTmp.size()));
-                hmTmp.put(newkey + 1, new Bead(stkTmp.peek()));
-                stkTmp.clear();
-            }
-
-            hm.clear();
-            hm = hmTmp;
-
-            // 변한 구슬을 map에 이동 시킬 차례
-            fill2D(mapTmp, -1);
-
-            keys = hm.keySet().toArray(new Integer[hm.size()]);
-            Arrays.sort(keys);
-
-            for (int seq : keys) {
-                if (seq >= (N*N-1))
-                    break;
-                int[] rc = hmSeqRC.get(seq);
-                map[rc[0]][rc[1]] = hm.get(seq);
-                mapTmp[rc[0]][rc[1]] = hm.get(seq).n;
-            }
-
-            for (int seq = keys.length + 1; seq <= (N * N - 1); ++seq) {
-                if (seq >= (N*N-1))
-                    break;
-                int[] rc = hmSeqRC.get(seq);
-                map[rc[0]][rc[1]] = nullBead;
-                mapTmp[rc[0]][rc[1]] = 0;
-            }
+            // 구슬을 다시 상어 왼쪽 칸을 1번으로 배치 하는 단계
+            placeBeads();
         }
 
         bw.write(String.valueOf(ans));
@@ -157,55 +98,130 @@ public class Main {
         bw.close();
     }
 
-    public boolean explodeBeads() {
+    private void placeBeads() {
+        // cntBead 는 N * N - 1 보다 작거나 같음
+        ListIterator<Integer> ll = llBeads.listIterator();
+
+        for (int idx = 1; idx <= cntBead; ++idx) {
+            int r = SeqRC[idx][0];
+            int c = SeqRC[idx][1];
+            map[r][c] = ll.next();
+        }
+
+        for (int idx = cntBead; idx <= maxNumBead; ++idx) {
+            int r = SeqRC[idx][0];
+            int c = SeqRC[idx][1];
+            map[r][c] = 0;
+        }
+    }
+
+    private void convertBeads() {
+        llBeads.clear();
+        cntBead = 0;
+
+        // numBead는 짝수임
+        //   maxNumBead <- 홀수 * 홀수 -1
+        int numBead = Math.min(maxNumBead, alGroups.size() * 2);
+        int maxIdx = numBead / 2;
+
+        for (int idxGroup = 0; idxGroup < maxIdx; ++idxGroup) {
+            ArrayList<Integer> group = alGroups.get(idxGroup);
+            llBeads.add(group.size());
+            llBeads.add(group.get(0));
+            cntBead += 2;
+            group.clear();
+        }
+    }
+
+    private void blizzardMagic(int[] magic) {
+        int dir = magic[0];
+        int len = magic[1];
+
         stkTmp.clear();
 
-        Integer[] keys = hm.keySet().toArray(new Integer[hm.size()]);
-        Arrays.sort(keys);
+        // 블리자드 마법 시전
+        for (int l = 1; l <= len; ++l) {
+            int nr = cR + dRC[dir][0] * l;
+            int nc = cC + dRC[dir][1] * l;
 
-        for (int key : keys) {
-            if (stkTmp.size() == 0) {
-                stkTmp.push(key);
+            int seq = mapSeq[nr][nc];
+            stkTmp.push(seq);
+        }
+
+        while (!stkTmp.isEmpty()) {
+            int cnt = stkTmp.pop();
+            if (cnt <= llBeads.size()) {
+                llBeads.remove(cnt - 1);
+            }
+        }
+    }
+
+    public void explodeBeads() throws IOException {
+        int numExplosion = 1;
+
+        while (numExplosion > 0) {
+            makeGroups();
+            numExplosion = explodeGroups();
+            flattenGroups();
+        }
+    }
+
+    private void makeGroups() {
+        ListIterator<Integer> ll = llBeads.listIterator();
+        ArrayList<Integer> alCrntGroup = null;
+
+        alGroups.clear();
+
+        while (ll.hasNext()) {
+            int bead = ll.next();
+
+            if (alGroups.size() == 0) {
+                alCrntGroup = new ArrayList<>();
+                alGroups.add(alCrntGroup);
+                alCrntGroup.add(bead);
+                continue;
+            }
+
+            int groupBead = alCrntGroup.get(0);
+
+            if (bead == groupBead) {
+                alCrntGroup.add(bead);
             } else {
-                int lastKey = stkTmp.peek();
+                alCrntGroup = new ArrayList<>();
+                alGroups.add(alCrntGroup);
+                alCrntGroup.add(bead);
+            }
+        }
+    }
 
-                if (hm.get(key).n == hm.get(lastKey).n) {
-                    stkTmp.push(key);
-                } else {
-                    if (stkTmp.size() >= 4) {
-                        int num = hm.get(lastKey).n;
-                        ans += (num * stkTmp.size());
+    private int explodeGroups() {
+        int rtn = 0;
 
-                        while (!stkTmp.isEmpty()) {
-                            int k = stkTmp.pop();
-                            hm.remove(k);
-                        }
+        Stack<ArrayList<Integer>> stk = new Stack<>();
 
-                        return true;
-                    }
-
-                    stkTmp.clear();
-                    stkTmp.add(key);
-                }
+        for (ArrayList<Integer> group : alGroups) {
+            if (group.size() >= 4) {
+                ans += group.get(0) * group.size();
+                stk.push(group);
+                ++rtn;
             }
         }
 
-        // stkTmp에 남아 있는 구슬도 폭발 가능한지 확인
-        if (stkTmp.size() >= 4) {
-            int num = hm.get(stkTmp.peek()).n;
-            ans += (num * stkTmp.size());
-
-            while (!stkTmp.isEmpty()) {
-                int k = stkTmp.pop();
-                hm.remove(k);
-            }
-
-            return true;
+        while(!stk.isEmpty()) {
+            alGroups.remove(stk.pop());
         }
 
-        stkTmp.clear();
+        return rtn;
+    }
 
-        return false;
+    private void flattenGroups() {
+        llBeads.clear();
+
+        for (ArrayList<Integer> group : alGroups) {
+            for (int bead : group) {
+                llBeads.add(bead);
+            }
+        }
     }
 
     // ↑, ↓, ←, →
@@ -232,7 +248,7 @@ public class Main {
         c = c + dRC[dir][1];
         ++num;
         map[r][c] = num;
-        hmSeqRC.put(num, new int[]{r, c});
+        SeqRC[num] = new int[]{r, c};
 
         while ((0 <= r) && (r < N) && (0 <= c) && (c < N)) {
             int dirTurnLeft = turnLeft[dir];
@@ -252,7 +268,7 @@ public class Main {
             ++num;
             if (num < N * N) {
                 map[r][c] = num;
-                hmSeqRC.put(num, new int[]{r, c});
+                SeqRC[num] = new int[]{r, c};
             }
         }
     }
@@ -264,17 +280,18 @@ public class Main {
     }
 
     public void printhm(String s) throws IOException {
-//        Integer[] keys = hm.keySet().toArray(new Integer[hm.size()]);
-//        Arrays.sort(keys);
-//
 //        bw.write(s);
 //        bw.newLine();
 //
-//        String str = String.format("size: %2d\n", hm.size());
+//        String str = String.format("size: %2d\n", llBeads.size());
 //        bw.write(str);
 //
-//        for (int key : keys) {
-//            str = String.format("%2d %2d\n", key, hm.get(key).n);
+//        ListIterator<Integer> ll = llBeads.listIterator();
+//        int cnt = 0;
+//
+//        while (ll.hasNext()) {
+//            ++cnt;
+//            str = String.format("%2d %2d\n", cnt, ll.next());
 //            bw.write(str);
 //        }
 //
