@@ -1,5 +1,15 @@
 import java.io.*;
 
+/**
+ * 백준 2355번 시그마
+ *
+ * 유튜브 문제 풀이: https://youtu.be/NdNhKmnVs0c
+ *
+ * 문제링크: https://www.acmicpc.net/problem/2355
+ *
+ * 자바소스: http://bit.ly/3DH3Ve7
+ */
+
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
