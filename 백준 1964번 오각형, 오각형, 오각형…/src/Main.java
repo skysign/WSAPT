@@ -8,13 +8,19 @@ public class Main {
     String[] strs;
 
     public void solve() throws IOException {
-        strs = br.readLine().split(" ");
-        N = Integer.parseInt(strs[0]);
-
-        // N 단 196419641964계에서 N-1단계 보다 늘어나는 점의 개수
-        // (N + 1) * 3 - 2
+        N = Integer.parseInt(br.readLine());
 
         int ans = 0;
+        int sum = 5;
+        int alpha = 7;
+
+        for (int n = 2; n <= N; ++n) {
+            sum += alpha;
+            alpha += 3;
+            sum = sum % 45678;
+        }
+
+        ans = sum;
 
         bw.write(String.valueOf(ans));
         bw.newLine();
