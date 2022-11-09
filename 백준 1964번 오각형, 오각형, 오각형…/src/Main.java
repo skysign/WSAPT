@@ -1,5 +1,15 @@
 import java.io.*;
 
+/**
+ * 백준 1964번 오각형, 오각형, 오각형…
+ *
+ * 유튜브 문제 풀이: https://youtu.be/x9MhiK_nTVE
+ *
+ * 문제링크: https://www.acmicpc.net/problem/1964
+ *
+ * 자바소스: http://bit.ly/3DTh0km
+ */
+
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
