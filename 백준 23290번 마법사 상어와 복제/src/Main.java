@@ -1,7 +1,15 @@
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
-
+/**
+ * 백준 23290번 마법사 상어와 복제
+ *
+ * 유튜브 문제 풀이: https://youtu.be/ySnaN5QDS10
+ *
+ * 문제링크: https://www.acmicpc.net/problem/23290
+ *
+ * 자바소스: http://bit.ly/3fXmTVO
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -284,13 +292,6 @@ public class Main {
     }
 
     int findFishDir(int sr, int sc, int fishDir) {
-        assert sr < 0;
-        assert sc < 0;
-        assert sr >= 4;
-        assert sc >= 4;
-        assert fishDir < 0;
-        assert fishDir > LD;
-
         for (int dir = fishDir; dir > 0; --dir) {
             int nr = sr + dR[dir];
             int nc = sc + dC[dir];
