@@ -1,5 +1,13 @@
 import java.io.*;
-
+/**
+ * 백준 24510번 시간복잡도를 배운 도도
+ *
+ * 유튜브 문제 풀이: https://youtu.be/paHxlAdhV2E
+ *
+ * 문제링크: https://www.acmicpc.net/problem/24510
+ *
+ * 자바소스: http://bit.ly/3Ts1Ng9
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
