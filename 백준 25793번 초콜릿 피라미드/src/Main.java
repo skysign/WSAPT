@@ -1,5 +1,13 @@
 import java.io.*;
-
+/**
+ * 백준 25793번 초콜릿 피라미드
+ *
+ * 유튜브 문제 풀이: https://youtu.be/q0KBwLYI024
+ *
+ * 문제링크: https://www.acmicpc.net/problem/25793
+ *
+ * 자바소스: http://bit.ly/3V87dxZ
+ */
 public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
