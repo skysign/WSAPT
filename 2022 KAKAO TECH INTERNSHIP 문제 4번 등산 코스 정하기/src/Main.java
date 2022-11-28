@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -36,9 +35,8 @@ public class Main {
 
         Edge answer = new Edge(-1, -1, Integer.MAX_VALUE);
 
-        for (int s : _summits) {
+        for (int s : _summits)
             summits.add(s);
-        }
 
         for (int[] p : paths) {
             Edge e1 = new Edge(p[0], p[1], p[2]);
@@ -66,20 +64,15 @@ public class Main {
                 continue;
 
             int intensity = Math.max(e.wt, map[e.fr]);
-            if (intensity < map[e.to]) {
+            if (intensity < map[e.to])
                 map[e.to] = intensity;
 
-                if (summits.contains(e.to)) {
-                    Edge eSummit = new Edge(0, e.to, intensity);
-
-                    if (answer.compareTo(eSummit) > 0)
-                        answer = eSummit;
-
-                    continue;
-                }
-            }
-
             if (summits.contains(e.to)) {
+                Edge eSummit = new Edge(0, e.to, intensity);
+
+                if (answer.compareTo(eSummit) > 0)
+                    answer = eSummit;
+
                 continue;
             }
 
@@ -87,46 +80,6 @@ public class Main {
             visited.add(e.to);
         }
 
-//        for (int gate : gates) {
-//            pqVisit.clear();
-//            visited.clear();
-//            map = new int[n + 1];
-//            Arrays.fill(map, Integer.MAX_VALUE);
-//
-//            pqVisit.addAll(edges.get(gate));
-//            visited.add(gate);
-//            map[gate] = 0;
-//
-//            while (!pqVisit.isEmpty()) {
-//                Edge e = pqVisit.poll();
-//
-//                if (visited.contains(e.to))
-//                    continue;
-//
-//                int intensity = Math.max(e.wt, map[e.fr]);
-//                if (intensity < map[e.to]) {
-//                    map[e.to] = intensity;
-//
-//                    if (summits.contains(e.to)) {
-//                        Edge eSummit = new Edge(0, e.to, intensity);
-//
-//                        if (answer.compareTo(eSummit) > 0)
-//                            answer = eSummit;
-//
-//                        continue;
-//                    }
-//                }
-//
-//                pqVisit.addAll(edges.get(e.to));
-//                visited.add(e.to);
-//            }
-//        }
-
         return new int[]{answer.to, answer.wt};
-    }
-
-    public static void main(String[] args) throws IOException {
-        Main main = new Main();
-//        main.test();
     }
 }
