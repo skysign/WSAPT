@@ -1,5 +1,11 @@
 import java.util.*;
-
+/**
+ * 2022 KAKAO TECH INTERNSHIP 문제 4번 등산 코스 정하기
+ *
+ * 유튜브 문제 풀이: https://youtu.be/La1DQoe3kco
+ *
+ * 자바소스: https://bit.ly/3VxHqj0
+ */
 public class Main {
     class Edge implements Comparable<Edge> {
         public int fr, to, wt;
