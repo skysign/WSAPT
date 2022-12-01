@@ -12,16 +12,24 @@ public class Main {
         public int r, c;
 
         RC(int sr, int sc) {
+            set(sr, sc);
+        }
+
+        void set(int sr, int sc) {
             this.r = sr;
             this.c = sc;
         }
     }
 
     AtomicInteger[][] cube;
+    Deque<RC> qDeltaMyeon = new ArrayDeque<>();
     Deque<RC> qMyeon = new ArrayDeque<>();
-    Deque<Integer> dq011 = new ArrayDeque<>();
-    Deque<RC[]> Fs = new ArrayDeque<>();
-    Deque<RC[]> Bs = new ArrayDeque<>();
+    Deque<RC> Us = new ArrayDeque<>();
+    Deque<RC> Ds = new ArrayDeque<>();
+    Deque<RC> Fs = new ArrayDeque<>();
+    Deque<RC> Bs = new ArrayDeque<>();
+    Deque<RC> Ls = new ArrayDeque<>();
+    Deque<RC> Rs = new ArrayDeque<>();
 
     int N = 0;
     String[] strs = null;
@@ -29,86 +37,103 @@ public class Main {
     public void solve() throws IOException {
         initCube();
 
-        qMyeon.add(new RC(1, 0));
-        qMyeon.add(new RC(2, 0));
-        qMyeon.add(new RC(2, 1));
-        qMyeon.add(new RC(2, 2));
-        qMyeon.add(new RC(1, 2));
-        qMyeon.add(new RC(0, 2));
-        qMyeon.add(new RC(0, 1));
-        qMyeon.add(new RC(0, 0));
+        qDeltaMyeon.add(new RC(1, 0));
+        qDeltaMyeon.add(new RC(2, 0));
+        qDeltaMyeon.add(new RC(2, 1));
+        qDeltaMyeon.add(new RC(2, 2));
+        qDeltaMyeon.add(new RC(1, 2));
+        qDeltaMyeon.add(new RC(0, 2));
+        qDeltaMyeon.add(new RC(0, 1));
+        qDeltaMyeon.add(new RC(0, 0));
 
-        for (int i = 11; i >= 0; --i)
-            dq011.add(i);
+        for (int i = 0; i < 8; ++i)
+            qMyeon.add(new RC(0, 0));
 
+        // U: 윗 면
+        Us.add(new RC(3, 0));
+        Us.add(new RC(3, 1));
+        Us.add(new RC(3, 2));
+        Us.add(new RC(3, 3));
+        Us.add(new RC(3, 4));
+        Us.add(new RC(3, 5));
+        Us.add(new RC(3, 6));
+        Us.add(new RC(3, 7));
+        Us.add(new RC(3, 8));
+        Us.add(new RC(3, 9));
+        Us.add(new RC(3, 10));
+        Us.add(new RC(3, 11));
 
-        /**
-         * F: 앞면
-         * 회전할 r,c
-         * to <- fr
-         * first <- 2,5
-         * second<- 2,4
-         * third <- 2,3
-         *
-         * 2,5 <- 3,2
-         * 2,4 <- 4,2
-         * 2,3 <- 5,2
-         *
-         * 3,2 <- 6,3
-         * 4,2 <- 6,4
-         * 5,2 <- 6,5
-         *
-         * 6,3 <- 5,6
-         * 6,4 <- 4,6
-         * 6,5 <- 3,6
-         *
-         * 5,6 <- first
-         * 4,6 <- second
-         * 3,6 <- third
-         */
-        Fs.add(new RC[]{
-                new RC(2, 5),
-                new RC(2, 4),
-                new RC(2, 3)
-        });
-        Fs.add(new RC[]{
-                new RC(3, 2),
-                new RC(4, 2),
-                new RC(5, 2)
-        });
-        Fs.add(new RC[]{
-                new RC(6, 3),
-                new RC(6, 4),
-                new RC(6, 5)
-        });
-        Fs.add(new RC[]{
-                new RC(5, 6),
-                new RC(4, 6),
-                new RC(3, 6)
-        });
+        // D: 아랫 면
+        Ds.add(new RC(5, 0));
+        Ds.add(new RC(5, 1));
+        Ds.add(new RC(5, 2));
+        Ds.add(new RC(5, 3));
+        Ds.add(new RC(5, 4));
+        Ds.add(new RC(5, 5));
+        Ds.add(new RC(5, 6));
+        Ds.add(new RC(5, 7));
+        Ds.add(new RC(5, 8));
+        Ds.add(new RC(5, 9));
+        Ds.add(new RC(5, 10));
+        Ds.add(new RC(5, 11));
 
-        Bs.add(new RC[]{
-                new RC(0, 5),
-                new RC(0, 4),
-                new RC(0, 3)
-        });
-        Bs.add(new RC[]{
-                new RC(3, 0),
-                new RC(4, 0),
-                new RC(5, 0)
-        });
+        // F: 앞면
+        Fs.add(new RC(2, 3));
+        Fs.add(new RC(2, 4));
+        Fs.add(new RC(2, 5));
+        Fs.add(new RC(3, 6));
+        Fs.add(new RC(4, 6));
+        Fs.add(new RC(5, 6));
+        Fs.add(new RC(6, 5));
+        Fs.add(new RC(6, 4));
+        Fs.add(new RC(6, 3));
+        Fs.add(new RC(5, 2));
+        Fs.add(new RC(4, 2));
+        Fs.add(new RC(3, 2));
 
-        Bs.add(new RC[]{
-                new RC(8, 3),
-                new RC(8, 4),
-                new RC(8, 5)
-        });
+        // B: 뒷 면
+        Bs.add(new RC(0, 3));
+        Bs.add(new RC(0, 4));
+        Bs.add(new RC(0, 5));
+        Bs.add(new RC(3, 8));
+        Bs.add(new RC(4, 8));
+        Bs.add(new RC(5, 8));
+        Bs.add(new RC(8, 5));
+        Bs.add(new RC(8, 4));
+        Bs.add(new RC(8, 3));
+        Bs.add(new RC(5, 0));
+        Bs.add(new RC(4, 0));
+        Bs.add(new RC(3, 0));
 
-        Bs.add(new RC[]{
-                new RC(5, 8),
-                new RC(4, 8),
-                new RC(3, 8)
-        });
+        // L: 왼쪽 면
+        Ls.add(new RC(0, 3));
+        Ls.add(new RC(1, 3));
+        Ls.add(new RC(2, 3));
+        Ls.add(new RC(3, 3));
+        Ls.add(new RC(4, 3));
+        Ls.add(new RC(5, 3));
+        Ls.add(new RC(6, 3));
+        Ls.add(new RC(7, 3));
+        Ls.add(new RC(8, 3));
+        Ls.add(new RC(9, 3));
+        Ls.add(new RC(10, 3));
+        Ls.add(new RC(11, 3));
+
+        // R: 왼쪽 면
+        Rs.add(new RC(0, 5));
+        Rs.add(new RC(1, 5));
+        Rs.add(new RC(2, 5));
+        Rs.add(new RC(3, 5));
+        Rs.add(new RC(4, 5));
+        Rs.add(new RC(5, 5));
+        Rs.add(new RC(6, 5));
+        Rs.add(new RC(7, 5));
+        Rs.add(new RC(8, 5));
+        Rs.add(new RC(9, 5));
+        Rs.add(new RC(10, 5));
+        Rs.add(new RC(11, 5));
+
+//        testcases();
 
         N = Integer.parseInt(br.readLine());
 
@@ -141,6 +166,8 @@ public class Main {
                         rotateR(IsCW);
                         break;
                 }
+
+//                printCube();
             }
 
             printMyeon(0, 3);
@@ -151,20 +178,30 @@ public class Main {
     }
 
     void rotateMyeon(int sr, int sc, boolean IsCW) {
+        Iterator<RC> iterDelta = (IsCW) ? qDeltaMyeon.iterator() : qDeltaMyeon.descendingIterator();
         Iterator<RC> iter = (IsCW) ? qMyeon.iterator() : qMyeon.descendingIterator();
-        RC rc;
-        rc = iter.next();
-        int prevR = sr + rc.r;
-        int prevC = sc + rc.c;
+
+        while (iterDelta.hasNext()) {
+            RC drc = iterDelta.next();
+            RC rc = iter.next();
+            rc.set(sr + drc.r, sc + drc.c);
+        }
+
+        rotate((IsCW) ? qMyeon.descendingIterator() : qMyeon.iterator());
+    }
+
+    void rotate(Iterator<RC> iter) {
+        RC rc = iter.next();
+        int prevR = rc.r;
+        int prevC = rc.c;
         int firstValue = cube[prevR][prevC].intValue();
         int crntR = 0;
         int crntC = 0;
 
         while (iter.hasNext()) {
             rc = iter.next();
-            crntR = sr + rc.r;
-            crntC = sc + rc.c;
-
+            crntR = rc.r;
+            crntC = rc.c;
             cube[prevR][prevC].set(cube[crntR][crntC].intValue());
             prevR = crntR;
             prevC = crntC;
@@ -178,118 +215,56 @@ public class Main {
     // +인 경우에는 시계 방향 (그 면을 바라봤을 때가 기준),
     // -인 경우에는 반시계 방향
     void rotateU(boolean IsCW) throws IOException {
-        _rotateUorD(3, !IsCW);
-        _rotateUorD(3, !IsCW);
-        _rotateUorD(3, !IsCW);
-        rotateMyeon(0, 3, IsCW);
-        rotateMyeon(0, 3, IsCW);
+        rotate(!IsCW ? Us.descendingIterator() : Us.iterator());
+        rotate(!IsCW ? Us.descendingIterator() : Us.iterator());
+        rotate(!IsCW ? Us.descendingIterator() : Us.iterator());
+        rotateMyeon(0, 3, !IsCW);
+        rotateMyeon(0, 3, !IsCW);
     }
 
     // D: 아랫 면,
     void rotateD(boolean IsCW) throws IOException {
-        _rotateUorD(5, IsCW);
-        _rotateUorD(5, IsCW);
-        _rotateUorD(5, IsCW);
-        rotateMyeon(6, 3, IsCW);
-        rotateMyeon(6, 3, IsCW);
-    }
-
-    void _rotateUorD(int r, boolean IsCW) {
-        Iterator<Integer> iter = (IsCW) ? dq011.iterator() : dq011.descendingIterator();
-        int prevC = iter.next();
-        int firstValue = cube[r][prevC].intValue();
-        int crntC = 0;
-
-        while (iter.hasNext()) {
-            crntC = iter.next();
-            cube[r][prevC].set(cube[r][crntC].intValue());
-            prevC = crntC;
-        }
-
-        cube[r][crntC].set(firstValue);
+        rotate(IsCW ? Ds.descendingIterator() : Ds.iterator());
+        rotate(IsCW ? Ds.descendingIterator() : Ds.iterator());
+        rotate(IsCW ? Ds.descendingIterator() : Ds.iterator());
+        rotateMyeon(6, 3, !IsCW);
+        rotateMyeon(6, 3, !IsCW);
     }
 
     // F: 앞 면,
     void rotateF(boolean IsCW) throws IOException {
-        _rotateForB(Fs, IsCW);
-        rotateMyeon(3, 3, IsCW);
-        rotateMyeon(3, 3, IsCW);
+        rotate(IsCW ? Fs.descendingIterator() : Fs.iterator());
+        rotate(IsCW ? Fs.descendingIterator() : Fs.iterator());
+        rotate(IsCW ? Fs.descendingIterator() : Fs.iterator());
+        rotateMyeon(3, 3, !IsCW);
+        rotateMyeon(3, 3, !IsCW);
     }
 
     // B: 뒷 면,
     void rotateB(boolean IsCW) throws IOException {
-        _rotateForB(Bs, !IsCW);
-        rotateMyeon(9, 3, IsCW);
-        rotateMyeon(9, 3, IsCW);
-    }
-
-    void _rotateForB(Deque<RC[]> FsOrDs, boolean IsCW) throws IOException {
-        if (IsCW) {
-            __rotateForB(FsOrDs.iterator());
-        } else {
-            __rotateForB(FsOrDs.descendingIterator());
-        }
-    }
-
-    void __rotateForB(Iterator<RC[]> iter) throws IOException {
-        RC[] prevRCs = iter.next(); // Fs[0];
-        RC[] crntRCs = null;
-        int first = cube[prevRCs[0].r][prevRCs[0].c].intValue();
-        int second = cube[prevRCs[1].r][prevRCs[1].c].intValue();
-        int third = cube[prevRCs[2].r][prevRCs[2].c].intValue();
-
-        while (iter.hasNext()) {
-            crntRCs = iter.next();
-            assignRCs(prevRCs, crntRCs);
-            prevRCs = crntRCs;
-        }
-
-        cube[crntRCs[0].r][crntRCs[0].c].set(first);
-        cube[crntRCs[1].r][crntRCs[1].c].set(second);
-        cube[crntRCs[2].r][crntRCs[2].c].set(third);
-    }
-
-    void assignRCs(RC tos[], RC frs[]) {
-        for (int i = 0; i < tos.length; ++i) {
-            assignRC(tos[i], frs[i]);
-        }
-    }
-
-    void assignRC(RC to, RC fr) {
-        cube[to.r][to.c].set(cube[fr.r][fr.c].intValue());
+        rotate(!IsCW ? Bs.descendingIterator() : Bs.iterator());
+        rotate(!IsCW ? Bs.descendingIterator() : Bs.iterator());
+        rotate(!IsCW ? Bs.descendingIterator() : Bs.iterator());
+        rotateMyeon(9, 3, !IsCW);
+        rotateMyeon(9, 3, !IsCW);
     }
 
     // L: 왼쪽 면,
     void rotateL(boolean IsCW) throws IOException {
-        _rotateLorR(3, IsCW);
-        _rotateLorR(3, IsCW);
-        _rotateLorR(3, IsCW);
-        rotateMyeon(3, 0, IsCW);
-        rotateMyeon(3, 0, IsCW);
+        rotate(IsCW ? Ls.descendingIterator() : Ls.iterator());
+        rotate(IsCW ? Ls.descendingIterator() : Ls.iterator());
+        rotate(IsCW ? Ls.descendingIterator() : Ls.iterator());
+        rotateMyeon(3, 0, !IsCW);
+        rotateMyeon(3, 0, !IsCW);
     }
 
     // R: 오른쪽 면이다.
     void rotateR(boolean IsCW) throws IOException {
-        _rotateLorR(5, !IsCW);
-        _rotateLorR(5, !IsCW);
-        _rotateLorR(5, !IsCW);
-        rotateMyeon(3, 6, IsCW);
-        rotateMyeon(3, 6, IsCW);
-    }
-
-    void _rotateLorR(int c, boolean IsCW) {
-        Iterator<Integer> iter = (IsCW) ? dq011.iterator() : dq011.descendingIterator();
-        int prevR = iter.next();
-        int firstValue = cube[prevR][c].intValue();
-        int crntR = 0;
-
-        while (iter.hasNext()) {
-            crntR = iter.next();
-            cube[prevR][c].set(cube[crntR][c].intValue());
-            prevR = crntR;
-        }
-
-        cube[crntR][c].set(firstValue);
+        rotate(!IsCW ? Rs.descendingIterator() : Rs.iterator());
+        rotate(!IsCW ? Rs.descendingIterator() : Rs.iterator());
+        rotate(!IsCW ? Rs.descendingIterator() : Rs.iterator());
+        rotateMyeon(3, 6, !IsCW);
+        rotateMyeon(3, 6, !IsCW);
     }
 
     void printMyeon(int sr, int sc) throws IOException {
@@ -299,6 +274,7 @@ public class Main {
             }
             bw.newLine();
         }
+        bw.flush();
     }
 
     void initCube() {
@@ -503,140 +479,141 @@ public class Main {
         bw.newLine();
     }
 
-    void testcases() {
-//        bw.write("Initial cube\n");
-//        printCube();
+    void testcases() throws IOException {
+        bw.write("Initial cube\n");
+        printCube();
 
-//        bw.write("print myeon\n");
-//        printMyeon(0, 3);
-//
-//        bw.write("rotate F+\n");
-//        rotateF(true);
-//        printCube();
-//        bw.write("rotate F-\n");
-//        rotateF(false);
-//        printCube();
-//
-//        bw.write("rotate B+\n");
-//        rotateB(true);
-//        printCube();
-//        bw.write("rotate B-\n");
-//        rotateB(false);
-//        printCube();
-//
-//        bw.write("rotate U+\n");
-//        rotateU(true);
-//        printCube();
-//        bw.write("rotate U-\n");
-//        rotateU(false);
-//        printCube();
-//
-//        bw.write("rotate D+\n");
-//        rotateD(true);
-//        printCube();
-//        bw.write("rotate D-\n");
-//        rotateD(false);
-//        printCube();
-//
-//        bw.write("rotate L+\n");
-//        rotateL(true);
-//        printCube();
-//        bw.write("rotate L-\n");
-//        rotateL(false);
-//        printCube();
-//
-//        bw.write("rotate R+\n");
-//        rotateR(true);
-//        printCube();
-//        bw.write("rotate R-\n");
-//        rotateR(false);
-//        printCube();
+        bw.write("print myeon\n");
+        printMyeon(0, 3);
+
+        bw.write("rotate F+\n");
+        rotateF(true);
+        printCube();
+        bw.write("rotate F-\n");
+        rotateF(false);
+        printCube();
+
+        bw.write("rotate B+\n");
+        rotateB(true);
+        printCube();
+        bw.write("rotate B-\n");
+        rotateB(false);
+        printCube();
+
+        bw.write("rotate U+\n");
+        rotateU(true);
+        printCube();
+        bw.write("rotate U-\n");
+        rotateU(false);
+        printCube();
+
+        bw.write("rotate D+\n");
+        rotateD(true);
+        printCube();
+        bw.write("rotate D-\n");
+        rotateD(false);
+        printCube();
+
+        bw.write("rotate L+\n");
+        rotateL(true);
+        printCube();
+        bw.write("rotate L-\n");
+        rotateL(false);
+        printCube();
+
+        bw.write("rotate R+\n");
+        rotateR(true);
+        printCube();
+        bw.write("rotate R-\n");
+        rotateR(false);
+        printCube();
 
 
-        // U: 윗 면, F: 앞 면,
-        // U+ F+ F- U-
-        // U판 회전 테스트를 위한 A~H
-//        cube[0][3].set('A');
-//        cube[0][4].set('B');
-//        cube[0][5].set('C');
-//        cube[1][5].set('D');
-//        cube[2][5].set('E');
-//        cube[2][4].set('F');
-//        cube[2][3].set('G');
-//        cube[1][3].set('H');
-//        printCube();
-//
-//        bw.write("rotate U+ F+ F- U-\n");
-//        rotateU(true);
-//        printCube();
-//        rotateF(true);
-//        printCube();
-//        rotateF(false);
-//        printCube();
-//        rotateU(false);
-//        printCube();
-//        resetCube();
-//
-//
-        // D: 아랫 면, L: 왼쪽 면
-        // D+ L+ L- D-
-        // D판 회전 테스트를 위한 A~H
-//        cube[6][3].set('A');
-//        cube[6][4].set('B');
-//        cube[6][5].set('C');
-//        cube[7][5].set('D');
-//        cube[8][5].set('E');
-//        cube[8][4].set('F');
-//        cube[8][3].set('G');
-//        cube[7][3].set('H');
-//        // L판
-//        cube[3][0].set('1');
-//        cube[3][1].set('2');
-//        cube[3][2].set('3');
-//        cube[4][2].set('4');
-//        cube[5][2].set('5');
-//        cube[5][1].set('6');
-//        cube[5][0].set('7');
-//        cube[4][0].set('8');
-//        printCube();
-//        bw.write("rotate D+ L+ L- D-\n");
-//        rotateD(true);
-//        printCube();
-//        rotateL(true);
-//        printCube();
-//        rotateL(false);
-//        printCube();
-//        rotateD(false);
-//        printCube();
-//        resetCube();
+//         U: 윗 면, F: 앞 면,
+//         U+ F+ F- U-
+//         U판 회전 테스트를 위한 A~H
+        cube[0][3].set('A');
+        cube[0][4].set('B');
+        cube[0][5].set('C');
+        cube[1][5].set('D');
+        cube[2][5].set('E');
+        cube[2][4].set('F');
+        cube[2][3].set('G');
+        cube[1][3].set('H');
+        printCube();
 
-        // B: 뒷 면, R: 오른쪽 면
-        // B+ R+ R- B-
-        // B판 회전 테스트를 위한 A~H
-//        cube[3][9].set('A');
-//        cube[3][10].set('B');
-//        cube[3][11].set('C');
-//        cube[4][11].set('D');
-//        cube[5][11].set('E');
-//        cube[5][10].set('F');
-//        cube[5][9].set('G');
-//        cube[4][9].set('H');
-//        bw.write("rotate B+ R+ R- B-\n");
-//        rotateB(true);
-//        printCube();
-//        rotateR(true);
-//        printCube();
-//        rotateR(false);
-//        printCube();
-//        rotateB(false);
-//        printCube();
-//        resetCube();
-//
-//
-//        bw.write("\n");
-//        bw.write("rotate F CW\n");
-//        rotateF(true);
-//        printCube();
+        bw.write("rotate U+ F+ F- U-\n");
+        rotateU(true);
+        printCube();
+        rotateF(true);
+        printCube();
+        rotateF(false);
+        printCube();
+        rotateU(false);
+        printCube();
+        resetCube();
+
+
+//         D: 아랫 면, L: 왼쪽 면
+//         D+ L+ L- D-
+//         D판 회전 테스트를 위한 A~H
+        cube[6][3].set('A');
+        cube[6][4].set('B');
+        cube[6][5].set('C');
+        cube[7][5].set('D');
+        cube[8][5].set('E');
+        cube[8][4].set('F');
+        cube[8][3].set('G');
+        cube[7][3].set('H');
+        // L판
+        cube[3][0].set('1');
+        cube[3][1].set('2');
+        cube[3][2].set('3');
+        cube[4][2].set('4');
+        cube[5][2].set('5');
+        cube[5][1].set('6');
+        cube[5][0].set('7');
+        cube[4][0].set('8');
+        printCube();
+        bw.write("rotate D+ L+ L- D-\n");
+        rotateD(true);
+        printCube();
+        rotateL(true);
+        printCube();
+        rotateL(false);
+        printCube();
+        rotateD(false);
+        printCube();
+        resetCube();
+
+//         B: 뒷 면, R: 오른쪽 면
+//         B+ R+ R- B-
+//         B판 회전 테스트를 위한 A~H
+        cube[3][9].set('A');
+        cube[3][10].set('B');
+        cube[3][11].set('C');
+        cube[4][11].set('D');
+        cube[5][11].set('E');
+        cube[5][10].set('F');
+        cube[5][9].set('G');
+        cube[4][9].set('H');
+        printCube();
+        bw.write("rotate B+ R+ R- B-\n");
+        rotateB(true);
+        printCube();
+        rotateR(true);
+        printCube();
+        rotateR(false);
+        printCube();
+        rotateB(false);
+        printCube();
+        resetCube();
+
+
+        bw.write("\n");
+        bw.write("rotate F CW\n");
+        rotateF(true);
+        printCube();
     }
 
     public static void main(String[] args) throws IOException {
