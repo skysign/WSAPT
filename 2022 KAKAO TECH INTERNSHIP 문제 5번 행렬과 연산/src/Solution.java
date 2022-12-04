@@ -2,20 +2,19 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 
+/**
+ * 2022 KAKAO TECH INTERNSHIP 문제 5번 행렬과 연산
+ *
+ * 유튜브 문제 풀이: https://youtu.be/usq335QwYZY
+ *
+ * 자바소스: http://bit.ly/3OWdATb
+ */
+
 public class Solution {
-    class RC {
-        int r, c;
-
-        public RC(int sr, int sc) {
-            r = sr;
-            c = sc;
-        }
-    }
-
     Deque<Integer> qLft = new ArrayDeque<>();
-    Deque<Integer> qTop = new ArrayDeque<>();
+    Deque<Integer> qTop;
     Deque<Deque<Integer>> qCtr = new ArrayDeque<>();
-    Deque<Integer> qBtm = new ArrayDeque<>();
+    Deque<Integer> qBtm;
     Deque<Integer> qRht = new ArrayDeque<>();
 
     public int[][] solution(int[][] dt, String[] operations) {
@@ -23,12 +22,10 @@ public class Solution {
         int C = dt[0].length;
 
         qLft.clear();
-        qTop.clear();
         for (Deque<Integer> ctr : qCtr) {
             ctr.clear();
         }
         qCtr.clear();
-        qBtm.clear();
         qRht.clear();
 
         for (int r = 0; r < R; ++r) {
