@@ -21,12 +21,12 @@ class SolutionTest {
         );
     }
 
-//    @Test
-//    void ex2() {
-//        Solution main = new Solution();
-//        assertEquals(
-//                15,
-//                main.solution(0, 0, new int[][]{{10, 15, 2, 1, 2}, {20, 20, 3, 3, 4}})
-//        );
-//    }
+    @Test
+    void ex3() {
+        Solution main = new Solution();
+        assertEquals(
+                150,
+                main.solution(0, 0, new int[][]{{150, 150, 1, 1, 100}, {0, 0, 1, 30, 1}})
+        );
+    }
 }

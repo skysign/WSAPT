@@ -1,5 +1,11 @@
 import java.util.Arrays;
-
+/**
+ * 2022 KAKAO TECH INTERNSHIP 문제 3번 코딩 테스트 공부
+ *
+ * 유튜브 문제 풀이: https://youtu.be/NTaYIADfTRE
+ *
+ * 자바소스: https://bit.ly/3VKnw4S
+ */
 class Solution {
     int MAX_ALP = 0, MAX_COP = 0;
     int[][] dp;
@@ -14,7 +20,6 @@ class Solution {
         }
 
         dp = new int[MAX_ALP + 1][MAX_COP + 1];
-
         fill2D(dp, Integer.MAX_VALUE);
 
         for (int a = 0; a <= alp; ++a)
