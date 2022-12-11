@@ -16,8 +16,8 @@ class Solution {
 
         // 최대 DP배열의 크기는 alp 1: cop 30 증가로
         // 150 * 30 = 4500 <- 최적화 해서 풀기 전에
-        MAX_MAP_ALP = 4500;
-        MAX_MAP_COP = 4500;
+        MAX_MAP_ALP = 180;
+        MAX_MAP_COP = 180;
 //        MAX_MAP_ALP = 450;  // 효율성을 시간초과 없이 통과 할 수 있는 작은 크기가 450임
 //        MAX_MAP_COP = 450;  // 숫자를 조금씩 줄여 보면서 찾았어요.
 
