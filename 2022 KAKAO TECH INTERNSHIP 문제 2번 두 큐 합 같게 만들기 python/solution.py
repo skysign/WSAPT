@@ -1,5 +1,10 @@
 from collections import deque
 
+# 2022 KAKAO TECH INTERNSHIP 문제 2번 두 큐 합 같게 만들기 python
+#
+# 유튜브 문제 풀이: https://youtu.be/rntT16XgqRc
+#
+# 파이썬소스: http://bit.ly/3WHqBmr
 
 def solution(queue1, queue2):
     answer = -1
@@ -15,12 +20,12 @@ def solution(queue1, queue2):
             answer = cnt
             break
         elif sum1 > sum2:
-            item = q1.popleft();
+            item = q1.popleft()
             sum1 -= item
             q2.append(item)
             sum2 += item
         else:
-            item = q2.popleft();
+            item = q2.popleft()
             sum2 -= item
             q1.append(item)
             sum1 += item
