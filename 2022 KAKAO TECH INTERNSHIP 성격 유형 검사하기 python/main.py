@@ -1,6 +1,8 @@
 # 2022 KAKAO TECH INTERNSHIP 성격 유형 검사하기 python
 #
 # 유튜브 문제 풀이: https://youtu.be/9sImoRvqxlI
+#
+# 파이썬소스: http://bit.ly/3BK8gNj
 
 def solution(survey, choices):
     dt = {'R': 0, 'T': 0, 'C': 0, 'F': 0, 'J': 0, 'M': 0, 'A': 0, 'N': 0}
