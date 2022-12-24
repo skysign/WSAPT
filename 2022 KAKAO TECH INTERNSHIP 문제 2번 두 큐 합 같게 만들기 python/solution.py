@@ -1,6 +1,6 @@
 from collections import deque
 
-# 2022 KAKAO TECH INTERNSHIP 문제 2번 두 큐 합 같게 만들기 python
+# 2022 KAKAO TECH INTERNSHIP 두 큐 합 같게 만들기 python
 #
 # 유튜브 문제 풀이: https://youtu.be/rntT16XgqRc
 #
