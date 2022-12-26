@@ -1,5 +1,10 @@
 from collections import deque
 
+# 2022 KAKAO BLIND RECRUITMENT 파괴되지 않은 건물 python
+#
+# 유튜브 문제 풀이: https://youtu.be/Gu6uXd1bPMU
+#
+# 파이썬소스: http://bit.ly/3Gikm2M
 
 def solution(board, skill):
     answer = 0
