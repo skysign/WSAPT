@@ -4,7 +4,7 @@ from collections import deque
 #
 # 유튜브 문제 풀이: https://youtu.be/Zxv3ZAqSRBk
 #
-# 파이썬소스:
+# 파이썬 소스: http://bit.ly/3GkaLse
 #
 # 문제: https://school.programmers.co.kr/learn/courses/30/lessons/92345
 
