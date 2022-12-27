@@ -1,11 +1,13 @@
 from unittest import TestCase
 from main import solution
 
-# 2022 KAKAO BLIND RECRUITMENT 파괴되지 않은 건물 python
+# 2022 카카오 신입 공채 1차 온라인 코딩테스트 사라지는 발판 Python
 #
-# 유튜브 문제 풀이: https://youtu.be/Gu6uXd1bPMU
+# 유튜브 문제 풀이: https://youtu.be/Zxv3ZAqSRBk
 #
-# 파이썬소스: http://bit.ly/3Gikm2M
+# 파이썬 소스: http://bit.ly/3GkaLse
+#
+# 문제: https://school.programmers.co.kr/learn/courses/30/lessons/92345
 
 class Test(TestCase):
     def test_solution(self):
