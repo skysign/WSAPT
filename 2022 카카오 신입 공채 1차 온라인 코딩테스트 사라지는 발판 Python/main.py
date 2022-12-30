@@ -2,7 +2,7 @@ from collections import deque
 
 # 2022 카카오 신입 공채 1차 온라인 코딩테스트 사라지는 발판 Python
 #
-# 유튜브 문제 풀이: https://youtu.be/Zxv3ZAqSRBk
+# 유튜브 문제 풀이: https://youtu.be/SW6McsCLg54
 #
 # 파이썬 소스: http://bit.ly/3GkaLse
 #
