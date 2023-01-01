@@ -1,6 +1,13 @@
 from unittest import TestCase
 from solution import solution
 
+# 2022 카카오 신입 공채 1차 온라인 코딩테스트 신고 결과 받기 Python
+#
+# 유튜브 문제 풀이: https://youtu.be/XNVY9InXtfU
+#
+# 파이썬소스: http://bit.ly/3GbA1jc
+#
+# 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/92334
 
 class Test(TestCase):
     def test_solution(self):
