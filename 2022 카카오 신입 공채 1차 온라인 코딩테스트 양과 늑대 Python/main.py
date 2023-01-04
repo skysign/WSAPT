@@ -1,6 +1,13 @@
 SHEEP = 0
 WOLF = 1
 
+# 2022 카카오 신입 공채 1차 온라인 코딩테스트 양과 늑대 Python
+#
+# 유튜브 문제 풀이: https://youtu.be/6Hxf7zjSA-g
+#
+# 파이썬소스: http://bit.ly/3vK7IDz
+#
+# 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/92343
 
 def solution(info, edges):
     tree = {}
