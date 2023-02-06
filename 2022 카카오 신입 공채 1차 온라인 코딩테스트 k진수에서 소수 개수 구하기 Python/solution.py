@@ -1,3 +1,11 @@
+# 2022 카카오 신입 공채 1차 온라인 코딩테스트 k진수에서 소수 개수 구하기 Python
+#
+# 유튜브 문제 풀이: https://youtu.be/Zxv3ZAqSRBk
+#
+# 파이썬소스: http://bit.ly/3JI1Frq
+#
+# 문제: https://bit.ly/3jsiNa9
+
 import string
 
 # x 약수 <= y
