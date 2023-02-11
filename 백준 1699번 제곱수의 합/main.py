@@ -1,8 +1,8 @@
 # 백준 1699번 제곱수의 합
 #
-# 유튜브 문제 풀이: 백준 1699번 제곱수의 합
+# 유튜브 문제 풀이: https://youtu.be/8u3rY4yoZLM
 #
-# 파이썬소스:
+# 파이썬소스: http://bit.ly/3E0ce5t
 #
 # 문제: https://www.acmicpc.net/problem/1699
 
