@@ -1,3 +1,11 @@
+# 백준 11054번 가장 긴 바이토닉 부분 수열
+#
+# 유튜브 문제 풀이: https://youtu.be/SEdX0CrOfCg
+#
+# 파이썬소스: http://bit.ly/3Z3fl4C
+#
+# 문제: https://www.acmicpc.net/problem/11054
+
 N = int(input())
 dt = [0] + list(map(int, input().split())) + [0]
 LIS = [0 for i in range(N + 2)]
