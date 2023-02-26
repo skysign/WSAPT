@@ -1,5 +1,5 @@
 from unittest import TestCase
-from solution import solution, get_score
+from solution import solution, get_score, more_lower_score
 
 
 class Test(TestCase):
@@ -22,3 +22,5 @@ class Test(TestCase):
     def test_get_score(self):
         print(get_score(9, [0, 0, 1, 2, 0, 1, 1, 1, 1, 1, 1], [1, 1, 2, 0, 1, 2, 2, 0, 0, 0, 0]))
         print(get_score(10, [0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 3], [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2]))
+        print(more_lower_score([0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 3], [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2]))
+        print(more_lower_score([1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2], [0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 3]))
