@@ -1,3 +1,11 @@
+# 2022 카카오 신입 공채 1차 온라인 코딩테스트 양궁대회 Python
+#
+# 유튜브 문제 풀이: https://youtu.be/T-hETKL42SU
+#
+# 파이썬소스: http://bit.ly/3EVUfgY
+#
+# 문제링크: http://bit.ly/3IOWofS
+
 ryan_arrows = None
 diff_a_r = 0
 
