@@ -2,6 +2,10 @@ import copy
 
 # 2023 카카오 신입 공채 1차 온라인 코딩 테스트 이모티콘 할인행사 Python
 #
+# 유튜브 문제 풀이: https://youtu.be/X80UHHe-qyA
+#
+# 파이썬 소스: http://bit.ly/3zJ8vH3
+#
 # 문제 링크: http://bit.ly/3mkbhzu
 
 def solution(users, emoticons):
