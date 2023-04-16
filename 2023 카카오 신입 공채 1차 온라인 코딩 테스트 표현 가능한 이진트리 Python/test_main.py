@@ -1,6 +1,14 @@
 from unittest import TestCase
 from main import solution
 
+# 2023 카카오 신입 공채 1차 온라인 코딩 테스트 택배 배달과 수거하기 Python
+#
+# 유튜브 문제 풀이: https://youtu.be/XExcM0Gqbd4
+#
+# 파이썬 소스: https://bit.ly/3KNLBUe
+#
+# 문제 링크: https://bit.ly/41yCaOT
+
 class Test(TestCase):
     def test_solution(self):
         self.assertEqual(
