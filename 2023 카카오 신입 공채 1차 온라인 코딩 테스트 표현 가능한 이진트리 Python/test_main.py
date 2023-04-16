@@ -1,7 +1,7 @@
 from unittest import TestCase
 from main import solution
 
-# 2023 카카오 신입 공채 1차 온라인 코딩 테스트 택배 배달과 수거하기 Python
+# 2023 카카오 신입 공채 1차 온라인 코딩 테스트 표현 가능한 이진트리 Python
 #
 # 유튜브 문제 풀이: https://youtu.be/XExcM0Gqbd4
 #
