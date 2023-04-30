@@ -1,3 +1,11 @@
+# 2023 카카오 신입 공채 1차 온라인 코딩 테스트 표 병합 Python
+#
+# 유튜브 문제 풀이: https://youtu.be/4HHe_aMacKw
+#
+# 파이썬 소스: https://bit.ly/3LgKrAJ
+#
+# 문제 링크: https://bit.ly/3Nr1SRM
+
 def solution(commands):
     answers = []
 
@@ -51,7 +59,7 @@ def solution(commands):
 
         elif cmd == 'PRINT':
             r, c = int(data[1]), int(data[2])
-            rt, ct = merged[r][c]
             answers.append(board[rt][ct])
+            rt, ct = merged[r][c]
 
     return answers
