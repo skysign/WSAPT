@@ -2,7 +2,7 @@
 #
 # 유튜브 문제 풀이: https://youtu.be/_bHRMmuGwfE
 #
-# 파이썬 소스: http://bit.ly/40ycouk
+# 파이썬 소스: https://bit.ly/3IVoS8z
 #
 # 문제 링크: https://bit.ly/3N9IeJw
 
