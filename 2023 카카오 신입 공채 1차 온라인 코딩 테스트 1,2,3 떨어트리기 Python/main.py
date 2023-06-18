@@ -1,3 +1,11 @@
+# 2023 카카오 신입 공채 1차 온라인 코딩 테스트 1,2,3 떨어트리기 Python
+#
+# 유튜브 문제 풀이: https://youtu.be/2qgW5HFwt_g
+#
+# 파이썬 소스: https://bit.ly/3NcyNaY
+#
+# 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/150364
+
 leaves = []
 
 
