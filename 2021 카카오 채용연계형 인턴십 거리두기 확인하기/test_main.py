@@ -1,3 +1,11 @@
+# 2021 카카오 채용연계형 인턴십 거리두기 확인하기 Python
+#
+# 유튜브 문제 풀이: https://youtu.be/CSmCku0lDCQ
+#
+# 파이썬 소스: https://bit.ly/3PBrxZ9
+#
+# 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/81302#fn1
+
 from unittest import TestCase
 from main import solution
 
