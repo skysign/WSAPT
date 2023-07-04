@@ -1,3 +1,11 @@
+# BOJ 2234번 성곽
+#
+# 유튜브 문제 풀이: https://youtu.be/MffbKhMOLX8
+#
+# 파이썬 소스: https://bit.ly/3JLE9sN
+#
+# 문제 링크: https://www.acmicpc.net/problem/2234
+
 import sys
 
 N = 0
