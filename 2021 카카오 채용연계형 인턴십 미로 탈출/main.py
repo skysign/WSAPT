@@ -67,20 +67,18 @@ def dfs(vertex_n, total_cost):
                     go_to_vertex = True
                 elif ((total_cost + edge_cost) <= to_vertex.path_cost):
                     go_to_vertex = True
-            elif (total_cost + edge_cost) <= to_vertex.path_cost:
+            elif (total_cost + edge_cost) <= to_vertex.path_cost and visited_count[to_vertex_n] < 1:
                 go_to_vertex = True
 
             if go_to_vertex:
                 total_cost += edge_cost
                 to_vertex.path_cost = total_cost
 
-                if (to_vertex.trap):
-                    visited_count[to_vertex_n] += 1
+                visited_count[to_vertex_n] += 1
 
                 dfs(to_vertex_n, total_cost)
 
-                if (to_vertex.trap):
-                    visited_count[to_vertex_n] -= 1
+                visited_count[to_vertex_n] -= 1
 
                 total_cost -= edge_cost
 
