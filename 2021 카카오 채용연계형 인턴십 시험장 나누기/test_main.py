@@ -1,6 +1,14 @@
 from unittest import TestCase
-# from main import solution
 from main import solution
+
+# 2021 카카오 채용연계형 인턴십 시험장 나누기 Python
+#
+# 유튜브 문제 풀이: https://youtu.be/T_H7meTh9Qk
+#
+# 파이썬 소스: https://bit.ly/47maO2d
+#
+# 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/81305
+
 
 class Test(TestCase):
     def test1_solution(self):

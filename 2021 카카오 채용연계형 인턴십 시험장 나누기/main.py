@@ -1,14 +1,21 @@
 import sys
 sys.setrecursionlimit(10**6)
 
+# 2021 카카오 채용연계형 인턴십 시험장 나누기 Python
+#
+# 유튜브 문제 풀이: https://youtu.be/T_H7meTh9Qk
+#
+# 파이썬 소스: https://bit.ly/47maO2d
+#
+# 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/81305
+
 class Node:
     def __init__(self, idx, v):
         self.idx = idx
-        self.group = -1
         self.v = v
-        self.parent = None;
-        self.child_left = None;
-        self.child_right = None;
+        self.parent = None
+        self.child_left = None
+        self.child_right = None
 
 
 nodes = []
@@ -48,11 +55,11 @@ def solution(k, num, links):
 
     while limit_low <= limit_high:
 
-        limit_mid = int((limit_low + limit_high) /2)
+        limit_mid = int((limit_low + limit_high) / 2)
         if get_group_count(limit_mid, root_node) <= k:
-            limit_high = limit_mid -1
+            limit_high = limit_mid - 1
         else:
-            limit_low = limit_mid +1
+            limit_low = limit_mid + 1
 
     return limit_high +1
 
@@ -61,7 +68,7 @@ def get_group_count(limit, root_node):
     global cnt_group
     cnt_group = 0
     dfs(limit, root_node.idx)
-    return cnt_group +1
+    return cnt_group + 1
 
 
 def dfs(limit, idx_node):
@@ -83,6 +90,6 @@ def dfs(limit, idx_node):
         cnt_group += 1
         return nums[node.idx] + min(left_v, right_v)
 
-    cnt_group +=2
+    cnt_group += 2
 
     return nums[node.idx]
