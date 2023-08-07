@@ -1,3 +1,11 @@
+# leetcode.com 416. Partition Equal Subset Sum
+#
+# 유튜브 문제 풀이: https://youtu.be/nLHNyrM-3VM
+#
+# 파이썬 소스: https://bit.ly/3Qw5C6a
+#
+# 문제 링크: https://leetcode.com/problems/partition-equal-subset-sum/
+
 class Solution:
     def canPartition(self, dt: list[int]) -> bool:
         my_half = int(sum(dt) / 2)
