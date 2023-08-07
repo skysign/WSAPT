@@ -1,21 +1,18 @@
-import copy
-
 class Solution:
-    def canPartition(self, nums: list[int]) -> bool:
-        dt = copy.deepcopy(nums)
-        dpL2R = [0 for _ in range(len(nums))]
-        dpR2L = [0 for _ in range(len(nums))]
+    def canPartition(self, dt: list[int]) -> bool:
+        my_half = int(sum(dt) / 2)
+        if sum(dt) % 2 == 1:
+            return False
 
-        dpL2R[0] = dt[0]
-        for idx in range(1, len(nums), 1):
-            dpL2R[idx] = dpL2R[idx -1] + dt[idx]
+        dp = [False for _ in range(my_half +1)]
+        dp[0] = True
 
-        dpR2L[len(nums) - 1] = dt[len(nums) - 1]
-        for idx in range(len(nums)-2, -1, -1):
-            dpR2L[idx] = dpR2L[idx + 1] + dt[idx]
+        for num in dt:
+            for idx in range(my_half -1, -1, -1):
+                if dp[idx] and idx + num <= my_half:
+                    dp[idx + num] = dp[idx]
 
-        for idx in range(1, len(nums) -1):
-            if dpL2R[idx-1] + dpR2L[idx+1] == dt[idx]:
-                return True
+                if dp[my_half]:
+                    return True
 
         return False
