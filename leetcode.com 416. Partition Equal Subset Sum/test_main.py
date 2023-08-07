@@ -1,6 +1,14 @@
 from unittest import TestCase
 from main import Solution
 
+# leetcode.com 416. Partition Equal Subset Sum
+#
+# 유튜브 문제 풀이: https://youtu.be/nLHNyrM-3VM
+#
+# 파이썬 소스: https://bit.ly/3Qw5C6a
+#
+# 문제 링크: https://leetcode.com/problems/partition-equal-subset-sum/
+
 class TestSolution(TestCase):
     def test1_can_partition(self):
         solution = Solution()
