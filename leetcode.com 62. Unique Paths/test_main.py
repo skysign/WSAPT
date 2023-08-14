@@ -9,3 +9,11 @@ class TestSolution(TestCase):
     def test2_unique_paths(self):
         solution = Solution()
         self.assertEqual(3, solution.uniquePaths(3, 2))
+
+    def test1_unique_paths(self):
+        solution = Solution()
+        self.assertEqual(28, solution.uniquePaths_dump_dp(3, 7))
+
+    def test2_unique_paths(self):
+        solution = Solution()
+        self.assertEqual(3, solution.uniquePaths_dump_dp(3, 2))
