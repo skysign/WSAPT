@@ -11,3 +11,8 @@ class TestSolution(TestCase):
         sol = Solution()
         self.assertEqual(set(["3z4","3Z4"]),
                          set(sol.letterCasePermutation("3z4")))
+
+    def test3_letter_case_permutation(self):
+        sol = Solution()
+        self.assertEqual(set(["c","C"]),
+                         set(sol.letterCasePermutation("C")))

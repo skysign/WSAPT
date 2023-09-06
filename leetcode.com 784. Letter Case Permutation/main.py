@@ -18,10 +18,10 @@ class Solution:
         return answer
 
     def rec(self, idx_bgn, dt: List[str], answer):
+        answer.append(copy.deepcopy(dt))
+
         if idx_bgn >= len(dt):
             return
-
-        answer.append(copy.deepcopy(dt))
 
         for idx in range(idx_bgn, len(dt)):
             if not dt[idx].isalpha():
