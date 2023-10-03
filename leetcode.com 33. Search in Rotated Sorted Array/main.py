@@ -1,5 +1,13 @@
 from typing import List
 
+# leetcode.com 33. Search in Rotated Sorted Array
+#
+# 유튜브 문제 풀이: https://youtu.be/hAOMTq6XQj4?si=nCVWEwu3TvhyWfN8
+#
+# 파이썬 소스: https://bit.ly/48EucIm
+#
+# 문제 링크: https://bit.ly/46gLUAg
+
 NOT_FOUND = -1 * 4 ** 10 -1
 
 def bs(dt, idx_lt, idx_rt, target):
