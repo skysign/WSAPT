@@ -3,6 +3,14 @@ from collections import deque
 
 MAX_NUMBER = 10 **6 +1
 
+# leetcode.com 4. Median of Two Sorted Arrays
+#
+# 유튜브 문제 풀이: https://youtu.be/Ye_639SfzJE?si=Un9JlPPcfFAci0-W
+#
+# 파이썬 소스: https://bit.ly/3RPxmDv
+#
+# 문제 링크: https://bit.ly/3torpmN
+
 class Solution:
     def get_next_min_number(self, q1: Deque[int], q2: Deque[int]):
         item1 = MAX_NUMBER
