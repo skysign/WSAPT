@@ -1,6 +1,14 @@
 from unittest import TestCase
 from main import Solution
 
+# leetcode.com 167. Two Sum II - Input Array Is Sorted
+#
+# 유튜브 문제 풀이: https://youtu.be/5Nu8kzohGDM?si=vQB2YD-V27iGuuBH
+#
+# 참고소스: https://bit.ly/45kKBio
+#
+# 문제 링크: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
+
 class TestSolution(TestCase):
     def test1_two_sum(self):
         sol = Solution()
