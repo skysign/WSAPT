@@ -4,7 +4,7 @@ from typing import List
 #
 # 유튜브 문제 풀이: https://youtu.be/5Nu8kzohGDM?si=vQB2YD-V27iGuuBH
 #
-# 참고소스: https://bit.ly/45kKBio
+# 파이썬 소스: https://bit.ly/45kKBio
 #
 # 문제 링크: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 
