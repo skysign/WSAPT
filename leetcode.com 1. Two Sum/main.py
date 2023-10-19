@@ -19,4 +19,5 @@ class Solution:
 
                 idx0 = min(mydict[numFind], idx)
                 idx1 = max(mydict[numFind], idx)
+
                 return [idx0, idx1]
