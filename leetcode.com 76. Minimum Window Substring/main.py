@@ -25,7 +25,6 @@ class Solution:
                 lt = idx
                 break
 
-
         for rt in range(lt, len(s)):
             if s[rt] in targets.keys():
                 tracks[s[rt]] += 1
