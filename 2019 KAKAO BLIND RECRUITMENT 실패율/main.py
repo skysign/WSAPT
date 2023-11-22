@@ -1,0 +1,35 @@
+from collections import defaultdict
+from functools import cmp_to_key
+
+def solution(N, stages):
+    dict = defaultdict(int)
+
+    for stage in stages:
+        dict[stage] += 1
+
+    current_stage_users = sum(dict.values())
+    failrate_stage = []
+
+    for stage in range(1, N+1, 1):
+        if current_stage_users == 0:
+            failrate_stage.append((0, stage))
+        else:
+            fail_rate = dict[stage] / current_stage_users
+            failrate_stage.append((fail_rate, stage))
+            current_stage_users -= dict[stage]
+
+    def my_compare(a, b):
+        if a[0] > b[0]:
+            return -1
+        elif a[0] < b[0]:
+            return 1
+        else:   # a[0] == b[0]
+            if a[1] < b[1]:
+                return -1
+            elif a[1] > b[1]:
+                return 1
+
+        return 0
+
+    failrate_stage = sorted(failrate_stage, key=cmp_to_key(my_compare))
+    return list(map(lambda x: x[1], failrate_stage))
