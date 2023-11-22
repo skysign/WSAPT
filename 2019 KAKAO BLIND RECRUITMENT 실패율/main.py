@@ -18,18 +18,20 @@ def solution(N, stages):
             failrate_stage.append((fail_rate, stage))
             current_stage_users -= dict[stage]
 
-    def my_compare(a, b):
-        if a[0] > b[0]:
-            return -1
-        elif a[0] < b[0]:
-            return 1
-        else:   # a[0] == b[0]
-            if a[1] < b[1]:
-                return -1
-            elif a[1] > b[1]:
-                return 1
+    failrate_stage.sort(key=lambda x: (-1 * x[0], x[1]), reverse=False)
+    # def my_compare(a, b):
+    #     if a[0] > b[0]:
+    #         return -1
+    #     elif a[0] < b[0]:
+    #         return 1
+    #     else:   # a[0] == b[0]
+    #         if a[1] < b[1]:
+    #             return -1
+    #         elif a[1] > b[1]:
+    #             return 1
+    #
+    #     return 0
+    #
+    # failrate_stage = sorted(failrate_stage, key=cmp_to_key(my_compare))
 
-        return 0
-
-    failrate_stage = sorted(failrate_stage, key=cmp_to_key(my_compare))
     return list(map(lambda x: x[1], failrate_stage))
