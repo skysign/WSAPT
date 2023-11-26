@@ -1,3 +1,11 @@
+# 2019 KAKAO BLIND RECRUITMENT 실패율
+#
+# 유튜브 문제 풀이: https://youtu.be/Zo8hECJa_ms?si=cB0vo11Izy5wCjSE
+#
+# 파이썬 소스: https://bit.ly/47wagqb
+#
+# 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/42889
+
 from collections import defaultdict
 from functools import cmp_to_key
 
