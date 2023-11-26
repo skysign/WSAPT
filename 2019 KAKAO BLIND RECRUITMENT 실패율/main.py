@@ -7,7 +7,7 @@ def solution(N, stages):
     for stage in stages:
         dict[stage] += 1
 
-    current_stage_users = sum(dict.values())
+    current_stage_users = len(stages)
     failrate_stage = []
 
     for stage in range(1, N+1, 1):
