@@ -1,13 +1,12 @@
 from collections import defaultdict
 
 def solution(dirs):
-    crntyx = [0, 0]
-
+    answer = 0
     # U: 위쪽으로 한 칸 가기
     # D: 아래쪽으로 한 칸 가기
     # R: 오른쪽으로 한 칸 가기
     # L: 왼쪽으로 한 칸 가기
-    move = {
+    moves = {
         'U': [1, 0],
         'D': [-1, 0],
         'R': [0, 1],
@@ -15,12 +14,12 @@ def solution(dirs):
     }
 
     visited = defaultdict(tuple)
-    answer = 0
+    crntyx = [0, 0]
 
     for dir in dirs:
-        dyx = move[dir]
-        newy = crntyx[0] + dyx[0]
-        newx = crntyx[1] + dyx[1]
+        dy, dx = moves[dir]
+        newy = crntyx[0] + dy
+        newx = crntyx[1] + dx
 
         if not (-5 <= newy <= 5 and -5 <= newx <= 5):
             continue
@@ -33,6 +32,7 @@ def solution(dirs):
 
         visited[path1] = 1
         visited[path2] = 1
+
         crntyx[0], crntyx[1] = newy, newx
 
     return answer
