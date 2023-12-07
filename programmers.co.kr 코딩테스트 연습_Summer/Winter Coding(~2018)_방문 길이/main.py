@@ -1,5 +1,13 @@
 from collections import defaultdict
 
+# programmers.co.kr 코딩테스트 연습 Summer/Winter Coding(~2018) 방문 길이
+#
+# 유튜브 문제 풀이:
+#
+# 파이썬 소스: https://bit.ly/3N84H9e
+#
+# 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/49994
+
 def solution(dirs):
     answer = 0
     # U: 위쪽으로 한 칸 가기
