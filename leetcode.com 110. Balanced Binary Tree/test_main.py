@@ -19,3 +19,15 @@ class TestSolution(TestCase):
         node1 = TreeNode(1, node2l, node2r)
         sol = Solution()
         self.assertEqual(False, sol.isBalanced(node1))
+
+
+    def test219_is_balanced(self):
+        n8 = TreeNode(8, None, None)
+        n6 = TreeNode(6, None, None)
+        n5 = TreeNode(5, None, None)
+        n4 = TreeNode(4, n8, None)
+        n3 = TreeNode(3, n6, None)
+        n2 = TreeNode(2, n4, n5)
+        root = TreeNode(1, n2, n3)
+        sol = Solution()
+        self.assertEqual(True, sol.isBalanced(root))
