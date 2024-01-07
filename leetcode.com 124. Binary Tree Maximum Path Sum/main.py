@@ -1,6 +1,5 @@
 from typing import Optional
 
-# Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -22,10 +21,9 @@ class Solution:
         max_left = self.path_sum(node.left)
         max_right = self.path_sum(node.right)
 
-        tmp = max(node.val,
-                  node.val + max_left,
-                  node.val + max_right)
+        path1 = max(node.val, node.val + max_left, node.val + max_right)
+        path2 = node.val + max_left + max_right
 
-        self.answer = max(self.answer, tmp, node.val + max_left + max_right)
+        self.answer = max(self.answer, path1, path2)
 
-        return tmp
+        return path1
