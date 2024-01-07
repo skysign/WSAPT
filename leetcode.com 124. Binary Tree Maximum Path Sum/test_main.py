@@ -23,7 +23,7 @@ class TestSolution(TestCase):
     def test66_max_path_sum(self):
         sol = Solution()
         root = TreeNode(-3, None, None)
-        self.assertEqual(6, sol.maxPathSum(root))
+        self.assertEqual(-3, sol.maxPathSum(root))
 
     def test68_max_path_sum(self):
         sol = Solution()

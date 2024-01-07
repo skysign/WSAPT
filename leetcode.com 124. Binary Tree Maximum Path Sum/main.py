@@ -8,40 +8,24 @@ class TreeNode:
         self.right = right
 
 class Solution:
+    def __init__(self):
+        self.answer = -1001
+
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        lrtn, lrtn2 = self.path_sum(root.left)
-        rrtn, rrtn2 = self.path_sum(root.right)
-
-        rtn = max(root.val,
-                  lrtn,
-                  rrtn,
-                  root.val + lrtn,
-                  root.val + rrtn,
-                  root.val + lrtn + rrtn)
-
-        rtn = max(rtn, lrtn2, rrtn2)
-
-        return rtn
+        self.path_sum(root)
+        return self.answer
 
     def path_sum(self, node: Optional[TreeNode]):
         if not node:
-            return [-1001, -1001]
+            return 0
 
-        if not node.left and not node.right:
-            return [node.val, node.val]
+        max_left = self.path_sum(node.left)
+        max_right = self.path_sum(node.right)
 
-        lrtn, lrtn2 = self.path_sum(node.left)
-        rrtn, rrtn2 = self.path_sum(node.right)
+        tmp = max(node.val,
+                  node.val + max_left,
+                  node.val + max_right)
 
-        rtn = max(node.val,
-                  node.val + lrtn,
-                  node.val + rrtn)
+        self.answer = max(self.answer, tmp, node.val + max_left + max_right)
 
-        rtn2 = max(node.val,
-                   node.val + lrtn + rrtn,
-                   node.val + lrtn,
-                   node.val + rrtn,
-                   lrtn2,
-                   rrtn2)
-
-        return [rtn, rtn2]
+        return tmp
