@@ -1,5 +1,12 @@
 from typing import List
 
+# 2024 KAKAO WINTER INTERNSHIP 산 모양 타일링 Python
+#
+# 유튜브 문제 풀이: https://youtu.be/Rac9bK930IA
+#
+# 파이썬 소스: https://bit.ly/48NJf2p
+#
+# 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/258705
 
 def solution(n, tops):
     dp: List[List[int]] = [[0, 0] for _ in range(n)]
