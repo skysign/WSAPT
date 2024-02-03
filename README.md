@@ -8,10 +8,6 @@
 # 알고리즘 문제 질문해도 될까요?
 - 아래 유튜브 채널에 문의해주세요 :-)
 - 코딩으로 데이터를 풀다, 코데풀 채널
-- [https://bit.ly/2Xi36nL](https://bit.ly/2Xi36nL){:target="_blank"}
-
-# 함께 알고리즘 문제 풀고 있는 사람들
-- WSAPT 스터디에서 알고리즘 문제 함께 풀고 있습니다.
-- [https://wsapt.github.io/public/](https://wsapt.github.io/public/){:target="_blank"}
+- [https://www.youtube.com/@codapul](https://www.youtube.com/@codapul)
 
 skysign at gmail.com
