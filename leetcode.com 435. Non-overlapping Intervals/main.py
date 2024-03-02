@@ -10,7 +10,7 @@ class Solution:
         prev = 0
 
         for idx in range(1, count_total):
-            # prev의 end가 다음의 start 보다 작거나 같으면
+            # prev의 end가 idx의 start 보다 작거나 같으면
             # 이 둘은 overlapped 되는 부분이 없다는 의미
             if intervals[prev][1] <= intervals[idx][0]:
                 prev = idx
