@@ -9,18 +9,18 @@ class Solution:
         while len(intervals) > 0:
             a_start, a_end = answer.pop()
             b_start, b_end = intervals.pop(0)
-            over_warapped = False
+            over_lapped = False
 
             if a_start <= b_start and b_end <= a_end:
-                over_warapped = True
+                over_lapped = True
             elif b_start <= a_start and a_end <= b_end:
-                over_warapped = True
+                over_lapped = True
             elif a_start <= b_start <= a_end:
-                over_warapped = True
+                over_lapped = True
             elif a_start <= b_end <= a_end:
-                over_warapped = True
+                over_lapped = True
 
-            if over_warapped:
+            if over_lapped:
                 start = min(a_start, b_start)
                 end = max(a_end, b_end)
                 answer.append([start, end])

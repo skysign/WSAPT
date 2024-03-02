@@ -15,22 +15,22 @@ class Solution:
         for idx in range(len(intervals)):
             itv = intervals[idx]
             start, end = itv
-            over_warped = False
+            over_lapped = False
 
             # start_new, start, end end_new
             # start, start_new end
             # start, end_new end
             if start_new <= start and end <= end_new:
-                over_warped = True
+                over_lapped = True
                 over_warped_at_least_once = True
             elif start <= start_new <= end:
-                over_warped = True
+                over_lapped = True
                 over_warped_at_least_once = True
             elif start <= end_new <= end:
-                over_warped = True
+                over_lapped = True
                 over_warped_at_least_once = True
 
-            if over_warped:
+            if over_lapped:
                 start_min = min(start_min, start_new)
                 end_max = max(end_max, end_new)
                 start_min = min(start_min, start)
