@@ -12,7 +12,6 @@ def solution(jobs: List):
         is_idle: bool = True
 
         while len(jobs) > 0 and jobs[0][0] <= current_time:
-            is_idle = False
             [start_time, duration] = jobs.pop(0)
             heapq.heappush(heap, [duration, start_time])
 
