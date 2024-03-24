@@ -24,7 +24,7 @@ class Solution:
                 t1, length = heapq.heappop(heap)
                 if t + 1 == t1:
                     t = t1
-                    removes.append((t, length - 1))
+                    removes.append((t1, length - 1))
                 else:
                     return False
 
