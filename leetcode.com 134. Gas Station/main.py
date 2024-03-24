@@ -8,7 +8,7 @@ class Solution:
         start = 0
         fuel = 0
 
-        for idx in range(len(gas)):
+        for idx in range(len(gas) -1):
             fuel += (gas[idx] - cost[idx])
 
             if fuel < 0:
