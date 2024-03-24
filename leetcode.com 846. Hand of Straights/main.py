@@ -8,14 +8,12 @@ class Solution:
             return False
 
         hands = Counter(hand)
-        items = hands.items()
-        heap = []
+        heap, removes = [], []
 
-        for item in items:
+        for item in hands.items():
             heapq.heappush(heap, item)
 
         while heap:
-            removes = []
             t, length = heapq.heappop(heap)
             removes.append((t, length-1))
 
@@ -33,5 +31,7 @@ class Solution:
             for item in removes:
                 if item[1] > 0:
                     heapq.heappush(heap, item)
+
+            removes.clear()
 
         return True
