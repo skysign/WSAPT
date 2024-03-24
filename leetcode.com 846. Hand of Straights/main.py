@@ -1,44 +1,37 @@
 from collections import Counter
 from typing import List
+import heapq
 
 class Solution:
     def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
-        length = len(hand)
-
-        if 0 != length % groupSize:
+        if 0 != len(hand) % groupSize:
             return False
 
-        hand.sort()
         hands = Counter(hand)
-        keys = list(hands.keys())
-        keys.sort()
+        items = hands.items()
+        heap = []
 
-        while keys:
-            length = len(keys)
-            if length < groupSize:
-                return False
+        for item in items:
+            heapq.heappush(heap, item)
 
+        while heap:
             removes = []
-            t = keys[0]
-            hands[t] -= 1
-
-            if hands[t] == 0:
-                removes.append(t)
+            t, length = heapq.heappop(heap)
+            removes.append((t, length-1))
 
             for i in range(1, groupSize):
-                if i < length and t +1 == keys[i]:
-                    t = keys[i]
-                    hands[t] -= 1
-                    if hands[t] == 0:
-                        removes.append(t)
+                if len(heap) <= 0:
+                    return False
+
+                t1, length = heapq.heappop(heap)
+                if t + 1 == t1:
+                    t = t1
+                    removes.append((t, length - 1))
                 else:
                     return False
 
-            for i in removes:
-                del hands[i]
-
-            removes.clear()
-            keys = list(hands.keys())
-            keys.sort()
+            for item in removes:
+                if item[1] > 0:
+                    heapq.heappush(heap, item)
 
         return True
