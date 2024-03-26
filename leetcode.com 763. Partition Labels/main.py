@@ -7,8 +7,6 @@ class Solution:
         answer = []
 
         for i in range(len(s)):
-            c = s[i]
-
             if len(set_part) > 0:
                 set_right = set(s[i:])
                 intersection = set_part.intersection(set_right)
@@ -18,11 +16,8 @@ class Solution:
                     answer.append(partition_length)
                     partition_length = 0
 
-            if not c in set_part:
-                set_part.add(c)
-                partition_length += 1
-            else:
-                partition_length += 1
+            set_part.add(s[i])
+            partition_length += 1
 
         if partition_length != 0:
             answer.append(partition_length)
