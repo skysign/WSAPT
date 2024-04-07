@@ -16,12 +16,11 @@ class Solution:
         dt[9] = ['w', 'x', 'y', 'z']
 
         output = dt[int(digits[:1])]
-        queue = []
-        for c in digits[1:]:
-            queue.append(int(c))
 
-        for idx in queue:
+        for c in digits[1:]:
+            idx = int(c)
             output2 = []
+
             for pre in output:
                 for post in dt[idx]:
                     output2.append(pre + post)
