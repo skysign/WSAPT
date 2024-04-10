@@ -4,7 +4,8 @@ from typing import List
 def mycombination(nums: List[int], length: int, answer: List):
     def rec(nums: List[int], idx_begin: int, length: int, pathes: List, answer: List):
         if length == 0:
-            answer.append(pathes)
+            if pathes not in answer:
+                answer.append(pathes)
             return
 
         for idx in range(idx_begin, len(nums)):
@@ -19,12 +20,13 @@ def mycombination(nums: List[int], length: int, answer: List):
 
 
 class Solution:
-    def subsets(self, nums: List[int]) -> List[List[int]]:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
         answer = []
+        nums.sort()
 
-        for n in range(len(nums) + 1):
-            local_answer = []
-            mycombination(nums, n, local_answer)
-            answer += local_answer
+        for length in range(len(nums) + 1):
+            answer_local = []
+            mycombination(nums, length, answer_local)
+            answer += answer_local
 
         return answer
