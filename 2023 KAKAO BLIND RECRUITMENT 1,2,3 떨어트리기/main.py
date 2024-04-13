@@ -1,11 +1,12 @@
+from collections import defaultdict
 from typing import List, Optional
 
 
 class Node:
     def __init__(self, node_num, target):
         self.num = node_num
-        self.target = target
         self.children: List[Optional[Node]] = []
+        self.target = target
         self.idx_child = 0
         self.indexes123: List[int] = []
 
@@ -47,7 +48,7 @@ def make_target_from123(length123: int, target: int):
 
 
 def solution(edges: List[List[int]], target: List[int]):
-    nodes: List[Node] = [None for _ in range(101)]
+    nodes = defaultdict(lambda : None)
 
     for parent_num, child_num in edges:
         if nodes[parent_num] is None:
@@ -59,7 +60,7 @@ def solution(edges: List[List[int]], target: List[int]):
 
     leaves: List[Node] = []
 
-    for node_num in range(101):
+    for node_num in nodes.keys():
         if nodes[node_num]:
             if len(nodes[node_num].children) > 0:
                 nodes[node_num].children.sort()
