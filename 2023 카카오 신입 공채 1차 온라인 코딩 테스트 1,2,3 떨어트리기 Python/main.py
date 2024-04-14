@@ -84,7 +84,7 @@ def solution(edges, targets):
         nodes[parent_number].add_child_node(nodes[child_number])
 
     for idx in range(101):
-        if nodes[idx] is not None and len(nodes[idx].indexes) == 0:
+        if nodes[idx] is not None and len(nodes[idx].children) == 0:
             leaves.append(nodes[idx])
 
     current_index = 0

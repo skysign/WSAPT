@@ -61,11 +61,10 @@ def solution(edges: List[List[int]], target: List[int]):
     leaves: List[Node] = []
 
     for node_num in nodes.keys():
-        if nodes[node_num]:
-            if len(nodes[node_num].children) > 0:
-                nodes[node_num].children.sort()
-            else:
-                leaves.append(nodes[node_num])
+        if len(nodes[node_num].children) > 0:
+            nodes[node_num].children.sort()
+        else:
+            leaves.append(nodes[node_num])
 
     idx123 = 0
     while True:
@@ -80,7 +79,6 @@ def solution(edges: List[List[int]], target: List[int]):
     answer = [0] * idx123
     for leaf in leaves:
         ans = make_target_from123(len(leaf.indexes123), target[leaf.num - 1])
-        ans.sort()
         for idx in range(len(leaf.indexes123)):
             answer[leaf.indexes123[idx]] = ans[idx]
 
