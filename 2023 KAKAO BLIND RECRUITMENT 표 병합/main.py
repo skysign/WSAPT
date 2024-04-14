@@ -12,7 +12,7 @@ def solution(commands: List[str]):
 
         if cmd[0] == 'UPDATE' and len(cmd) == 4:
             r, c, v = int(cmd[1]), int(cmd[2]), cmd[3]
-            if merged[r][c] == (r,c):
+            if merged[r][c] == (r, c):
                 map[r][c] = v
             else:
                 mr, mc = merged[r][c]
