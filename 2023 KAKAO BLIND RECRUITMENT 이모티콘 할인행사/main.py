@@ -1,5 +1,5 @@
 from typing import List
-from itertools import product, permutations
+from itertools import product
 
 
 def solution(users: List[List[int]], emoticons: List[List[int]]):
