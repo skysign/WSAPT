@@ -14,8 +14,8 @@ def solution(today: str, terms: List, privacies: List[str]):
         privacies[idx] = [idx + 1, (ymd2int(ymd) + dict_terms[yakkwan])]
 
     privacies = list(filter(lambda privacy: privacy[1] <= today, privacies))
-    sorted(privacies, key=lambda privacy: privacy[1])
     answer = list(map(lambda privacy: privacy[0], privacies))
+    answer.sort()
 
     return answer
 
