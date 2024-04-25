@@ -1,4 +1,3 @@
-import copy
 from typing import List
 
 
@@ -11,16 +10,16 @@ def solution(n: int, info: List[int]):
     return answer[1]
 
 
-def rec(depth: int, remained_arrow: int, info: List[int], pathes: List[int]):
+def rec(depth: int, remained_arrow: int, info: List[int], shot_by_ryan: List[int]):
     if depth == len(info) or remained_arrow == 0:
-        pathes += [0] * (len(info) - len(pathes))
-        pathes[10] += remained_arrow
-        return [jumsu(info, pathes), pathes]
+        shot_by_ryan += [0] * (len(info) - len(shot_by_ryan))
+        shot_by_ryan[10] += remained_arrow
+        return [jumsu(info, shot_by_ryan), shot_by_ryan]
 
     ans1 = [-1, [0] * 11]
     if remained_arrow - (info[depth] + 1) >= 0:
-        ans1 = rec(depth + 1, remained_arrow - (info[depth] + 1), info, pathes + [(info[depth] + 1)])
-    ans2 = rec(depth + 1, remained_arrow, info, pathes + [0])
+        ans1 = rec(depth + 1, remained_arrow - (info[depth] + 1), info, shot_by_ryan + [(info[depth] + 1)])
+    ans2 = rec(depth + 1, remained_arrow, info, shot_by_ryan + [0])
 
     if ans1[0] > ans2[0]:
         return ans1
