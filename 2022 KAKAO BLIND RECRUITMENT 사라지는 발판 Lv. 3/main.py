@@ -3,7 +3,6 @@ from typing import List
 
 dyx = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
-
 def solution(board: List[List[int]], aloc: List[int], bloc: List[int]) -> int:
     answer = a_move(board, aloc[0], aloc[1], 0, bloc[0], bloc[1], 0)
     return answer[1]
