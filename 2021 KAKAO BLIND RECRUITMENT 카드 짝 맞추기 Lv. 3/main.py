@@ -73,57 +73,47 @@ def count_keys(board, y, x, dst_y, dst_x):
 
     global mx_x, mx_y, map_ori, darrows, dyxs, double_arrows
 
-    # for yy in range(mx_y):
-    #     for xx in range(mx_x):
-    #         map[yy][xx] = sys.maxsize
     map = copy.deepcopy(map_ori)
     map[y][x] = 0
 
     max_length = abs(y - dst_y) + abs(x - dst_x)
 
-    queue = [[y, x, []]]
+    queue = [[y, x, 0]]
     while queue:
-        y, x, pathes_ori = queue.pop(0)
+        y, x, crnt_length = queue.pop(0)
 
-        if len(pathes_ori) >= max_length:
+        if crnt_length >= max_length:
             continue
 
         for arrow in darrows:
             dy, dx = dyxs[arrow]
             ny, nx = y + dy, x + dx
 
-            # pathes = copy.deepcopy(pathes_ori)
-            pathes = pathes_ori + []
+            if not (0 <= ny < mx_y and 0 <= nx < mx_x):
+                continue
 
-            while 0 <= ny < mx_y and 0 <= nx < mx_x:
-                l = len(pathes) + 1
-                if map[ny][nx] > l and board[ny][nx] == 0:
-                    map[ny][nx] = l
-                    if map[dst_y][dst_x] != sys.maxsize:
-                        if l < map[dst_y][dst_x] - 1:
-                            queue.append([ny, nx, pathes + [arrow]])
-                    else:
-                        queue.append([ny, nx, pathes + [arrow]])
-                    pathes.append(arrow)
+            if dy != 0:
+                while 0 <= ny < mx_y:
+                    if (board[ny][nx] > 0 or ((0 == ny or ny == mx_y - 1))):
+                        if map[ny][nx] > crnt_length + 1:
+                            map[ny][nx] = crnt_length + 1
+                            queue.append([ny, nx, crnt_length + 1])
+                        break
+                    ny = ny + dy
 
-                if board[ny][nx] > 0 or ((0 == ny or ny == mx_y - 1) and (dy != 0)) or ((0 == nx or nx == mx_x - 1) and dx != 0):
-                    # local_pathes = copy.deepcopy(pathes)
-                    local_pathes = pathes + []
-                    while len(local_pathes) > 0 and local_pathes[len(local_pathes) - 1] == arrow:
-                        local_pathes.pop()
-                    local_pathes.append(double_arrows[arrow])
+            if dx != 0:
+                while 0 <= nx < mx_x:
+                    if (board[ny][nx] > 0 or ((0 == nx or nx == mx_x - 1))):
+                        if map[ny][nx] > crnt_length + 1:
+                            map[ny][nx] = crnt_length + 1
+                            queue.append([ny, nx, crnt_length + 1])
+                        break
+                    nx = nx + dx
 
-                    if map[ny][nx] > len(local_pathes):
-                        map[ny][nx] = len(local_pathes)
-
-                        if map[dst_y][dst_x] != sys.maxsize:
-                            if len(local_pathes) < map[dst_y][dst_x] - 1:
-                                queue.append([ny, nx, local_pathes])
-                        else:
-                            queue.append([ny, nx, local_pathes])
-                    break
-
-                ny, nx = ny + dy, nx + dx
+            ny, nx = y + dy, x + dx
+            if map[ny][nx] > crnt_length + 1:
+                map[ny][nx] = crnt_length + 1
+                queue.append([ny, nx, crnt_length + 1])
 
     # [Enter] key 1+
     return 1 + map[dst_y][dst_x]
