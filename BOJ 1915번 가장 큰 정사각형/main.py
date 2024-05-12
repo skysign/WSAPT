@@ -1,3 +1,8 @@
+# 백준 1915번 가장 큰 정사각형
+# 문제 링크: https://www.acmicpc.net/problem/1915
+# 파이썬 소스: https://bit.ly/3WvyrCz
+# 유튜브 문제 풀이: https://youtu.be/ZUHMmUfCqLw?si=AqZQlkRKOVBwzOJz
+
 import sys
 
 
