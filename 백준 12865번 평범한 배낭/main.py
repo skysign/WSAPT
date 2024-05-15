@@ -1,5 +1,9 @@
 import sys
 
+# 백준 12865번 평범한 배낭
+# 문제 링크: https://www.acmicpc.net/problem/12865
+# 파이썬 소스: https://bit.ly/3ymrXvX
+# 유튜브 문제 풀이: https://youtu.be/S-7YAuT9nDk?si=O6uJT1vFHzw8Yzk4
 
 def solution(filename=''):
     if filename == '':
