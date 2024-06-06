@@ -4,12 +4,10 @@ class Solution:
         length = len(s)
 
         for i in range(length):
-            tmp = self.expand(i, i, s, length)
-            answer += tmp
+            answer += self.expand(i, i, s, length)
 
             if i + 1 < length:
-                tmp = self.expand(i, i + 1, s, length)
-                answer += tmp
+                answer += self.expand(i, i + 1, s, length)
 
         return answer
 
