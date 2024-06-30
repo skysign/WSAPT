@@ -10,7 +10,7 @@
       steps:
         - uses: actions/checkout@v3      
         - id: step1
-          run: git diff --name-only HEAD^ HEAD | grep '/main.py'
+          run: git diff --name-only HEAD~1 HEAD | grep '/main.py'
     job2:
       needs: job1    
       runs-on: ubuntu-latest	
