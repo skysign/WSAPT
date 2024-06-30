@@ -2,7 +2,6 @@
   on:
     push:
       branches: [ master ]
-      paths: [ 'main.py' ]
   jobs:
     job1:
       runs-on: ubuntu-latest
