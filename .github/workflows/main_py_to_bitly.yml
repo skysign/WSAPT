@@ -1,10 +1,10 @@
   name: CI
-	
+
   on:
     push:
       branches: [ master ]
       paths: [ 'main.py' ]
-	
+
   jobs:
     job1:
       runs-on: ubuntu-latest
@@ -13,7 +13,7 @@
       steps:
         - id: step1
           run: path_of_main_py=`git diff --name-only HEAD~1 HEAD | grep '/main.py'`
-	
+
     job2:
       needs: job1    
       runs-on: ubuntu-latest	
