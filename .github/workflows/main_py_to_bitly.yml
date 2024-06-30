@@ -9,6 +9,8 @@
         output1: ${{ steps.step1.outputs }}
       steps:
         - uses: actions/checkout@v3      
+          with: 
+            fetch-depth: 1
         - id: step1
           run: git diff --name-only HEAD~1 HEAD | grep '/main.py'
     job2:
