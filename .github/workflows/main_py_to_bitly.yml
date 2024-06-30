@@ -29,8 +29,8 @@
           shell: bash
           run: |
             curl \
-              -H 'Authorization: Bearer $BITLY_ACCESS_TOKEN' \
-              -H 'Content-Type: application/json' \
+              -H "Authorization: Bearer ${{ env.BITLY_ACCESS_TOKEN }}" \
+              -H "Content-Type: application/json" \
               -X POST \
               -d '{"long_url": "${{ env.path_of_main_py }}"}' \
               https://api-ssl.bitly.com/v4/bitlinks
