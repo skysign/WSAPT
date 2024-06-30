@@ -14,7 +14,11 @@
           run: |
             echo "zero_length_string=\"\"" >> $GITHUB_ENV
             echo "path_of_main_py=$(git diff --name-only HEAD~1 HEAD | grep '/main\.py')" >> $GITHUB_ENV
-            echo "path_of_main_py=${{ env.path_of_main_py }}\"\"" >> $GITHUB_ENV
+            echo $path_of_main_py
+            echo ${{ env.path_of_main_py }}
+            echo "path_of_main_py=$path_of_main_py\"\"" >> $GITHUB_ENV
+            echo $path_of_main_py
+            echo ${{ env.path_of_main_py }}
         - name: Check main.py exists
           run: |
             if [${{ env.zero_length_string }} == ${{ env.path_of_main_py }}]; then
