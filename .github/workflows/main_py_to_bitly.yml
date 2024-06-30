@@ -2,6 +2,8 @@
   on:
     push:
       branches: [ master ]
+  env:
+    BITLY_ACCESS_TOKEN: ${{ secrets.wsapt-bitly.BITLY_ACCESS_TOKEN }}
   jobs:
     job1:
       runs-on: ubuntu-latest
@@ -25,8 +27,6 @@
           run: echo "${{ env.path_of_main_py }}"
         - name: Create bit.ly short url
           shell: bash
-          env:
-            BITLY_ACCESS_TOKEN: ${{ secrets.BITLY_ACCESS_TOKEN }}
           run: |
             curl \
               -H 'Authorization: Bearer $BITLY_ACCESS_TOKEN' \
