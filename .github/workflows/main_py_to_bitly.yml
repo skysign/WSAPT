@@ -29,7 +29,7 @@
           shell: bash
           run: |
             curl \
-              -H "Authorization: Bearer ${{ env.BITLY_ACCESS_TOKEN }}" \
+              -H "Authorization: Bearer af9661877cae5b4e1922d0dfd327475019f4d177" \
               -H "Content-Type: application/json" \
               -X POST \
               -d '{"long_url": "${{ env.path_of_main_py }}"}' \
