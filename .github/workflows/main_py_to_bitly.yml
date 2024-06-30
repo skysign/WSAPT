@@ -6,12 +6,11 @@
     job1:
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/checkout@v4
+        - name: get repo
+          uses: actions/checkout@v4
           with:
             fetch-depth: 2
         - name: get path of main.py
-          with:
-            path_of_main_py: |
-              run: git diff --name-only HEAD~1 HEAD | grep '/main.py'
+          run: echo "path_of_main_py=$(git diff --name-only HEAD~1 HEAD | grep '/main.py')"
         - name: print path_of_main_py
           run: echo "${{ steps.with.path_of_main_py }}"
