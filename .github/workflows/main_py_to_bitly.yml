@@ -10,7 +10,7 @@
         output1: ${{ steps.step1.outputs }}
       steps:
         - id: step1
-          run: path_of_main_py=`git diff --name-only HEAD~1 HEAD | grep '/main.py'`
+          run: git diff --name-only HEAD~1 HEAD | grep '/main.py'
     job2:
       needs: job1    
       runs-on: ubuntu-latest	
