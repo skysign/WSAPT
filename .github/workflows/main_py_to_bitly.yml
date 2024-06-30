@@ -20,6 +20,7 @@
             if [[${{ env.zero_length_string }} == ${{ env.path_of_main_py }}]]; then
               echo "No main.py"
               exit 1
+            fi
         - name: Decorate path_of_main_py
           run: echo "path_of_main_py=https://github.com/skysign/WSAPT/${{ env.path_of_main_py }}" >> $GITHUB_ENV
         - name: Print path_of_main_py
