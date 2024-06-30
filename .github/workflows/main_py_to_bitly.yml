@@ -23,10 +23,9 @@
           run: echo "path_of_main_py=https://github.com/skysign/WSAPT/blob/master/${{ env.path_of_main_py }}" >> $GITHUB_ENV
         - name: Print path_of_main_py
           run: echo "${{ env.path_of_main_py }}"
-        - shell: bash
-          env:
-            BITLY_ACCESS_TOKEN: ${{ secrets.BITLY_ACCESS_TOKEN }}
         - name: Create bit.ly short url
+          env:
+            BITLY_ACCESS_TOKEN: ${{ secrets.BITLY_ACCESS_TOKEN }}        
           run: |
             curl \
               -H 'Authorization: Bearer $BITLY_ACCESS_TOKEN' \
