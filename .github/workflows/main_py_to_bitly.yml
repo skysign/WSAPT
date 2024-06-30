@@ -11,6 +11,6 @@
           with:
             fetch-depth: 2
         - name: get path of main.py
-          run: echo "path_of_main_py=$(git diff --name-only HEAD~1 HEAD | grep '/main.py')" >> $GITHUB_ENV
+          run: echo "path_of_main_py=$(git diff --name-only HEAD~1 HEAD | grep '/main\.py')" >> $GITHUB_ENV
         - name: print path_of_main_py
           run: echo "${{ env.path_of_main_py }}"
