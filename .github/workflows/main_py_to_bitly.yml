@@ -5,8 +5,6 @@
   jobs:
     job1:
       runs-on: ubuntu-latest
-      env:
-        BITLY_ACCESS_TOKEN: ${{ secrets.BITLY_ACCESS_TOKEN }}
       steps:
         - name: get repo
           uses: actions/checkout@v4
@@ -26,9 +24,12 @@
         - name: Print path_of_main_py
           run: echo "${{ env.path_of_main_py }}"
         - name: Create bit.ly short url
+          shell: bash
+          env:
+            BITLY_ACCESS_TOKEN: ${{ secrets.BITLY_ACCESS_TOKEN }}
           run: |
             curl \
-              -H 'Authorization: Bearer ${{ env.BITLY_ACCESS_TOKEN }}' \
+              -H 'Authorization: Bearer $BITLY_ACCESS_TOKEN' \
               -H 'Content-Type: application/json' \
               -X POST \
               -d '{"long_url": "${{ env.path_of_main_py }}"}' \
