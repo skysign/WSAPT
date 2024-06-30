@@ -28,7 +28,7 @@
         - name: Create bit.ly short url
           run: |
             curl \
-              -H 'Authorization: Bearer $BITLY_ACCESS_TOKEN' \
+              -H 'Authorization: Bearer ${{ env.BITLY_ACCESS_TOKEN }}' \
               -H 'Content-Type: application/json' \
               -X POST \
               -d '{"long_url": "${{ env.path_of_main_py }}"}' \
