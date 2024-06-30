@@ -17,7 +17,7 @@
             echo "path_of_main_py=${{ env.path_of_main_py }}\"\"" >> $GITHUB_ENV
         - name: Check main.py exists
           run: |
-            if [[${{ env.zero_length_string }} == ${{ env.path_of_main_py }}]]; then
+            if [${{ env.zero_length_string }} == ${{ env.path_of_main_py }}]; then
               echo "No main.py"
               exit 1
             fi
