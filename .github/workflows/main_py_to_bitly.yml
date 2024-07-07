@@ -24,9 +24,9 @@
         - name: Print path_of_main_py
           run: echo "${{ env.path_of_main_py }}"
         - name: Create bit.ly short url
+          shell: bash
           env:
             bitly_pat: ${{ secrets.BITLY_PAT }}
-          shell: bash
           run: |
             curl \
               -H "Authorization: $bitly_pat" \
