@@ -26,10 +26,12 @@
         - name: Print path_of_main_py
           run: echo "${{ env.path_of_main_py }}"
         - name: Create bit.ly short url
+          env:
+            BITLY_PAT: ${{ secrets.BITLY_PAT }}
           shell: bash
           run: |
             curl \
-              -H "Authorization: Bearer af9661877cae5b4e1922d0dfd327475019f4d177" \
+              -H "Authorization: Bearer $BITLY_PAT" \
               -H "Content-Type: application/json" \
               -X POST \
               -d '{"long_url": "${{ env.path_of_main_py }}"}' \
