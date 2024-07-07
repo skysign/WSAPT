@@ -29,7 +29,7 @@
             bitly_pat: ${{ secrets.BITLY_PAT }}
           run: |
             curl \
-              -H "Authorization: $bitly_pat" \
+              -H "Authorization: ${{ env.bitly_pat }}" \
               -H "Content-Type: application/json" \
               -X POST \
               -d '{"long_url": "${{ env.path_of_main_py }}"}' \
