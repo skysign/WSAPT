@@ -29,7 +29,7 @@
           shell: bash
           run: |
             curl \
-              -H "$bitly_pat" \
+              -H "Authorization: $bitly_pat" \
               -H "Content-Type: application/json" \
               -X POST \
               -d '{"long_url": "${{ env.path_of_main_py }}"}' \
