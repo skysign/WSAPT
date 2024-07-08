@@ -21,6 +21,10 @@
               echo "No main.py exists"
               exit 1
             fi
+        - name: Get first line of last commit message
+          shell: bash        
+          run: |
+            echo "one_line=$(git log --oneline -n 1 --format=%B | head -n 1)" >> $GITHUB_ENV
         - name: Decorate path_of_main_py
           shell: bash
           env:
@@ -37,6 +41,6 @@
               -H "Authorization: Bearer ${{ env.BITLY_PAT }}" \
               -H "Content-Type: application/json" \
               -X POST \
-              -d '{"long_url": "${{ env.path_of_main_py }}"}' \
+              -d '{"long_url": "${{ env.path_of_main_py }}", "title": "${{ env.one_line }}"}' \
               https://api-ssl.bitly.com/v4/bitlinks
 
