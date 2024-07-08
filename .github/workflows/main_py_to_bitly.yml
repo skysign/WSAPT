@@ -11,25 +11,33 @@
           with:
             fetch-depth: 2
         - name: get path of main.py
+          shell: bash        
           run: |
             echo "path_of_main_py=$(git diff --name-only HEAD~1 HEAD | grep '/main\.py')" >> $GITHUB_ENV
         - name: Check main.py exists
+          shell: bash
           run: |
             if [ -z ${{ env.path_of_main_py }} ]; then
               echo "No main.py exists"
               exit 1
             fi
         - name: Decorate path_of_main_py
-          run: echo "path_of_main_py=https://github.com/skysign/WSAPT/blob/master/${{ env.path_of_main_py }}" >> $GITHUB_ENV
-        - name: Print path_of_main_py
-          run: echo "${{ env.path_of_main_py }}"
+          shell: bash
+          run: |
+            echo "path_of_main_py=https://github.com/skysign/WSAPT/blob/master/${{ env.path_of_main_py }}" >> $GITHUB_ENV
+            echo "${{ env.path_of_main_py }}"
+        - name: Get bitly-pat
+          shell: bash
+          id: get-bitly-pat
+          run: |
+            echo "BITLY_PAT=${{ secrets.BITLY_PAT }}" >> $GITHUB_OUTPUT
         - name: Create bit.ly short url
           shell: bash
           env:
             bitly_pat: ${{ secrets.BITLY_PAT }}
           run: |
             curl \
-              -H "Authorization: ${{ env.bitly_pat }}" \
+              -H "Authorization: ${{ steps.get-bitly-pat.outputs.BITLY_PAT }}" \
               -H "Content-Type: application/json" \
               -X POST \
               -d '{"long_url": "${{ env.path_of_main_py }}"}' \
