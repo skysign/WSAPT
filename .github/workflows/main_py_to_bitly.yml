@@ -23,21 +23,16 @@
             fi
         - name: Decorate path_of_main_py
           shell: bash
+          env:
+            BITLY_PAT: ${{ secrets.BITLY_PAT }}
           run: |
             echo "path_of_main_py=https://github.com/skysign/WSAPT/blob/master/${{ env.path_of_main_py }}" >> $GITHUB_ENV
             echo "${{ env.path_of_main_py }}"
-        - name: Get bitly-pat
-          shell: bash
-          id: get-bitly-pat
-          run: |
-            echo "BITLY_PAT=${{ secrets.BITLY_PAT }}" >> $GITHUB_OUTPUT
         - name: Create bit.ly short url
           shell: bash
-          env:
-            bitly_pat: ${{ secrets.BITLY_PAT }}
           run: |
             curl \
-              -H "Authorization: ${{ steps.get-bitly-pat.outputs.BITLY_PAT }}" \
+              -H "Authorization: ${{ env.BITLY_PAT }}" \
               -H "Content-Type: application/json" \
               -X POST \
               -d '{"long_url": "${{ env.path_of_main_py }}"}' \
