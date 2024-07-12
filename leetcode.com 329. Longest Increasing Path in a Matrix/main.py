@@ -1,41 +1,44 @@
 from typing import List
 
+
 class Solution:
-    def longestIncreasingPath(self, dt: List[List[int]]) -> int:
-        dp = [[-1 for _ in range(len(dt[0]))] for _ in range(len(dt))]
+    def __init__(self):
+        self.drc = [[-1, 0], [0, 1], [1, 0], [0, -1]]
+        self.mx_row = 0
+        self.mx_col = 0
 
-        for sy in range(len(dt)):
-            for sx in range(len(dt[0])):
-                self.dfs(sy, sx, 1, dp, dt)
+    def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
+        self.mx_row = len(matrix)
+        self.mx_col = len(matrix[0])
+        outdegree: List[List[int]] = [[0 for _ in range(self.mx_col)] for _ in range(self.mx_row)]
+        leaves = []
 
-        answer = 0
+        for r in range(self.mx_row):
+            for c in range(self.mx_col):
+                for dr, dc in self.drc:
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < self.mx_row and 0 <= nc < self.mx_col:
+                        if matrix[nr][nc] > matrix[r][c]:
+                            outdegree[r][c] += 1
 
-        for sy in range(len(dt)):
-            for sx in range(len(dt[0])):
-                answer = max(answer, dp[sy][sx])
+                if outdegree[r][c] == 0:
+                    leaves.append([r, c])
 
-        return answer
+        mx = 0
+        while len(leaves) > 0:
+            mx += 1
+            newLeaves = []
 
-    def dfs(self, sy, sx, depth, dp, dt):
-        if dp[sy][sx] >= depth:
-            return
+            for r, c in leaves:
+                for dr, dc in self.drc:
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < self.mx_row and 0 <= nc < self.mx_col:
+                        if matrix[nr][nc] < matrix[r][c]:
+                            outdegree[nr][nc] -= 1
 
-        dp[sy][sx] = depth
+                            if outdegree[nr][nc] == 0:
+                                newLeaves.append([nr, nc])
 
-        dyxs = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-        for dyx in dyxs:
-            dy, dx = dyx
-            ty = sy + dy
-            tx = sx + dx
+            leaves = newLeaves
 
-            if self.is_in(ty, tx, dt):
-                if dt[sy][sx] < dt[ty][tx]:
-                    if dp[ty][tx] < depth +1:
-                        self.dfs(ty, tx, depth +1, dp, dt)
-
-
-    def is_in(self, idx_row, idx_col, map):
-        if (0 <= idx_row < len(map)) and (0 <= idx_col < len(map[0])):
-            return True
-
-        return False
+        return mx
