@@ -15,6 +15,7 @@
           run: |
             git -c core.quotepath=false diff --name-only HEAD~1 HEAD | grep '/main\.py'
             echo "path_of_main_py=$(git -c core.quotepath=false diff --name-only HEAD~1 HEAD | grep '/main\.py')" >> $GITHUB_ENV
+            echo $path_of_main_py
         - name: Check main.py exists
           shell: bash
           run: |
