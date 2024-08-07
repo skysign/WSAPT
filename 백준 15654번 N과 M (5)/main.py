@@ -1,7 +1,6 @@
 import sys
 from typing import List
 
-
 def solve():
     N, M = map(int, sys.stdin.readline().strip().split(' '))
     dt: List[int] = list(map(int, sys.stdin.readline().strip().split(' ')))
