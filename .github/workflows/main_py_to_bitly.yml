@@ -19,7 +19,9 @@
         - name: Check main.py exists
           shell: bash
           run: |
-            if [ -z ${{ env.path_of_main_py }} ]; then
+            $path_of_main_py=$(echo '${{ env.path_of_main_py }}' | sed -e 's/([^)]*)//g)
+            echo $path_of_main_py
+            if [ -z $path_of_main_py ]; then
               echo "No main.py exists"
               exit 1
             fi
