@@ -32,6 +32,5 @@ def my_perm(visited: List[bool], dt, perms, length, perm_found):
         perms.pop()
         visited[i] = False
 
-
 if __name__ == '__main__':
     solve()
