@@ -35,18 +35,6 @@ def solution(fees: List[int], records: List[List]):
         parking_fee = calculate_parking_fee(parking_time[plate], gibon_time, gibon_fee, danwi_time, danwi_fee)
         answer[plate] += parking_fee
 
-    # keys = list(dt.keys())
-    # for plate in keys:
-    #     time_in = dt[plate]
-    #     time_in = HH_MM(time_in)
-    #     time_out = '23:59'
-    #     time_out = HH_MM(time_out)
-    #     parking_time = time_out - time_in
-    #
-    #     parking_fee = calculate_parking_fee(parking_time, gibon_time, gibon_fee, danwi_time, danwi_fee)
-    #     answer[plate] += parking_fee
-    #     del dt[plate]
-
     ans = []
     for plate in answer.keys():
         ans.append([plate, answer[plate]])
