@@ -1,13 +1,5 @@
-import copy
 import sys
-from collections import deque
 
-# 문제를 BFS로 풀수 없는 반례
-# 3 3
-# 0 1
-# 1 2
-# 1 2
-# 즉, 마지막 edge가 cycle을 만드는 경우는 BFS로 구현하면, 알 수 없음
 
 def solve():
     N, M = map(int, sys.stdin.readline().strip().split())
