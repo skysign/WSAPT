@@ -14,6 +14,7 @@ def solve():
 
         for _ in range(M):
             fr, to, time = map(int, sys.stdin.readline().strip().split(' '))
+            edges[to].append([fr, time])
             edges[fr].append([to, time])
 
         for _ in range(W):
@@ -28,9 +29,9 @@ def solve():
             print('NO')
 
 
-def bf(departue, N, edges):
+def bf(N, edges):
     maps = [sys.maxsize for _ in range(N + 1)]
-    maps[departue] = 0
+    maps[1] = 0
 
     for i in range(1, N + 1):
         nodes = list(edges.keys())
