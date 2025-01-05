@@ -1,5 +1,6 @@
 import sys
-sys.setrecursionlimit(10**9)
+
+sys.setrecursionlimit(10 ** 9)
 
 
 def solve():
@@ -21,19 +22,15 @@ def solve():
 
         if v1_root != v2_root:
             answer += w
-            if v1_root < v2_root:
-                dt[v2_root] = v1_root
-            else:
-                dt[v1_root] = v2_root
+            dt[v1_root] = v2_root
 
     print(answer)
 
 
 def union_find(v, dt):
-    if dt[v] == v:
-        return v
+    if dt[v] != v:
+        dt[v] = union_find(dt[v], dt)
 
-    dt[v] = union_find(dt[v], dt)
     return dt[v]
 
 
