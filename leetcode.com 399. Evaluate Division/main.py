@@ -24,10 +24,8 @@ class Solution:
         answer = []
 
         for q1, q2 in queries:
-            rtn = self.direct(dicts, q1, q2)
-
-            if None != rtn:
-                answer.append(rtn)
+            if q1 not in dicts.keys():
+                answer.append(-1)
                 continue
 
             rtn = self.dfs(dicts, q1, q2, 1, [])
@@ -35,17 +33,7 @@ class Solution:
 
         return answer
 
-    def direct(self, dicts, q1, q2):
-        if q1 in dicts.keys():
-            if q2 in dicts[q1].keys():
-                return dicts[q1][q2]
-
-        return None
-
     def dfs(self, dicts, bgn, end, v, visited: List[str]):
-        if bgn not in dicts.keys():
-            return -1
-
         for mid in dicts[bgn].keys():
             if mid not in visited:
                 if mid == end:

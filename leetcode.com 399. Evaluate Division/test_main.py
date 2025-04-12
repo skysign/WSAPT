@@ -33,7 +33,7 @@ class TestSolution(TestCase):
     def test18_calc_equation(self):
         sln = Solution()
         self.assertEqual(
-            [360.00000, 0.00833, 20.00000, 1.00000, -1.00000, -1.00000],
+            [360.00000, 0.008333333333333333, 20.00000, 1.00000, -1.00000, -1.00000],
             sln.calcEquation(
                 equations=[["x1", "x2"], ["x2", "x3"], ["x3", "x4"], ["x4", "x5"]],
                 values=[3.0, 4.0, 5.0, 6.0],
