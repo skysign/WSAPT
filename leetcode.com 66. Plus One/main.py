@@ -11,7 +11,7 @@ class Solution:
         for d in digits:
             d += carry
 
-            if d >= 10:
+            if d == 10:
                 carry = 1
                 d = 0
             else:
