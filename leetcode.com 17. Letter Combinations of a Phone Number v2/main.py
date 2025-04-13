@@ -13,21 +13,15 @@ class Solution:
         dict['8'] = ['t', 'u', 'v']
         dict['9'] = ['w', 'x', 'y', 'z']
 
-        queue = [['']]
+        queue = ['']
         queue2 = []
 
         for d in digits:
             for prev in queue:
                 for new in dict[d]:
-                    queue2.append(prev + [new])
+                    queue2.append(prev + new)
 
             queue = queue2
             queue2 = []
 
-        answer = []
-        for q in queue:
-            a = ''.join(q)
-            if a != '':
-                answer.append(a)
-
-        return answer
+        return list(filter(lambda a: len(a) > 0, queue))
