@@ -12,18 +12,12 @@ class Solution:
 
         answer = 0
 
-        for idx in range(len(s)):
-            j = int(s[idx])
-            answer += self.my(idx, j)
+        v = 1
+        answer += (v * s[0])
+
+        for idx in range(1, len(s)):
+            nn = int(s[idx])
+            v *= 2
+            answer += (v * nn)
 
         return answer
-
-    def my(self, i, j):
-        if i == 0:
-            return j
-
-        v = 1
-        for _ in range(i):
-            v *= 2
-
-        return v * j
