@@ -10,16 +10,23 @@ class TestSolution(TestCase):
             sln.generateParenthesis(3)
         )
 
-    def test_n_2_generate_parenthesis(self):
-        sln = Solution()
-        self.assertEqual(
-            ['()()', '(())'],
-            sln.generateParenthesis(2)
-        )
-
     def test2_generate_parenthesis(self):
         sln = Solution()
         self.assertEqual(
             ["()"],
             sln.generateParenthesis(1)
+        )
+
+    def test_n_2_generate_parenthesis(self):
+        sln = Solution()
+        self.assertEqual(
+            ['(())', '()()'],
+            sln.generateParenthesis(2)
+        )
+
+    def test_n_4_generate_parenthesis(self):
+        sln = Solution()
+        self.assertEqual(
+            ["(((())))","((()()))","((())())","((()))()","(()(()))","(()()())","(()())()","(())(())","(())()()","()((()))","()(()())","()(())()","()()(())","()()()()"],
+            sln.generateParenthesis(4)
         )

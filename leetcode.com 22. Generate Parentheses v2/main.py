@@ -1,9 +1,13 @@
 from typing import List
 
+#(())(()) n = 4일 때 답 중에 1개임
+
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         rlt = self.gen(n, '', '')
-        return list(set(rlt))
+        answer = list(set(rlt))
+        answer.sort()
+        return answer
 
     def gen(self, n, lt: str, rt: str) -> List[str]:
         if n == 0:
