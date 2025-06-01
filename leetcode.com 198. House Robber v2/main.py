@@ -7,7 +7,6 @@ class Solution:
         dp = [0 for _ in range(len(nums))]
 
         for idx in range(3, len(nums)):
-            mx = max(dp[idx - 3], dp[idx - 2])
-            dp[idx] = mx + nums[idx]
+            dp[idx] = max(dp[idx - 3], dp[idx - 2]) + nums[idx]
 
         return max(dp)
