@@ -16,4 +16,4 @@ class Solution:
             else:
                 dt.append(c)
 
-        return True if len(dt) == 0 else False
+        return len(dt) == 0
