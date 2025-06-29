@@ -10,19 +10,21 @@ class ListNode:
 
 class Solution:
     def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        # linked list length is 1
+        # linked list length is 0 or 1
         if head is None or head.next is None:
             return head
 
+        # from here, linked list length is 2 at least
         length = 0
         node = head
         while node:
             length += 1
             node = node.next
 
+        # Calculate minimum rotation
+        # if length is 3, and k is 3, we don't need to rotate linked list
         k = k % length
 
-        # from here, linked list length is 2 at least
         for _ in range(k):
             tail = self.get_tail(head)
             tail.next = head
