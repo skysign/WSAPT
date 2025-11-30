@@ -20,7 +20,12 @@ def solve():
 
     for pos in nCr:
         seconds = bfs(N, board, pos)
-        min_second = min(min_second, seconds)
+        if seconds != -1:
+            min_second = min(min_second, seconds)
+
+    if min_second == sys.maxsize:
+        print(-1)
+        return
 
     print(min_second)
 
