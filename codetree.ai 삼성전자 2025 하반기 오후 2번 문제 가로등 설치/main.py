@@ -19,22 +19,32 @@ def solve():
             M += 1
             mx_M += 1
             new_streetlight = [0, 0, M]
-            for idx in range(len(streetlights) - 1):
-                if idx == 0:
-                    left, right = 1, streetlights[idx + 1][1]
-                elif 0 < idx < len(streetlights) - 1:
-                    left, right = streetlights[idx - 1][1], streetlights[idx + 1][1]
-
+            for idx in range(len(streetlights)):
                 local_delta, local_Ln, local_idx = 0, 0, 0
 
-                if streetlights[idx][1] - left >= right - streetlights[idx][1]:
-                    local_delta = streetlights[idx][1] - left
-                    local_Ln = math.ceil((left + streetlights[idx][1]) / 2)
-                    local_idx = idx
-                else:
+                if idx == 0:
+                    right = streetlights[idx + 1][1]
+
                     local_delta = right - streetlights[idx][1]
                     local_Ln = math.ceil((streetlights[idx][1] + right) / 2)
                     local_idx = idx + 1
+                elif 0 < idx < len(streetlights) - 1:
+                    left, right = streetlights[idx - 1][1], streetlights[idx + 1][1]
+
+                    if streetlights[idx][1] - left >= right - streetlights[idx][1]:
+                        local_delta = streetlights[idx][1] - left
+                        local_Ln = math.ceil((left + streetlights[idx][1]) / 2)
+                        local_idx = idx
+                    else:
+                        local_delta = right - streetlights[idx][1]
+                        local_Ln = math.ceil((streetlights[idx][1] + right) / 2)
+                        local_idx = idx + 1
+                else:  # if idx == len(streetlights)-1
+                    left = streetlights[idx - 1][1]
+
+                    local_delta = streetlights[idx][1] - left
+                    local_Ln = math.ceil((left + streetlights[idx][1]) / 2)
+                    local_idx = idx
 
                 if new_streetlight[0] < local_delta:
                     new_streetlight[0], new_streetlight[1], new_streetlight[2] = local_delta, local_Ln, local_idx
@@ -43,9 +53,11 @@ def solve():
                         new_streetlight[0], new_streetlight[1], new_streetlight[2] = local_delta, local_Ln, local_idx
 
             if new_streetlight[2] < len(streetlights):
-                streetlights = streetlights[0:new_streetlight[2]] + [[mx_M, new_streetlight[1]]] + streetlights[new_streetlight[2]:]
+                # streetlights = streetlights[0:new_streetlight[2]] + [[mx_M, new_streetlight[1]]] + streetlights[new_streetlight[2]:]
+                streetlights.insert(new_streetlight[2], [mx_M, new_streetlight[1]])
             else:
-                streetlights = streetlights + [[M, new_streetlight[1]]]
+                # streetlights = streetlights + [[M, new_streetlight[1]]]
+                streetlights.append([M, new_streetlight[1]])
 
         elif cmd == 300:
             D = tmps[1]

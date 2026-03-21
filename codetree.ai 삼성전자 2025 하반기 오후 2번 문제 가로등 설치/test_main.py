@@ -24,3 +24,6 @@ class Test(TestCase):
 
     def test2_solve(self):
         self.test_solve('2')
+
+    def test3_solve(self):
+        self.test_solve('3')
