@@ -36,7 +36,7 @@ def solve():
 
                     if visited[sr][sc] == False:    # 인접한 칸에서오는 중복 방문 제거
                         if dt[sr][sc] > 0:
-                            candidates.append([0, sr, sc])
+                            candidates.append([sr, sc])
 
                         visited[sr][sc] = True
                         queue_next.append([depth, sr, sc])
@@ -58,8 +58,7 @@ def solve():
                 robots_next.append([robot_sr, robot_sc])
             else:
                 candidates.sort()
-                _, r, c = candidates[0]
-                robots_next.append([r, c])
+                robots_next.append(candidates[0])
 
         robots = robots_next
 
