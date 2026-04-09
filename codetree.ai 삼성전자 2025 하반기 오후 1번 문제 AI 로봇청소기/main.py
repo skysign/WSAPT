@@ -26,25 +26,33 @@ def solve():
                 visited[r][c] = True
 
             candidates = []
-            if dt[robot_sr][robot_sc] > 0:
-                candidates.append([0, robot_sr, robot_sc])
-
             queue = deque([[0, robot_sr, robot_sc]])
-            visited[robot_sr][robot_sc] = True
 
             while queue:
-                depth, sr, sc = queue.popleft()
+                queue_next = deque()
+
+                while queue:
+                    depth, sr, sc = queue.popleft()
+
+                    if visited[sr][sc] == False:    # 인접한 칸에서오는 중복 방문 제거
+                        if dt[sr][sc] > 0:
+                            candidates.append([0, sr, sc])
+
+                        visited[sr][sc] = True
+                        queue_next.append([depth, sr, sc])
+
+                if len(candidates) > 0:
+                    break
+
                 drc = [[0, 1], [1, 0], [0, -1], [-1, 0]]
 
-                for dr, dc in drc:
-                    nr, nc = sr + dr, sc + dc
-                    if 0 <= nr < N and 0 <= nc < N and visited[nr][nc] == False:
-                        if dt[nr][nc] == 0: # 빈칸이면
-                            queue.append([depth +1, nr, nc])
-                        elif dt[nr][nc] > 0: # 먼지가 있으면
-                            candidates.append([depth +1, nr, nc])
-
-                        visited[nr][nc] = True
+                while queue_next:
+                    depth, sr, sc = queue_next.popleft()
+                    for dr, dc in drc:
+                        nr, nc = sr + dr, sc + dc
+                        if 0 <= nr < N and 0 <= nc < N and visited[nr][nc] == False:
+                            if dt[nr][nc] >= 0: # 빈칸이거나 먼지가 있거나
+                                queue.append([depth +1, nr, nc])
 
             if len(candidates) == 0:
                 robots_next.append([robot_sr, robot_sc])
