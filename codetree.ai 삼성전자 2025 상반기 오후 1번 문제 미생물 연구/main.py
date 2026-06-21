@@ -60,13 +60,30 @@ def tetris_micro(board, micro):
     N = len(board)
     candidates = []
 
+    dr, dc = 100, 100
+    for r, c in micro.cells.keys():
+        dr = min(dr, r)
+        dc = min(dc, c)
+
+    cells = {}
+    if dr != 0 or dc != 0:
+        for r, c in micro.cells.keys():
+            cells[(r - dr, c - dc)] = 0
+
+        micro.cells = cells
+
     for r in range(N - 1, 0, -1):
         for c in range(1, N):
             if can_place_micro(board, r, c, micro):
                 heapq.heappush(candidates, (c, r))
 
+    # 옮기는 과정에서 어떤 곳에도 둘 수 없는 미생물 무리가 있을 수 있습니다. 이 경우 그 미생물은 새 용기에 옮겨지지 않고 사라집니다.
+    if len(candidates) == 0:
+        return False
+
     c, r = heapq.heappop(candidates)
     place_board(board, r, c, micro)
+    return True
 
 
 def count_cells_by_bfs(micro):
@@ -157,7 +174,9 @@ def solve():
 
         while micro_order_heap:
             _, micro = heapq.heappop(micro_order_heap)
-            tetris_micro(board, micro)
+            if False == tetris_micro(board, micro):
+                # 옮기는 과정에서 어떤 곳에도 둘 수 없는 미생물 무리가 있을 수 있습니다. 이 경우 그 미생물은 새 용기에 옮겨지지 않고 사라집니다.
+                del micros[micro.n]
 
         board_save = board
 
