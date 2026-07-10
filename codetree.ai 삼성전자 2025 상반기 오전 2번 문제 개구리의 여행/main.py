@@ -1,84 +1,79 @@
 import heapq
+import sys
 
 
 def dijkstra(board, src_r, src_c, dst_r, dst_c):
-    ddrc = [[[-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0]],
-            [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0]],
-            [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5]],
-            [[0, -1], [0, -2], [0, -3], [0, -4], [0, -5]]]
-
     N = len(board)
-    # node [time_node, -jump_crnt, r, c, time_total]
-    heap = []
-    heapq.heappush(heap, [0, -1, src_r, src_c, 0])
-    dijkstra = {}
-    dijkstra[(src_r, src_c)] = [0, 1, 0]
+    distances = [[[sys.maxsize] * 6 for _ in range(N)] for _ in range(N)]
 
-    while heap:
-        time_crnt, jump_crnt, src_r, src_c, time_total = heapq.heappop(heap)
+    ddrc = [
+        [[-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0]],
+        [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5]],
+        [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0]],
+        [[0, -1], [0, -2], [0, -3], [0, -4], [0, -5]]
+    ]
+    edges = []
+    heapq.heappush(edges, (0, -1, src_r, src_c, 0))
+    distances[src_r][src_c][1] = 0
+    distances[src_r][src_c][2] = 0
+    distances[src_r][src_c][3] = 0
+    distances[src_r][src_c][4] = 0
+    distances[src_r][src_c][5] = 0
+
+    while edges:
+        time_prev, jump_crnt, sr, sc, _ = heapq.heappop(edges)
         jump_crnt = -jump_crnt
+
+        if distances[sr][sc][jump_crnt] < time_prev :
+            continue
+
+        if (sr, sc) == (dst_r, dst_c):
+            return min(distances[dst_r][dst_c])
 
         for drc in ddrc:
             for dr, dc in drc:
-                nr, nc = src_r + dr, src_c + dc
-                if 1 <= nr < N and 1 <= nc < N:
+                nr, nc = sr + dr, sc + dc
+                if 0 <= nr < N and 0 <= nc < N:
+                    if board[nr][nc] == 'S':
+                        continue
                     if board[nr][nc] == '#':
                         break
-                    if board[nr][nc] == '.':
-                        jump_new = max(abs(dr), abs(dc))
-                        time_new = 0
+                    time_new = 0
+                    jump_new = max(abs(dr), abs(dc))
 
-                        if jump_new != jump_crnt:
-                            if jump_new > jump_crnt:
-                                for j in range(jump_crnt + 1, jump_new + 1):
-                                    time_new += (j * j)
-                                time_new += 1
-                            else: # 점프력을 감소 + 점프하는 시간
-                                time_new += (1 + 1)
-                        else: # jump_new == jump_crnt
-                            time_new += 1
+                    if jump_crnt > jump_new:
+                        time_new += 1
+                    elif jump_crnt < jump_new:
+                        for j in range(jump_crnt + 1, jump_new + 1):
+                            time_new += (j ** 2)
 
-                        dijkstra_node = [time_new, -jump_new, nr, nc, time_total + time_new]
+                    time_new += 1
 
-                        # if dst_r == nr and dst_c == nc:
-                        #     return time_total + time_new
+                    if distances[nr][nc][jump_new] > time_prev + time_new:
+                        edge_new = [time_prev + time_new, -jump_new, nr, nc, time_new]
+                        distances[nr][nc][jump_new] = time_prev + time_new
+                        heapq.heappush(edges, edge_new)
 
-                        if (nr, nc) in dijkstra.keys():
-                            node_legacy = dijkstra[(nr, nc)]
+    answer = min(distances[dst_r][dst_c])
+    if answer == sys.maxsize:
+        return -1
 
-                            if dijkstra_node[4] < node_legacy[2]:
-                                dijkstra[(nr, nc)] = [time_new, jump_new, time_total + time_new]
-                                heapq.heappush(heap, dijkstra_node)
-                            elif dijkstra_node[4] == node_legacy[2] and dijkstra_node[1] < -node_legacy[1]:
-                                dijkstra[(nr, nc)] = [time_new, jump_new, time_total + time_new]
-                                heapq.heappush(heap, dijkstra_node)
-                        else:
-                            dijkstra[(nr, nc)] = [time_new, jump_new, time_total + time_new]
-                            heapq.heappush(heap, dijkstra_node)
-                else:
-                    break
-
-    if (dst_r, dst_c) in dijkstra.keys():
-        return dijkstra[(dst_r, dst_c)][2]
-
-    return -1
+    return answer
 
 
 def solve():
     N = int(input())
-    board = [['S' for _ in range(N + 1)] for _ in range(N + 1)]
+    board = [['#' for _ in range(N + 1)] for _ in range(N + 1)]
 
     for r in range(1, N + 1):
-        c = 1
         line = input()
-        for b in line:
-            board[r][c] = b
-            c += 1
+        for c in range(1, N + 1):
+            board[r][c] = line[c - 1]
 
-    Q = int(input())
-    for _ in range(Q):
-        r1, c1, r2, c2 = map(int, input().split())
-        answer = dijkstra(board, r1, c1, r2, c2)
+    M = int(input())
+    for _ in range(M):
+        src_r, src_c, dst_r, dst_c = map(int, input().split())
+        answer = dijkstra(board, src_r, src_c, dst_r, dst_c)
         print(answer)
 
 
