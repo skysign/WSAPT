@@ -13,7 +13,7 @@ def dijkstra(board, src_r, src_c, dst_r, dst_c):
         [[0, -1], [0, -2], [0, -3], [0, -4], [0, -5]]
     ]
     edges = []
-    heapq.heappush(edges, (0, -1, src_r, src_c, 0))
+    heapq.heappush(edges, (0, -1, src_r, src_c))
     distances[src_r][src_c][1] = 0
     distances[src_r][src_c][2] = 0
     distances[src_r][src_c][3] = 0
@@ -21,7 +21,7 @@ def dijkstra(board, src_r, src_c, dst_r, dst_c):
     distances[src_r][src_c][5] = 0
 
     while edges:
-        time_prev, jump_crnt, sr, sc, _ = heapq.heappop(edges)
+        time_prev, jump_crnt, sr, sc = heapq.heappop(edges)
         jump_crnt = -jump_crnt
 
         if distances[sr][sc][jump_crnt] < time_prev :
@@ -50,7 +50,7 @@ def dijkstra(board, src_r, src_c, dst_r, dst_c):
                     time_new += 1
 
                     if distances[nr][nc][jump_new] > time_prev + time_new:
-                        edge_new = [time_prev + time_new, -jump_new, nr, nc, time_new]
+                        edge_new = [time_prev + time_new, -jump_new, nr, nc]
                         distances[nr][nc][jump_new] = time_prev + time_new
                         heapq.heappush(edges, edge_new)
 
